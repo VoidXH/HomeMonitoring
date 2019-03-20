@@ -89,6 +89,7 @@
             this.StatusStrip = new System.Windows.Forms.StatusStrip();
             this.LastAlert = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolTip = new System.Windows.Forms.ToolTip(this.components);
+            this.rulesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.roomSettings.SuspendLayout();
             this.sensorSettings.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.roomHeight)).BeginInit();
@@ -382,6 +383,7 @@
             // 
             this.menuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.fileMenu,
+            this.rulesToolStripMenuItem,
             this.helpMenu});
             this.menuStrip.Location = new System.Drawing.Point(0, 0);
             this.menuStrip.Name = "menuStrip";
@@ -816,6 +818,13 @@
             this.LastAlert.Name = "LastAlert";
             this.LastAlert.Size = new System.Drawing.Size(0, 17);
             // 
+            // rulesToolStripMenuItem
+            // 
+            this.rulesToolStripMenuItem.Name = "rulesToolStripMenuItem";
+            this.rulesToolStripMenuItem.Size = new System.Drawing.Size(47, 20);
+            this.rulesToolStripMenuItem.Text = "Rules";
+            this.rulesToolStripMenuItem.Click += new System.EventHandler(this.RulesToolStripMenuItem_Click);
+            // 
             // HomeEditor
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -928,6 +937,7 @@
         private System.Windows.Forms.Button openDebugger;
         public System.Windows.Forms.ToolTip toolTip;
         public System.Windows.Forms.StatusStrip StatusStrip;
+        private System.Windows.Forms.ToolStripMenuItem rulesToolStripMenuItem;
     }
 }
 

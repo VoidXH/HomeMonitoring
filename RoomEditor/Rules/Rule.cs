@@ -1,7 +1,13 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace HomeEditor.Rules {
-    class Rule {
+    public class Rule {
+        /// <summary>
+        /// Name of this rule.
+        /// </summary>
+        public string name;
+
         /// <summary>
         /// Room to check. If null, all sensors will be checked independently.
         /// </summary>
@@ -36,7 +42,9 @@ namespace HomeEditor.Rules {
         /// Check the history entries of the <see cref="targetRoom"/> for this rule.
         /// </summary>
         public void Tick() {
-            // TODO
+            List<SensorData> source = new List<SensorData>();
+            // TODO: collect from target room or all sensors
+            source.Sort((a, b) => a.Timestamp.CompareTo(b.Timestamp));
         }
     }
 }
