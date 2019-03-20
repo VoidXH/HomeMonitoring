@@ -1,0 +1,6 @@
+.vs/
+packages/
+RoomEditor/bin/
+RoomEditor/obj/
+Rooms/
+Server/
