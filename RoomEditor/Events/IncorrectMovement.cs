@@ -15,21 +15,21 @@ namespace HomeEditor.Events {
         public static void Check() {
             Sensor.ForEachWithHistory((Sensor sensor) => {
                 SensorData last = sensor.DataHistory[sensor.DataHistory.Count - 1];
-                DateTime timeToExist = last.timestamp.Subtract(TimeSpan.FromSeconds(interval));
-                DateTime lastMovement = last.timestamp;
+                DateTime timeToExist = last.Timestamp.Subtract(TimeSpan.FromSeconds(interval));
+                DateTime lastMovement = last.Timestamp;
                 bool error = true;
                 int i, start = sensor.DataHistory.Count - 2;
-                for (i = start; i >= 0 && sensor.DataHistory[i].timestamp >= timeToExist; --i) {
+                for (i = start; i >= 0 && sensor.DataHistory[i].Timestamp >= timeToExist; --i) {
                     SensorData frame = sensor.DataHistory[i];
                     if (frame.Movement) {
-                        if (lastMovement - frame.timestamp > TimeSpan.FromSeconds(maxSilence)) {
+                        if (lastMovement - frame.Timestamp > TimeSpan.FromSeconds(maxSilence)) {
                             error = false;
                             continue;
                         }
-                        lastMovement = frame.timestamp;
+                        lastMovement = frame.Timestamp;
                     }
                 }
-                if (error && i > 0 && sensor.DataHistory[i].timestamp <= timeToExist) // Protection against judging from not enough data
+                if (error && i > 0 && sensor.DataHistory[i].Timestamp <= timeToExist) // Protection against judging from not enough data
                     Event.Alert(sensor, "Too much movement at " + sensor.LogName + " (possible sensor failure)");
             });
         }

@@ -3,7 +3,12 @@ using System.Text;
 
 namespace HomeEditor {
     public class SensorData {
-        public DateTime timestamp { get; private set; }
+        /// <summary>
+        /// Value of an unmeasured float field.
+        /// </summary>
+        public const float Unmeasured = -1;
+
+        public DateTime Timestamp { get; private set; }
 
         bool? _movement;
         public bool Movement {
@@ -14,27 +19,27 @@ namespace HomeEditor {
         public bool open;
         public bool led;
         public bool buzzer;
-        public float light = -1;
-        public float temperature = -1;
-        public float humidity = -1;
-        public float pressure = -1;
-        public float battery = -1;
+        public float light = Unmeasured;
+        public float temperature = Unmeasured;
+        public float humidity = Unmeasured;
+        public float pressure = Unmeasured;
+        public float battery = Unmeasured;
 
-        public SensorData() => timestamp = DateTime.Now;
+        public SensorData() => Timestamp = DateTime.Now;
 
-        public SensorData(DateTime timestamp) => this.timestamp = timestamp;
+        public SensorData(DateTime timestamp) => Timestamp = timestamp;
 
         public SensorData(bool movement, bool open) {
             _movement = movement;
             this.open = open;
-            timestamp = DateTime.Now;
+            Timestamp = DateTime.Now;
         }
 
         public SensorData(float temperature, float humidity, float pressure) {
             this.temperature = temperature;
             this.humidity = humidity;
             this.pressure = pressure;
-            timestamp = DateTime.Now;
+            Timestamp = DateTime.Now;
         }
 
         public SensorData(float temperature, float light, float battery, bool led, bool buzzer) {
@@ -43,7 +48,7 @@ namespace HomeEditor {
             this.battery = battery;
             this.led = led;
             this.buzzer = buzzer;
-            timestamp = DateTime.Now;
+            Timestamp = DateTime.Now;
         }
 
         public void FillFrom(SensorData other) {

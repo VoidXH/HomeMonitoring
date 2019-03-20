@@ -16,8 +16,8 @@ namespace HomeEditor.Events {
                 SensorData last = sensor.DataHistory[sensor.DataHistory.Count - 1];
                 bool lastState = last.open;
                 int stateChanges = 0;
-                DateTime lastTime = last.timestamp.Subtract(TimeSpan.FromSeconds(errorInterval));
-                for (int i = sensor.DataHistory.Count - 2; i >= 0 && sensor.DataHistory[i].timestamp >= lastTime; --i) {
+                DateTime lastTime = last.Timestamp.Subtract(TimeSpan.FromSeconds(errorInterval));
+                for (int i = sensor.DataHistory.Count - 2; i >= 0 && sensor.DataHistory[i].Timestamp >= lastTime; --i) {
                     if (sensor.DataHistory[i].open != lastState) {
                         ++stateChanges;
                         lastState = !lastState;

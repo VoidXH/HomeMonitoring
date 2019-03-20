@@ -16,10 +16,10 @@ namespace HomeEditor.Events {
                 Sensor.ForEachWithHistory((Sensor sensor) => {
                     if (sensor.parent == lastRoom) {
                         SensorData last = sensor.DataHistory[sensor.DataHistory.Count - 1];
-                        DateTime sleepTime = last.timestamp.Subtract(TimeSpan.FromSeconds(sleepTimer));
+                        DateTime sleepTime = last.Timestamp.Subtract(TimeSpan.FromSeconds(sleepTimer));
                         movement |= last.Movement;
                         int i = sensor.DataHistory.Count - 2;
-                        for (; i >= 0 && !movement && sensor.DataHistory[i].timestamp >= sleepTime; --i)
+                        for (; i >= 0 && !movement && sensor.DataHistory[i].Timestamp >= sleepTime; --i)
                             movement |= (sensor.DataHistory[i].Movement);
                         if (i != 0)
                             return;

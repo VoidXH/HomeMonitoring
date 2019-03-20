@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Drawing;
+using System.Reflection;
 using System.Windows.Forms;
 using System.Xml;
 
@@ -69,6 +70,7 @@ namespace HomeEditor {
         /// Snap to a grid with 1 meter gaps when moved.
         /// </summary>
         protected override void Draggable_MouseMove(object sender, MouseEventArgs e) {
+            RoomStatus();
             if (e.Button == MouseButtons.Left) { // TODO: don't jump on click
                 Left = (Left + e.X - dragOrigin.X) / PixelsPerMeter * PixelsPerMeter - ((Panel)parent).HorizontalScroll.Value % PixelsPerMeter;
                 Top = (Top + e.Y - dragOrigin.Y) / PixelsPerMeter * PixelsPerMeter - ((Panel)parent).VerticalScroll.Value % PixelsPerMeter;
@@ -98,12 +100,28 @@ namespace HomeEditor {
             SensorData result = new SensorData(lastResult);
             lastResult -= maxDiff;
             ForEachSensor((sensor) => {
-                if (lastResult < sensor.lastActivation) {
+                if (lastResult < sensor.lastActivation && sensor.DataHistory.Count != 0) {
                     SensorData lastEntry = sensor.DataHistory[sensor.DataHistory.Count - 1];
                     result.Movement |= lastEntry.Movement;
                 }
             });
-            return null;
+            foreach (FieldInfo field in typeof(SensorData).GetFields()) {
+                if (field.FieldType == typeof(float) && !field.Attributes.HasFlag(FieldAttributes.Static)) {
+                    float sum = 0;
+                    int measurements = 0;
+                    ForEachSensor((sensor) => {
+                        if (lastResult < sensor.lastActivation && sensor.DataHistory.Count != 0) {
+                            float value = (float)field.GetValue(sensor.DataHistory[sensor.DataHistory.Count - 1]);
+                            if (value != SensorData.Unmeasured) {
+                                ++measurements;
+                                sum += value;
+                            }
+                        }
+                    });
+                    field.SetValue(result, measurements != 0 ? sum / measurements : SensorData.Unmeasured);
+                }
+            }
+            return result;
         }
 
         #region Serialization

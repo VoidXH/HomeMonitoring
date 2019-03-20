@@ -19,8 +19,8 @@ namespace HomeEditor.Events {
             Sensor.ForEachWithHistory((Sensor sensor) => {
                 SensorData last = sensor.DataHistory[sensor.DataHistory.Count - 1];
                 float lowestTemp = last.temperature;
-                DateTime lastTime = last.timestamp.Subtract(TimeSpan.FromSeconds(errorInterval));
-                for (int i = sensor.DataHistory.Count - 2; i >= 0 && sensor.DataHistory[i].timestamp >= lastTime; --i)
+                DateTime lastTime = last.Timestamp.Subtract(TimeSpan.FromSeconds(errorInterval));
+                for (int i = sensor.DataHistory.Count - 2; i >= 0 && sensor.DataHistory[i].Timestamp >= lastTime; --i)
                     if (lowestTemp > sensor.DataHistory[i].temperature)
                         lowestTemp = sensor.DataHistory[i].temperature;
                 if (last.temperature - lowestTemp >= errorCooling && lowestTemp < maximumTemp)
