@@ -11,10 +11,10 @@
             bool error = false;
             Sensor.ForEachWithHistory((Sensor sensor) => {
                 SensorData last = sensor.DataHistory[sensor.DataHistory.Count - 1];
-                if (last.temperature != -1 && (last.temperature <= minTemp || last.temperature >= maxTemp)) {
+                if (last.Temperature != -1 && (last.Temperature <= minTemp || last.Temperature >= maxTemp)) {
                     if (warmup > warmupTarget) {
                         if (cooldown <= 0) {
-                            Event.Alert(sensor, "Temperature is constantly " + last.temperature + " at " + sensor.LogName + " (possible sensor failure)");
+                            Event.Alert(sensor, "Temperature is constantly " + last.Temperature + " at " + sensor.LogName + " (possible sensor failure)");
                             cooldown = 60;
                         }
                     }

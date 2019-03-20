@@ -70,7 +70,6 @@ namespace HomeEditor {
         /// Snap to a grid with 1 meter gaps when moved.
         /// </summary>
         protected override void Draggable_MouseMove(object sender, MouseEventArgs e) {
-            RoomStatus();
             if (e.Button == MouseButtons.Left) { // TODO: don't jump on click
                 Left = (Left + e.X - dragOrigin.X) / PixelsPerMeter * PixelsPerMeter - ((Panel)parent).HorizontalScroll.Value % PixelsPerMeter;
                 Top = (Top + e.Y - dragOrigin.Y) / PixelsPerMeter * PixelsPerMeter - ((Panel)parent).VerticalScroll.Value % PixelsPerMeter;
@@ -90,26 +89,17 @@ namespace HomeEditor {
                     bool value = false;
                     Sensor.ForEachWithHistory(this, lastResult, sensor => value |= (bool)property.GetValue(sensor.DataHistory[sensor.DataHistory.Count - 1]));
                     property.SetValue(result, value);
-                }
-            }
-            foreach (FieldInfo field in typeof(SensorData).GetFields()) {
-                if (field.Attributes.HasFlag(FieldAttributes.Static))
-                    continue;
-                if (field.FieldType == typeof(bool)) {
-                    bool value = false;
-                    Sensor.ForEachWithHistory(this, lastResult, sensor => value |= (bool)field.GetValue(sensor.DataHistory[sensor.DataHistory.Count - 1]));
-                    field.SetValue(result, value);
-                } else if (field.FieldType == typeof(float)) {
+                } else if (property.PropertyType == typeof(float)) {
                     float sum = 0;
                     int measurements = 0;
                     Sensor.ForEachWithHistory(this, lastResult, sensor => {
-                        float value = (float)field.GetValue(sensor.DataHistory[sensor.DataHistory.Count - 1]);
+                        float value = (float)property.GetValue(sensor.DataHistory[sensor.DataHistory.Count - 1]);
                         if (value != SensorData.Unmeasured) {
                             ++measurements;
                             sum += value;
                         }
                     });
-                    field.SetValue(result, measurements != 0 ? sum / measurements : SensorData.Unmeasured);
+                    property.SetValue(result, measurements != 0 ? sum / measurements : SensorData.Unmeasured);
                 }
             }
             return result;

@@ -20,7 +20,7 @@ namespace HomeEditor.Events {
                 int lastSample = sensor.DataHistory.Count - samples;
                 if (lastSample >= 0) {
                     for (int i = sensor.DataHistory.Count - 2; i >= lastSample; --i)
-                        totalNoise += Math.Abs(sensor.DataHistory[i].light - sensor.DataHistory[i + 1].light);
+                        totalNoise += Math.Abs(sensor.DataHistory[i].Light - sensor.DataHistory[i + 1].Light);
                     if (totalNoise > noiseThresh)
                         Event.Activity = tvStatusText;
                     else if (Event.Activity.Equals(tvStatusText))

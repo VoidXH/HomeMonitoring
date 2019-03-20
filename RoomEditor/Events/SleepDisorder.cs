@@ -12,7 +12,7 @@
             float maxLight = 0;
             Sensor.ForEachWithHistory((sensor) => {
                 if (sensor.parent == lastRoom) {
-                    float lastLight = sensor.DataHistory[sensor.DataHistory.Count - 1].light;
+                    float lastLight = sensor.DataHistory[sensor.DataHistory.Count - 1].Light;
                     if (maxLight < lastLight)
                         maxLight = lastLight;
                 }
@@ -21,7 +21,7 @@
                 return;
             Sensor.ForEachDoor(lastRoom, (door, sensor) => {
                 int entries = sensor.DataHistory.Count;
-                if (entries >= 2 && sensor.DataHistory[entries - 1].open && !sensor.DataHistory[entries - 2].open)
+                if (entries >= 2 && sensor.DataHistory[entries - 1].Open && !sensor.DataHistory[entries - 2].Open)
                     Event.Alert(sensor, "Door " + sensor.LogName + " opened in the dark (possible sleep disorder).");
             });
         }

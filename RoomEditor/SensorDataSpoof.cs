@@ -12,9 +12,9 @@ namespace HomeEditor {
 
         private void Ok_Click(object sender, EventArgs e) {
             Data.Movement = Movement.Checked;
-            Data.open = Open.Checked;
-            Data.light = Convert.ToSingle(Light.Text);
-            Data.temperature = Convert.ToSingle(Temperature.Text);
+            Data.Open = Open.Checked;
+            Data.Light = Convert.ToSingle(Light.Text);
+            Data.Temperature = Convert.ToSingle(Temperature.Text);
             DialogResult = DialogResult.OK;
             Close();
         }

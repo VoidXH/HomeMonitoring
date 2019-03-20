@@ -18,12 +18,12 @@ namespace HomeEditor.Events {
         public static void Check() {
             Sensor.ForEachWithHistory((Sensor sensor) => {
                 SensorData last = sensor.DataHistory[sensor.DataHistory.Count - 1];
-                float lowestTemp = last.temperature;
+                float lowestTemp = last.Temperature;
                 DateTime lastTime = last.Timestamp.Subtract(TimeSpan.FromSeconds(errorInterval));
                 for (int i = sensor.DataHistory.Count - 2; i >= 0 && sensor.DataHistory[i].Timestamp >= lastTime; --i)
-                    if (lowestTemp > sensor.DataHistory[i].temperature)
-                        lowestTemp = sensor.DataHistory[i].temperature;
-                if (last.temperature - lowestTemp >= errorCooling && lowestTemp < maximumTemp)
+                    if (lowestTemp > sensor.DataHistory[i].Temperature)
+                        lowestTemp = sensor.DataHistory[i].Temperature;
+                if (last.Temperature - lowestTemp >= errorCooling && lowestTemp < maximumTemp)
                     Event.Alert(sensor, sensor.parent.Name + " (room of " + sensor.LogName + ") has cooled too much.");
             });
         }

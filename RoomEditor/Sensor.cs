@@ -111,7 +111,7 @@ namespace HomeEditor {
                 data.FillFrom(history[history.Count - 1]);
             Program.window.Invoke(new Action(() => { Program.window.toolTip.SetToolTip(marker, data.ToString()); }));
             history.Add(data);
-            bool activate = data.open || data.Movement;
+            bool activate = data.Open || data.Movement;
             if (activate && !color.Activation)
                 OnActivate();
             else if (!activate && color.Activation)

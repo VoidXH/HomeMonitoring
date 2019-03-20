@@ -8,9 +8,9 @@ namespace HomeEditor.Rules {
         public Room targetRoom;
 
         /// <summary>
-        /// Field in <see cref="SensorData"/> to check.
+        /// Property in <see cref="SensorData"/> to check.
         /// </summary>
-        public string targetField;
+        public string targetProperty;
 
         /// <summary>
         /// Maximum detection interval.

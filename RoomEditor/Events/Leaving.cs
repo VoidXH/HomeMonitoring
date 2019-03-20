@@ -29,7 +29,7 @@
                 return;
             bool movement = false; // Movement in the last room
             Sensor.ForEachWithHistory(sensor => {
-                if (sensor.parent == lastRoom && sensor.DataHistory[sensor.DataHistory.Count - 1].open)
+                if (sensor.parent == lastRoom && sensor.DataHistory[sensor.DataHistory.Count - 1].Open)
                     movement = true;
             });
             if (movement) {
@@ -39,7 +39,7 @@
             if (++timer <= alertTimer)
                 return;
             Sensor.ForEachDoorWithHistory(lastRoom, (door, sensor) => {
-                if (door.doorType == Door.Types.Entrance && sensor.DataHistory[sensor.DataHistory.Count - 1].open) {
+                if (door.doorType == Door.Types.Entrance && sensor.DataHistory[sensor.DataHistory.Count - 1].Open) {
                     if (!alerted)
                         Event.Alert(sensor, "The house is empty but an entrance (" + sensor.LogName + ") is open.");
                     alerted = true;

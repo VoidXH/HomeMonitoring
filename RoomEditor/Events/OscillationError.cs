@@ -14,11 +14,11 @@ namespace HomeEditor.Events {
         public static void Check() {
             Sensor.ForEachWithHistory((Sensor sensor) => {
                 SensorData last = sensor.DataHistory[sensor.DataHistory.Count - 1];
-                bool lastState = last.open;
+                bool lastState = last.Open;
                 int stateChanges = 0;
                 DateTime lastTime = last.Timestamp.Subtract(TimeSpan.FromSeconds(errorInterval));
                 for (int i = sensor.DataHistory.Count - 2; i >= 0 && sensor.DataHistory[i].Timestamp >= lastTime; --i) {
-                    if (sensor.DataHistory[i].open != lastState) {
+                    if (sensor.DataHistory[i].Open != lastState) {
                         ++stateChanges;
                         lastState = !lastState;
                     }

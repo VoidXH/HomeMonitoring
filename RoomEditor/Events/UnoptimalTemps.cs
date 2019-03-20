@@ -9,10 +9,10 @@
             --cooldown;
             Sensor.ForEachWithHistory((Sensor sensor) => {
                 SensorData last = sensor.DataHistory[sensor.DataHistory.Count - 1];
-                if (last.temperature != -1 && ((last.temperature <= minTemp && last.temperature > IncorrectTemps.minTemp) ||
-                    (last.temperature >= maxTemp && last.temperature < IncorrectTemps.maxTemp))) {
+                if (last.Temperature != -1 && ((last.Temperature <= minTemp && last.Temperature > IncorrectTemps.minTemp) ||
+                    (last.Temperature >= maxTemp && last.Temperature < IncorrectTemps.maxTemp))) {
                     if (cooldown <= 0)
-                        Event.Alert(sensor, "Temperature is " + last.temperature + " at " + sensor.parent.Name + " (room of " + sensor.LogName + ").");
+                        Event.Alert(sensor, "Temperature is " + last.Temperature + " at " + sensor.parent.Name + " (room of " + sensor.LogName + ").");
                     cooldown = 60;
                 }
             });
