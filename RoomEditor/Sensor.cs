@@ -202,6 +202,12 @@ namespace HomeEditor {
                 action.Invoke(sensor);
         }
 
+        public static void ForEach(Room room, Action<Sensor> action) {
+            foreach (Control child in room.Controls)
+                if (child is Sensor)
+                    action.Invoke((Sensor)child);
+        }
+
         public static void ForEachDoor(Room room, Action<Door, Sensor> action) {
             foreach (SerializablePanel panel in Program.window.Elements) {
                 if (Utils.Intersect(room, panel) && panel.DoorType != -1) {
@@ -216,6 +222,12 @@ namespace HomeEditor {
             foreach (Sensor sensor in sensors)
                 if (sensor.DataHistory.Count != 0)
                     action.Invoke(sensor);
+        }
+
+        public static void ForEachWithHistory(Room room, DateTime after, Action<Sensor> action) {
+            foreach (Control child in room.Controls)
+                if (child is Sensor && ((Sensor)child).DataHistory.Count != 0 && after < ((Sensor)child).lastActivation)
+                    action.Invoke((Sensor)child);
         }
 
         public static void ForEachDoorWithHistory(Room room, Action<Door, Sensor> action) {

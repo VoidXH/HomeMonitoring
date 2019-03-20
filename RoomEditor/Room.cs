@@ -78,44 +78,35 @@ namespace HomeEditor {
         }
 
         /// <summary>
-        /// Call an action for all sensors in this room.
-        /// </summary>
-        void ForEachSensor(Action<Sensor> action) {
-            foreach (Control child in Controls)
-                if (child is Sensor)
-                    action.Invoke((Sensor)child);
-        }
-
-        /// <summary>
         /// Merges data from all sensors in the room, averaging available float values and or-ing bool values.
         /// Data older than 5 minutes won't count, as the sensor's battery has probably died.
         /// </summary>
         public SensorData RoomStatus() {
             TimeSpan maxDiff = TimeSpan.FromMinutes(5);
             DateTime lastResult = DateTime.Now - maxDiff;
-            ForEachSensor((sensor) => {
-                if (lastResult < sensor.lastActivation)
-                    lastResult = sensor.lastActivation;
-            });
             SensorData result = new SensorData(lastResult);
-            lastResult -= maxDiff;
-            ForEachSensor((sensor) => {
-                if (lastResult < sensor.lastActivation && sensor.DataHistory.Count != 0) {
-                    SensorData lastEntry = sensor.DataHistory[sensor.DataHistory.Count - 1];
-                    result.Movement |= lastEntry.Movement;
+            foreach (PropertyInfo property in typeof(SensorData).GetProperties()) {
+                if (property.PropertyType == typeof(bool)) {
+                    bool value = false;
+                    Sensor.ForEachWithHistory(this, lastResult, sensor => value |= (bool)property.GetValue(sensor.DataHistory[sensor.DataHistory.Count - 1]));
+                    property.SetValue(result, value);
                 }
-            });
+            }
             foreach (FieldInfo field in typeof(SensorData).GetFields()) {
-                if (field.FieldType == typeof(float) && !field.Attributes.HasFlag(FieldAttributes.Static)) {
+                if (field.Attributes.HasFlag(FieldAttributes.Static))
+                    continue;
+                if (field.FieldType == typeof(bool)) {
+                    bool value = false;
+                    Sensor.ForEachWithHistory(this, lastResult, sensor => value |= (bool)field.GetValue(sensor.DataHistory[sensor.DataHistory.Count - 1]));
+                    field.SetValue(result, value);
+                } else if (field.FieldType == typeof(float)) {
                     float sum = 0;
                     int measurements = 0;
-                    ForEachSensor((sensor) => {
-                        if (lastResult < sensor.lastActivation && sensor.DataHistory.Count != 0) {
-                            float value = (float)field.GetValue(sensor.DataHistory[sensor.DataHistory.Count - 1]);
-                            if (value != SensorData.Unmeasured) {
-                                ++measurements;
-                                sum += value;
-                            }
+                    Sensor.ForEachWithHistory(this, lastResult, sensor => {
+                        float value = (float)field.GetValue(sensor.DataHistory[sensor.DataHistory.Count - 1]);
+                        if (value != SensorData.Unmeasured) {
+                            ++measurements;
+                            sum += value;
                         }
                     });
                     field.SetValue(result, measurements != 0 ? sum / measurements : SensorData.Unmeasured);
@@ -153,7 +144,7 @@ namespace HomeEditor {
             writer.WriteAttributeString("top", Top.ToString());
             writer.WriteAttributeString("size_x", Width.ToString());
             writer.WriteAttributeString("size_y", Height.ToString());
-            ForEachSensor((sensor) => {
+            Sensor.ForEach(this, sensor => {
                 writer.WriteStartElement("Sensor");
                 sensor.WriteXml(writer);
                 writer.WriteEndElement();

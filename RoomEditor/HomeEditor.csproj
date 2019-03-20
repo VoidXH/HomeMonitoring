@@ -178,6 +178,7 @@
     <Compile Include="Room.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Rules\Rule.cs" />
     <Compile Include="Sensor.cs">
       <SubType>Component</SubType>
     </Compile>
