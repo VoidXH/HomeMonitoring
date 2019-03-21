@@ -6,7 +6,7 @@ namespace HomeEditor.Rules {
         /// <summary>
         /// Name of this rule.
         /// </summary>
-        public string name;
+        public string name = string.Empty;
 
         /// <summary>
         /// Room to check. If null, all sensors will be checked independently.
@@ -16,12 +16,12 @@ namespace HomeEditor.Rules {
         /// <summary>
         /// Property in <see cref="SensorData"/> to check.
         /// </summary>
-        public string targetProperty;
+        public string targetProperty = string.Empty;
 
         /// <summary>
         /// Maximum detection interval.
         /// </summary>
-        public TimeSpan span;
+        public TimeSpan span = TimeSpan.FromMinutes(5);
 
         /// <summary>
         /// Triggers if the rule happend more than this times in the interval set in <see cref="span"/>.

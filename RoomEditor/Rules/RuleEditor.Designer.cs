@@ -78,6 +78,7 @@
             this.targetRoom.Name = "targetRoom";
             this.targetRoom.Size = new System.Drawing.Size(144, 21);
             this.targetRoom.TabIndex = 3;
+            this.targetRoom.Text = "None";
             // 
             // label1
             // 
@@ -153,6 +154,11 @@
             this.span.Name = "span";
             this.span.Size = new System.Drawing.Size(98, 20);
             this.span.TabIndex = 6;
+            this.span.Value = new decimal(new int[] {
+            5,
+            0,
+            0,
+            0});
             // 
             // label6
             // 

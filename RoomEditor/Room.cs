@@ -105,6 +105,19 @@ namespace HomeEditor {
             return result;
         }
 
+        public static void ForEach(Action<Room> action) {
+            foreach (SerializablePanel panel in Program.window.Elements)
+                if (panel is Room)
+                    action((Room)panel);
+        }
+
+        public static Room GetByName(string name) {
+            foreach (SerializablePanel panel in Program.window.Elements)
+                if (panel is Room && panel.Name.Equals(name))
+                    return (Room)panel;
+            return null;
+        }
+
         #region Serialization
         public override void ReadXml(XmlReader reader) {
             reader = reader.ReadSubtree();
