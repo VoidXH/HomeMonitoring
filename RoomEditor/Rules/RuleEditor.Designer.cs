@@ -79,6 +79,7 @@
             this.targetRoom.Size = new System.Drawing.Size(144, 21);
             this.targetRoom.TabIndex = 3;
             this.targetRoom.Text = "None";
+            this.targetRoom.SelectedIndexChanged += new System.EventHandler(this.TargetRoom_SelectedIndexChanged);
             // 
             // label1
             // 
@@ -98,6 +99,7 @@
             this.targetProperty.Name = "targetProperty";
             this.targetProperty.Size = new System.Drawing.Size(133, 21);
             this.targetProperty.TabIndex = 4;
+            this.targetProperty.SelectedIndexChanged += new System.EventHandler(this.TargetProperty_SelectedIndexChanged);
             // 
             // label2
             // 
@@ -133,9 +135,20 @@
             // 
             this.occurence.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.occurence.Location = new System.Drawing.Point(653, 147);
+            this.occurence.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
             this.occurence.Name = "occurence";
             this.occurence.Size = new System.Drawing.Size(82, 20);
             this.occurence.TabIndex = 9;
+            this.occurence.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.occurence.ValueChanged += new System.EventHandler(this.Occurence_ValueChanged);
             // 
             // label5
             // 
@@ -159,6 +172,7 @@
             0,
             0,
             0});
+            this.span.ValueChanged += new System.EventHandler(this.Span_ValueChanged);
             // 
             // label6
             // 
@@ -173,10 +187,12 @@
             // minValue
             // 
             this.minValue.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.minValue.DecimalPlaces = 1;
             this.minValue.Location = new System.Drawing.Point(670, 173);
             this.minValue.Name = "minValue";
             this.minValue.Size = new System.Drawing.Size(102, 20);
             this.minValue.TabIndex = 12;
+            this.minValue.ValueChanged += new System.EventHandler(this.MinValue_ValueChanged);
             // 
             // label7
             // 
@@ -191,10 +207,17 @@
             // maxValue
             // 
             this.maxValue.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.maxValue.DecimalPlaces = 1;
             this.maxValue.Location = new System.Drawing.Point(673, 199);
             this.maxValue.Name = "maxValue";
             this.maxValue.Size = new System.Drawing.Size(99, 20);
             this.maxValue.TabIndex = 14;
+            this.maxValue.Value = new decimal(new int[] {
+            100,
+            0,
+            0,
+            0});
+            this.maxValue.ValueChanged += new System.EventHandler(this.MaxValue_ValueChanged);
             // 
             // label8
             // 
@@ -215,6 +238,7 @@
             this.close.TabIndex = 16;
             this.close.Text = "Close";
             this.close.UseVisualStyleBackColor = true;
+            this.close.Click += new System.EventHandler(this.Close_Click);
             // 
             // ruleName
             // 
@@ -224,6 +248,7 @@
             this.ruleName.Size = new System.Drawing.Size(188, 20);
             this.ruleName.TabIndex = 2;
             this.ruleName.Text = "Rule name";
+            this.ruleName.TextChanged += new System.EventHandler(this.RuleName_TextChanged);
             // 
             // RuleEditor
             // 

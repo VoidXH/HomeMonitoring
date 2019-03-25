@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Reflection;
 
 namespace HomeEditor.Rules {
     public class Rule {
@@ -16,7 +17,7 @@ namespace HomeEditor.Rules {
         /// <summary>
         /// Property in <see cref="SensorData"/> to check.
         /// </summary>
-        public string targetProperty = string.Empty;
+        public PropertyInfo targetProperty;
 
         /// <summary>
         /// Maximum detection interval.
@@ -26,7 +27,7 @@ namespace HomeEditor.Rules {
         /// <summary>
         /// Triggers if the rule happend more than this times in the interval set in <see cref="span"/>.
         /// </summary>
-        public int occurence;
+        public int occurence = 1;
 
         /// <summary>
         /// Triggers if <see cref="targetField"/>'s value falls below this.
@@ -36,7 +37,7 @@ namespace HomeEditor.Rules {
         /// <summary>
         /// Triggers if <see cref="targetField"/>'s value falls over this.
         /// </summary>
-        public float maxValue;
+        public float maxValue = 100;
 
         /// <summary>
         /// Check the history entries of the <see cref="targetRoom"/> for this rule.
