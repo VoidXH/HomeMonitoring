@@ -86,7 +86,7 @@ namespace HomeEditor {
         /// </summary>
         void SaveToolStripMenuItem1_Click(object sender, EventArgs e) {
             try {
-                SerializeHome(_lastFileName);
+                SerializeHome(lastFileName);
             } catch (Exception exception) {
                 MessageBox.Show("Error saving file: " + exception.Message, "Error");
                 return;
@@ -106,7 +106,7 @@ namespace HomeEditor {
                 }
                 if (!Properties.Settings.Default.Recents.Contains(saveFileDialog.FileName + '\n'))
                     AddToRecents(saveFileDialog.FileName);
-                lastFileName = saveFileDialog.FileName;
+                LastFileName = saveFileDialog.FileName;
             }
         }
 

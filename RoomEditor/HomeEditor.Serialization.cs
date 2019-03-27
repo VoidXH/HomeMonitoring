@@ -15,26 +15,17 @@ namespace HomeEditor {
         /// <summary>
         /// Cached last opened file's path.
         /// </summary>
-        string _lastFileName;
+        string lastFileName;
 
         /// <summary>
         /// Last opened file's path, changes the window's title when set.
         /// </summary>
-        string lastFileName {
-            get => _lastFileName;
+        string LastFileName {
+            get => lastFileName;
             set {
-                _lastFileName = value;
+                lastFileName = value;
                 Text = value.Equals(defaultFileName) ? defaultTitle : defaultTitle + " - " + value;
             }
-        }
-
-        /// <summary>
-        /// Attach an <see cref="IXmlSerializable"/> to an XML file.
-        /// </summary>
-        void SerializeObject(XmlWriter writer, IXmlSerializable target) {
-            writer.WriteStartElement(target.GetType().Name);
-            target.WriteXml(writer);
-            writer.WriteEndElement();
         }
 
         /// <summary>
@@ -44,11 +35,10 @@ namespace HomeEditor {
         void SerializeHome(string fileName) {
             drawingPanel.HorizontalScroll.Value = drawingPanel.VerticalScroll.Value = 0; // Top/Left positions are relative to this
             drawingPanel.AutoScroll = true; // Reset scrollbar position
-            XmlWriterSettings settings = new XmlWriterSettings() { Indent = true, IndentChars = "  " };
-            XmlWriter writer = XmlWriter.Create(fileName, settings);
+            XmlWriter writer = XmlWriter.Create(fileName, Utils.xmlSettings);
             writer.WriteStartElement("home");
             foreach (SerializablePanel target in drawingPanel.Controls)
-                SerializeObject(writer, target);
+                Utils.SerializeObject(writer, target);
             writer.WriteEndElement();
             writer.Close();
         }
@@ -85,7 +75,7 @@ namespace HomeEditor {
                     }
                 }
             }
-            lastFileName = fileName;
+            LastFileName = fileName;
         }
     }
 }

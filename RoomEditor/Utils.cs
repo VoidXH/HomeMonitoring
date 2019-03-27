@@ -1,11 +1,18 @@
 ﻿using System;
 using System.Text;
+using System.Xml;
+using System.Xml.Serialization;
 
 namespace HomeEditor {
     /// <summary>
     /// Random functions without a specific location.
     /// </summary>
     public static class Utils {
+        /// <summary>
+        /// Global indention settings for XML writing.
+        /// </summary>
+        public static XmlWriterSettings xmlSettings = new XmlWriterSettings() { Indent = true, IndentChars = "  " };
+
         /// <summary>
         /// Clamp <paramref name="x"/> between <paramref name="min"/> and <paramref name="max"/>.
         /// </summary>
@@ -16,11 +23,10 @@ namespace HomeEditor {
         /// </summary>
         /// <param name="Container">First element</param>
         /// <param name="Content">Second element</param>
-        public static bool Intersect(SerializablePanel Container, SerializablePanel Content) {
-            // They intersect, if the second rectangle is not entirely left/right/up/down from the first
-            return !(Container.Left >= Content.Right || Container.Top >= Content.Bottom ||
-                     Container.Right <= Content.Left || Container.Bottom <= Content.Top);
-        }
+        /// <remarks>They intersect, if the second rectangle is not entirely left/right/up/down from the first</remarks>
+        public static bool Intersect(SerializablePanel Container, SerializablePanel Content) =>
+            !(Container.Left >= Content.Right || Container.Top >= Content.Bottom ||
+                Container.Right <= Content.Left || Container.Bottom <= Content.Top);
 
         /// <summary>
         /// Safely parse a property from user input.
@@ -47,6 +53,15 @@ namespace HomeEditor {
                 else
                     errorLog.Append("Invalid value: ").AppendLine(value);
             return result;
+        }
+
+        /// <summary>
+        /// Attach an <see cref="IXmlSerializable"/> to an XML file.
+        /// </summary>
+        public static void SerializeObject(XmlWriter writer, IXmlSerializable target) {
+            writer.WriteStartElement(target.GetType().Name);
+            target.WriteXml(writer);
+            writer.WriteEndElement();
         }
     }
 }

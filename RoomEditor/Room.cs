@@ -159,11 +159,7 @@ namespace HomeEditor {
             writer.WriteAttributeString("top", Top.ToString());
             writer.WriteAttributeString("size_x", Width.ToString());
             writer.WriteAttributeString("size_y", Height.ToString());
-            Sensor.ForEach(this, sensor => {
-                writer.WriteStartElement("Sensor");
-                sensor.WriteXml(writer);
-                writer.WriteEndElement();
-            });
+            Sensor.ForEach(this, sensor => Utils.SerializeObject(writer, sensor));
         }
         #endregion
     }
