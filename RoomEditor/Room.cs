@@ -126,10 +126,22 @@ namespace HomeEditor {
             while (reader.MoveToNextAttribute()) {
                 switch (reader.Name) {
                     case "name": SetName(reader.Value); break;
-                    case "left": Left = Convert.ToInt32(reader.Value); break;
-                    case "top": Top = Convert.ToInt32(reader.Value); break;
-                    case "size_x": Width = Convert.ToInt32(reader.Value); break;
-                    case "size_y": Height = Convert.ToInt32(reader.Value); break;
+                    case "left":
+                        if (Utils.ParseProperty(reader.Value, out int left))
+                            Left = left;
+                        break;
+                    case "top":
+                        if (Utils.ParseProperty(reader.Value, out int top))
+                            Top = top;
+                        break;
+                    case "size_x":
+                        if (Utils.ParseProperty(reader.Value, out int size_x))
+                            Width = size_x;
+                        break;
+                    case "size_y":
+                        if (Utils.ParseProperty(reader.Value, out int size_y))
+                            Height = size_y;
+                        break;
                 }
             }
             while (reader.Read()) {

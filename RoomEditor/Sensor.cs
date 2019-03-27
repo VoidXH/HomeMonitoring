@@ -247,8 +247,14 @@ namespace HomeEditor {
                 switch (reader.Name) {
                     case "name": Name = reader.Value; break;
                     case "address": Address = reader.Value; break;
-                    case "left": Left = Convert.ToInt32(reader.Value); break;
-                    case "top": Top = Convert.ToInt32(reader.Value); break;
+                    case "left":
+                        if (Utils.ParseProperty(reader.Value, out int left))
+                            Left = left;
+                        break;
+                    case "top":
+                        if (Utils.ParseProperty(reader.Value, out int top))
+                            Top = top;
+                        break;
                 }
             }
         }

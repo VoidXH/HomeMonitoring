@@ -1,4 +1,7 @@
-﻿namespace HomeEditor {
+﻿using System;
+using System.Text;
+
+namespace HomeEditor {
     /// <summary>
     /// Random functions without a specific location.
     /// </summary>
@@ -17,6 +20,33 @@
             // They intersect, if the second rectangle is not entirely left/right/up/down from the first
             return !(Container.Left >= Content.Right || Container.Top >= Content.Bottom ||
                      Container.Right <= Content.Left || Container.Bottom <= Content.Top);
+        }
+
+        /// <summary>
+        /// Safely parse a property from user input.
+        /// </summary>
+        /// <typeparam name="T">Target property type</typeparam>        
+        /// <param name="value">Input value</param>
+        /// <param name="parsedValue">Parsed value if <typeparamref name="T"/> is supported and <paramref name="value"/> is valid</param>
+        /// <param name="errorLog">If the parsing failed, a line will be logged in this <see cref="StringBuilder"/></param>
+        /// <param name="propertyName">Name of the property to be logged in case of an error</param>
+        /// <returns>True if parsing was successful</returns>
+        public static bool ParseProperty<T>(string value, out T parsedValue, StringBuilder errorLog = null, string propertyName = null) {
+            bool result = false;
+            parsedValue = default(T);
+            if (typeof(T) == typeof(float)) {
+                if (result = float.TryParse(value, out float temp))
+                    parsedValue = (T)Convert.ChangeType(temp, typeof(T));
+            } else if (typeof(T) == typeof(int)) {
+                if (result = int.TryParse(value, out int temp))
+                    parsedValue = (T)Convert.ChangeType(temp, typeof(T));
+            }
+            if (!result && errorLog != null)
+                if (!string.IsNullOrEmpty(propertyName))
+                    errorLog.Append("Invalid ").Append(propertyName).Append(" value: ").AppendLine(value);
+                else
+                    errorLog.Append("Invalid value: ").AppendLine(value);
+            return result;
         }
     }
 }
