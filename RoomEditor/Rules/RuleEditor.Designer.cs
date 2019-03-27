@@ -41,6 +41,7 @@
             this.label8 = new System.Windows.Forms.Label();
             this.close = new System.Windows.Forms.Button();
             this.ruleName = new System.Windows.Forms.TextBox();
+            this.deleteRule = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.occurence)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.span)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.minValue)).BeginInit();
@@ -250,11 +251,23 @@
             this.ruleName.Text = "Rule name";
             this.ruleName.TextChanged += new System.EventHandler(this.RuleName_TextChanged);
             // 
+            // deleteRule
+            // 
+            this.deleteRule.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.deleteRule.Location = new System.Drawing.Point(670, 225);
+            this.deleteRule.Name = "deleteRule";
+            this.deleteRule.Size = new System.Drawing.Size(102, 23);
+            this.deleteRule.TabIndex = 17;
+            this.deleteRule.Text = "Delete rule";
+            this.deleteRule.UseVisualStyleBackColor = true;
+            this.deleteRule.Click += new System.EventHandler(this.DeleteRule_Click);
+            // 
             // RuleEditor
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(784, 426);
+            this.Controls.Add(this.deleteRule);
             this.Controls.Add(this.ruleName);
             this.Controls.Add(this.close);
             this.Controls.Add(this.label8);
@@ -275,6 +288,7 @@
             this.Controls.Add(this.ruleList);
             this.Name = "RuleEditor";
             this.Text = "RuleEditor";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.RuleEditor_FormClosing);
             ((System.ComponentModel.ISupportInitialize)(this.occurence)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.span)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.minValue)).EndInit();
@@ -304,5 +318,6 @@
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Button close;
         private System.Windows.Forms.TextBox ruleName;
+        private System.Windows.Forms.Button deleteRule;
     }
 }

@@ -120,13 +120,11 @@
     <Compile Include="Events\ConstantCooling.cs" />
     <Compile Include="Events\DetectTV.cs" />
     <Compile Include="Events\Event.cs" />
-    <Compile Include="Events\IncorrectTemps.cs" />
     <Compile Include="Events\IncorrectMovement.cs" />
     <Compile Include="Events\Leaving.cs" />
     <Compile Include="Events\NoMovement.cs" />
     <Compile Include="Events\OscillationError.cs" />
     <Compile Include="Events\SleepDisorder.cs" />
-    <Compile Include="Events\UnoptimalTemps.cs" />
     <Compile Include="HomeEditor.DoorEditor.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -186,6 +184,7 @@
     <Compile Include="Rules\RuleEditor.Designer.cs">
       <DependentUpon>RuleEditor.cs</DependentUpon>
     </Compile>
+    <Compile Include="Rules\RuleLibrary.cs" />
     <Compile Include="Sensor.cs">
       <SubType>Component</SubType>
     </Compile>

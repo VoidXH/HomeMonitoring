@@ -1,11 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Reflection;
 using System.Windows.Forms;
 
 namespace HomeEditor.Rules {
     public partial class RuleEditor : Form {
-        public static List<Rule> rules = new List<Rule>();
         Rule selectedRule;
 
         public RuleEditor() {
@@ -18,22 +16,27 @@ namespace HomeEditor.Rules {
                 if (property.PropertyType == typeof(bool) || property.PropertyType == typeof(float))
                     targetProperty.Items.Add(new PropertyInfoListItem(property));
             targetProperty.SelectedIndex = 0;
+            RuleLibrary.LoadRules();
+            UpdateRuleList();
         }
 
         void UpdateRuleList() {
             ruleList.Items.Clear();
-            foreach (Rule rule in rules)
-                ruleList.Items.Add(rule.name);
+            for (int i = 0, c = RuleLibrary.Rules.Count; i < c; ++i) {
+                ruleList.Items.Add(RuleLibrary.Rules[i].name);
+                if (RuleLibrary.Rules[i] == selectedRule)
+                    ruleList.SelectedIndex = i;
+            }
         }
 
         void NewRule_Click(object s, EventArgs e) {
-            rules.Add(new Rule() { name = "New rule", targetProperty = ((PropertyInfoListItem)targetProperty.Items[0]).item });
+            RuleLibrary.Rules.Add(new Rule("New rule", ((PropertyInfoListItem)targetProperty.Items[0]).item));
             UpdateRuleList();
-            ruleList.SelectedIndex = rules.Count - 1;
+            ruleList.SelectedIndex = RuleLibrary.Rules.Count - 1;
         }
 
         void RuleList_SelectedIndexChanged(object s, EventArgs e) {
-            selectedRule = rules[ruleList.SelectedIndex];
+            selectedRule = RuleLibrary.Rules[ruleList.SelectedIndex];
             ruleName.Text = selectedRule.name;
             for (int i = 0, c = targetRoom.Items.Count; i < c; ++i)
                 if (((RoomListItem)targetRoom.Items[i]).item == selectedRule.targetRoom)
@@ -48,8 +51,10 @@ namespace HomeEditor.Rules {
         }
 
         private void RuleName_TextChanged(object s, EventArgs e) {
-            if (selectedRule != null)
+            if (selectedRule != null) {
                 selectedRule.name = ruleName.Text;
+                UpdateRuleList();
+            }
         }
 
         private void TargetRoom_SelectedIndexChanged(object s, EventArgs e) {
@@ -82,9 +87,19 @@ namespace HomeEditor.Rules {
                 selectedRule.maxValue = (float)maxValue.Value;
         }
 
+        private void DeleteRule_Click(object sender, EventArgs e) {
+            if (selectedRule != null) {
+                RuleLibrary.Rules.Remove(selectedRule);
+                selectedRule = RuleLibrary.Rules.Count > 0 ? RuleLibrary.Rules[0] : null;
+                UpdateRuleList();
+            }
+        }
+
         private void Close_Click(object sender, EventArgs e) {
             DialogResult = DialogResult.OK;
             Close();
         }
+
+        private void RuleEditor_FormClosing(object sender, FormClosingEventArgs e) => RuleLibrary.SaveRules();
     }
 }

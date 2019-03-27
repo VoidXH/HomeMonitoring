@@ -21,12 +21,10 @@ namespace HomeEditor.Events {
         public static void RegisterEvents() {
             EventCalls += Leaving.Check;
             EventCalls += ConstantCooling.Check;
-            EventCalls += UnoptimalTemps.Check;
             EventCalls += NoMovement.Check;
             EventCalls += SleepDisorder.Check;
             EventCalls += DetectTV.Check;
             EventCalls += IncorrectMovement.Check;
-            EventCalls += IncorrectTemps.Check;
             EventCalls += OscillationError.Check;
         }
 
