@@ -46,6 +46,9 @@ namespace HomeEditor {
             } else if (typeof(T) == typeof(int)) {
                 if (result = int.TryParse(value, out int temp))
                     parsedValue = (T)Convert.ChangeType(temp, typeof(T));
+            } else if (typeof(T) == typeof(bool)) {
+                if (result = bool.TryParse(value, out bool temp))
+                    parsedValue = (T)Convert.ChangeType(temp, typeof(T));
             }
             if (!result && errorLog != null)
                 if (!string.IsNullOrEmpty(propertyName))

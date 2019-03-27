@@ -115,17 +115,42 @@ namespace HomeEditor {
 
         #region Serialization
         public override void ReadXml(XmlReader reader) {
+            string sensor = null;
             while (reader.MoveToNextAttribute()) {
                 switch (reader.Name) {
-                    case "type": doorType = (Types)Convert.ToInt32(reader.Value); OnDeselect(); break;
-                    case "orientation": Orientation = (Orientations)Convert.ToInt32(reader.Value); break;
-                    case "size": Size = Convert.ToInt32(reader.Value); break;
-                    case "left": Left = Convert.ToInt32(reader.Value); break;
-                    case "top": Top = Convert.ToInt32(reader.Value); break;
-                    case "attached": if (Convert.ToBoolean(reader.Value)) AttachedSensor = new Sensor(this) { Visible = false }; break;
-                    case "sensor": if (AttachedSensor != null) AttachedSensor.Address = reader.Value; break;
+                    case "type":
+                        if (Utils.ParseProperty(reader.Value, out int type)) {
+                            doorType = (Types)type;
+                            OnDeselect();
+                        }
+                        break;
+                    case "orientation":
+                        if (Utils.ParseProperty(reader.Value, out int orientation))
+                            Orientation = (Orientations)orientation;
+                        break;
+                    case "size":
+                        if (Utils.ParseProperty(reader.Value, out int size))
+                            Size = size;
+                        break;
+                    case "left":
+                        if (Utils.ParseProperty(reader.Value, out int left))
+                            Left = left;
+                        break;
+                    case "top":
+                        if (Utils.ParseProperty(reader.Value, out int top))
+                            Top = top;
+                        break;
+                    case "attached":
+                        if (Utils.ParseProperty(reader.Value, out bool attached) && attached)
+                            AttachedSensor = new Sensor(this) { Visible = false };
+                        break;
+                    case "sensor":
+                        sensor = reader.Value;
+                        break;
                 }
             }
+            if (AttachedSensor != null && !string.IsNullOrEmpty(sensor))
+                AttachedSensor.Address = sensor;
         }
 
         public override void WriteXml(XmlWriter writer) {
