@@ -49,21 +49,22 @@ namespace HomeEditor.Rules {
             minValue.Value = (decimal)selectedRule.minValue;
             maxValue.Value = (decimal)selectedRule.maxValue;
             invert.Checked = selectedRule.invert;
+            notify.Checked = selectedRule.notify;
         }
 
-        private void RuleName_TextChanged(object s, EventArgs e) {
+        void RuleName_TextChanged(object s, EventArgs e) {
             if (selectedRule != null) {
                 selectedRule.name = ruleName.Text;
                 UpdateRuleList();
             }
         }
 
-        private void TargetRoom_SelectedIndexChanged(object s, EventArgs e) {
+        void TargetRoom_SelectedIndexChanged(object s, EventArgs e) {
             if (selectedRule != null)
                 selectedRule.targetRoom = ((RoomListItem)targetRoom.SelectedItem).item;
         }
 
-        private void TargetProperty_SelectedIndexChanged(object s, EventArgs e) {
+        void TargetProperty_SelectedIndexChanged(object s, EventArgs e) {
             PropertyInfo property = ((PropertyInfoListItem)targetProperty.SelectedItem).item;
             if (selectedRule != null)
                 selectedRule.targetProperty = property;
@@ -73,32 +74,37 @@ namespace HomeEditor.Rules {
             maxValue.Enabled = !booleanProperty;
         }
 
-        private void Span_ValueChanged(object s, EventArgs e) {
+        void Span_ValueChanged(object s, EventArgs e) {
             if (selectedRule != null)
                 selectedRule.span = TimeSpan.FromMinutes((int)span.Value);
         }
 
-        private void Occurence_ValueChanged(object s, EventArgs e) {
+        void Occurence_ValueChanged(object s, EventArgs e) {
             if (selectedRule != null)
                 selectedRule.occurence = (int)occurence.Value;
         }
 
-        private void MinValue_ValueChanged(object s, EventArgs e) {
+        void MinValue_ValueChanged(object s, EventArgs e) {
             if (selectedRule != null)
                 selectedRule.minValue = (float)minValue.Value;
         }
 
-        private void MaxValue_ValueChanged(object s, EventArgs e) {
+        void MaxValue_ValueChanged(object s, EventArgs e) {
             if (selectedRule != null)
                 selectedRule.maxValue = (float)maxValue.Value;
         }
 
-        private void Invert_CheckedChanged(object s, EventArgs e) {
+        void Invert_CheckedChanged(object s, EventArgs e) {
             if (selectedRule != null)
                 selectedRule.invert = invert.Checked;
         }
 
-        private void DeleteRule_Click(object s, EventArgs e) {
+        void Notify_CheckedChanged(object s, EventArgs e) {
+            if (selectedRule != null)
+                selectedRule.notify = notify.Checked;
+        }
+
+        void DeleteRule_Click(object s, EventArgs e) {
             if (selectedRule != null) {
                 RuleLibrary.Rules.Remove(selectedRule);
                 selectedRule = RuleLibrary.Rules.Count > 0 ? RuleLibrary.Rules[0] : null;
@@ -106,11 +112,11 @@ namespace HomeEditor.Rules {
             }
         }
 
-        private void Close_Click(object s, EventArgs e) {
+        void Close_Click(object s, EventArgs e) {
             DialogResult = DialogResult.OK;
             Close();
         }
 
-        private void RuleEditor_FormClosing(object s, FormClosingEventArgs e) => RuleLibrary.SaveRules();
+        void RuleEditor_FormClosing(object s, FormClosingEventArgs e) => RuleLibrary.SaveRules();
     }
 }

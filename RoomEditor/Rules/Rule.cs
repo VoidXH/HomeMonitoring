@@ -37,7 +37,7 @@ namespace HomeEditor.Rules {
         /// <summary>
         /// Triggers if <see cref="targetField"/>'s value falls below this.
         /// </summary>
-        public float minValue;
+        public float minValue = 0;
 
         /// <summary>
         /// Triggers if <see cref="targetField"/>'s value falls over this.
@@ -48,6 +48,11 @@ namespace HomeEditor.Rules {
         /// Detect false for boolean values and trigger for in range for float values.
         /// </summary>
         public bool invert = false;
+
+        /// <summary>
+        /// Notify the user if this rule triggers.
+        /// </summary>
+        public bool notify = true;
 
         public Rule() { }
 
@@ -106,6 +111,7 @@ namespace HomeEditor.Rules {
                     case "minValue": Utils.ParseProperty(reader.Value, out minValue, errorLog, "minValue"); break;
                     case "maxValue": Utils.ParseProperty(reader.Value, out maxValue, errorLog, "maxValue"); break;
                     case "invert": Utils.ParseProperty(reader.Value, out invert, errorLog, "invert"); break;
+                    case "notify": Utils.ParseProperty(reader.Value, out notify, errorLog, "notify"); break;
                 }
             }
             if (errorLog.Length != 0)
@@ -123,6 +129,7 @@ namespace HomeEditor.Rules {
             writer.WriteAttributeString("minValue", minValue.ToString());
             writer.WriteAttributeString("maxValue", maxValue.ToString());
             writer.WriteAttributeString("invert", invert.ToString());
+            writer.WriteAttributeString("notify", notify.ToString());
         }
         #endregion
     }
