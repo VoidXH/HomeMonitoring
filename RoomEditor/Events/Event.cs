@@ -23,7 +23,6 @@ namespace HomeEditor.Events {
             EventCalls += ConstantCooling.Check;
             EventCalls += SleepDisorder.Check;
             EventCalls += DetectTV.Check;
-            EventCalls += IncorrectMovement.Check;
             EventCalls += OscillationError.Check;
         }
 

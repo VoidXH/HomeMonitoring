@@ -11,7 +11,5 @@
 	= Az elmúlt [samples] mintában a fényerősség deriváltjának abszolút szummája [noiseThresh]
 	  felett van-e.
 - Valószínűsíthető szenzorhibák:
-	- Mozgás irreális időtartamon túl ------------------------------------------------------------- IncorrectMovement
-	  = Az elmúlt [interval] másodpercben maximum [maxSilence] másodpercig nem volt mozgás.
 	- Folyamatosan nyíló/záródó ajtó/ablak -------------------------------------------------------- OscillationError
 	  = [errorInterval] másodperc alatt legalább [errorRate]-szer nyílódott/záródott ajtó.
