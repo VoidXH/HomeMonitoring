@@ -48,6 +48,7 @@ namespace HomeEditor.Rules {
             occurence.Value = selectedRule.occurence;
             minValue.Value = (decimal)selectedRule.minValue;
             maxValue.Value = (decimal)selectedRule.maxValue;
+            invert.Checked = selectedRule.invert;
         }
 
         private void RuleName_TextChanged(object s, EventArgs e) {
@@ -63,8 +64,13 @@ namespace HomeEditor.Rules {
         }
 
         private void TargetProperty_SelectedIndexChanged(object s, EventArgs e) {
+            PropertyInfo property = ((PropertyInfoListItem)targetProperty.SelectedItem).item;
             if (selectedRule != null)
-                selectedRule.targetProperty = ((PropertyInfoListItem)targetProperty.SelectedItem).item;
+                selectedRule.targetProperty = property;
+            bool booleanProperty = property.PropertyType == typeof(bool);
+            occurence.Enabled = booleanProperty;
+            minValue.Enabled = !booleanProperty;
+            maxValue.Enabled = !booleanProperty;
         }
 
         private void Span_ValueChanged(object s, EventArgs e) {
@@ -87,7 +93,12 @@ namespace HomeEditor.Rules {
                 selectedRule.maxValue = (float)maxValue.Value;
         }
 
-        private void DeleteRule_Click(object sender, EventArgs e) {
+        private void Invert_CheckedChanged(object s, EventArgs e) {
+            if (selectedRule != null)
+                selectedRule.invert = invert.Checked;
+        }
+
+        private void DeleteRule_Click(object s, EventArgs e) {
             if (selectedRule != null) {
                 RuleLibrary.Rules.Remove(selectedRule);
                 selectedRule = RuleLibrary.Rules.Count > 0 ? RuleLibrary.Rules[0] : null;
@@ -95,11 +106,11 @@ namespace HomeEditor.Rules {
             }
         }
 
-        private void Close_Click(object sender, EventArgs e) {
+        private void Close_Click(object s, EventArgs e) {
             DialogResult = DialogResult.OK;
             Close();
         }
 
-        private void RuleEditor_FormClosing(object sender, FormClosingEventArgs e) => RuleLibrary.SaveRules();
+        private void RuleEditor_FormClosing(object s, FormClosingEventArgs e) => RuleLibrary.SaveRules();
     }
 }

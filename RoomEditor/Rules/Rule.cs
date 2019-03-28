@@ -44,6 +44,11 @@ namespace HomeEditor.Rules {
         /// </summary>
         public float maxValue = 100;
 
+        /// <summary>
+        /// Detect false for boolean values and trigger for in range for float values.
+        /// </summary>
+        public bool invert = false;
+
         public Rule() { }
 
         public Rule(string name, PropertyInfo targetProperty) {
@@ -100,6 +105,7 @@ namespace HomeEditor.Rules {
                     case "occurence": Utils.ParseProperty(reader.Value, out occurence, errorLog, "occurence"); break;
                     case "minValue": Utils.ParseProperty(reader.Value, out minValue, errorLog, "minValue"); break;
                     case "maxValue": Utils.ParseProperty(reader.Value, out maxValue, errorLog, "maxValue"); break;
+                    case "invert": Utils.ParseProperty(reader.Value, out invert, errorLog, "invert"); break;
                 }
             }
             if (errorLog.Length != 0)
@@ -116,6 +122,7 @@ namespace HomeEditor.Rules {
             writer.WriteAttributeString("occurence", occurence.ToString());
             writer.WriteAttributeString("minValue", minValue.ToString());
             writer.WriteAttributeString("maxValue", maxValue.ToString());
+            writer.WriteAttributeString("invert", invert.ToString());
         }
         #endregion
     }

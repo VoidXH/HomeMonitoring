@@ -42,6 +42,7 @@
             this.close = new System.Windows.Forms.Button();
             this.ruleName = new System.Windows.Forms.TextBox();
             this.deleteRule = new System.Windows.Forms.Button();
+            this.invert = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.occurence)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.span)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.minValue)).BeginInit();
@@ -233,10 +234,10 @@
             // close
             // 
             this.close.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.close.Location = new System.Drawing.Point(584, 391);
+            this.close.Location = new System.Drawing.Point(584, 384);
             this.close.Name = "close";
             this.close.Size = new System.Drawing.Size(188, 23);
-            this.close.TabIndex = 16;
+            this.close.TabIndex = 18;
             this.close.Text = "Close";
             this.close.UseVisualStyleBackColor = true;
             this.close.Click += new System.EventHandler(this.Close_Click);
@@ -262,11 +263,24 @@
             this.deleteRule.UseVisualStyleBackColor = true;
             this.deleteRule.Click += new System.EventHandler(this.DeleteRule_Click);
             // 
+            // invert
+            // 
+            this.invert.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.invert.AutoSize = true;
+            this.invert.Location = new System.Drawing.Point(587, 229);
+            this.invert.Name = "invert";
+            this.invert.Size = new System.Drawing.Size(53, 17);
+            this.invert.TabIndex = 16;
+            this.invert.Text = "Invert";
+            this.invert.UseVisualStyleBackColor = true;
+            this.invert.CheckedChanged += new System.EventHandler(this.Invert_CheckedChanged);
+            // 
             // RuleEditor
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(784, 426);
+            this.ClientSize = new System.Drawing.Size(784, 419);
+            this.Controls.Add(this.invert);
             this.Controls.Add(this.deleteRule);
             this.Controls.Add(this.ruleName);
             this.Controls.Add(this.close);
@@ -319,5 +333,6 @@
         private System.Windows.Forms.Button close;
         private System.Windows.Forms.TextBox ruleName;
         private System.Windows.Forms.Button deleteRule;
+        private System.Windows.Forms.CheckBox invert;
     }
 }
