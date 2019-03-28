@@ -26,6 +26,8 @@ namespace HomeEditor.Rules {
                 rules.Add(new Rule("Sleep", "Movement") { invert = true, span = TimeSpan.FromHours(2), notify = false });
                 rules.Add(new Rule("Empty house for a day", "Movement") { invert = true, span = TimeSpan.FromHours(24) });
                 rules.Add(new Rule("Too much movement (possible sensor failure)", "Movement") { span = TimeSpan.FromHours(12) });
+                rules.Add(new Rule("Too many door openings (possible sensor failure)", "Open")
+                    { span = TimeSpan.FromMinutes(1), occurence = 5 });
                 return;
             }
             using (XmlReader reader = XmlReader.Create(RuleFileName)) {

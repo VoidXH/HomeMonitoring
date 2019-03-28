@@ -1,15 +1,9 @@
 ﻿- Lakó távozik, ajtót nyitva hagyta --------------------------------------------------------------- Leaving
 	= A bejárati ajtó nyitva, utoljára az amelletti szobában járt a lakó, de [alertTimer]
 	  másodperce nem mozgott.
-- Szoba folyamatosan hűl, de az ablak/bejárat nyitva ---------------------------------------------- ConstantCooling (tesztelni)
-	= Nyitott ablak/bejárat mellett [errorInterval] másodperc alatt [errorCooling] fokot hűlt egy
-	  szoba, [maximumTemp] fok alá kerülve.
 - Sötétben mászkál a lakó (pl. sötétben nyílnak ajtók, lehetséges alvásprobléma / néha lámpa) ----- SleepDisorder
 	= Ha a fény [lightThreshold] alatt van abban a szobában, ahol a lakó elaludt, de így is kinyílt
 	  egy ajtó, az lehetséges alvásprobléma.
 - TV-t néz-e (fényzaj) ---------------------------------------------------------------------------- DetectTV
 	= Az elmúlt [samples] mintában a fényerősség deriváltjának abszolút szummája [noiseThresh]
 	  felett van-e.
-- Valószínűsíthető szenzorhibák:
-	- Folyamatosan nyíló/záródó ajtó/ablak -------------------------------------------------------- OscillationError
-	  = [errorInterval] másodperc alatt legalább [errorRate]-szer nyílódott/záródott ajtó.

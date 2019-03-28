@@ -11,7 +11,7 @@ namespace HomeEditor.Events {
 
         static string _Activity = string.Empty;
         public static string Activity {
-            get { return _Activity; }
+            get => _Activity;
             internal set {
                 _Activity = value;
                 Program.window.activityLabel.Text = "Activity: " + value;
@@ -20,15 +20,11 @@ namespace HomeEditor.Events {
 
         public static void RegisterEvents() {
             EventCalls += Leaving.Check;
-            EventCalls += ConstantCooling.Check;
             EventCalls += SleepDisorder.Check;
             EventCalls += DetectTV.Check;
-            EventCalls += OscillationError.Check;
         }
 
-        public static void Tick() {
-            EventCalls?.Invoke();
-        }
+        public static void Tick() => EventCalls?.Invoke();
 
         public static void Alert(Sensor sensor, string message) {
             if (sensor != null)
@@ -37,9 +33,8 @@ namespace HomeEditor.Events {
                 LogViewer.Log(message);
                 Program.window.StatusStrip.BackColor = Color.Red;
                 Program.window.LastAlert.Text = LogViewer.GetLog(1);
-            } else {
+            } else
                 MessageBox.Show(message);
-            }
         }
 
         /// <summary>
