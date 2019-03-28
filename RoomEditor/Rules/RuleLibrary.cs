@@ -23,6 +23,8 @@ namespace HomeEditor.Rules {
                 rules.Add(new Rule("Unoptimal temperature", "Temperature") { minValue = 18, maxValue = 32 });
                 rules.Add(new Rule("Incorrect temperature (possible sensor failure)", "Temperature")
                     { minValue = 10, maxValue = 50, span = TimeSpan.FromMinutes(0) });
+                rules.Add(new Rule("Sleep", "Movement") { invert = true, span = TimeSpan.FromHours(2), notify = false });
+                rules.Add(new Rule("Empty house for a day", "Movement") { invert = true, span = TimeSpan.FromHours(24) });
                 return;
             }
             using (XmlReader reader = XmlReader.Create(RuleFileName)) {

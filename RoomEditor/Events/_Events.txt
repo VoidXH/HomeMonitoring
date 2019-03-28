@@ -4,8 +4,6 @@
 - Szoba folyamatosan hűl, de az ablak/bejárat nyitva ---------------------------------------------- ConstantCooling (tesztelni)
 	= Nyitott ablak/bejárat mellett [errorInterval] másodperc alatt [errorCooling] fokot hűlt egy
 	  szoba, [maximumTemp] fok alá kerülve.
-- Alvás és ébrenlét meghatározása (otthon van és régóta nem mozog), ezek alapján alvás hossza ----- NoMovement
-	= Az utoljára mozgást rögzített szobában [sleepTimer] másodperce nem történt mozgás.
 - Sötétben mászkál a lakó (pl. sötétben nyílnak ajtók, lehetséges alvásprobléma / néha lámpa) ----- SleepDisorder
 	= Ha a fény [lightThreshold] alatt van abban a szobában, ahol a lakó elaludt, de így is kinyílt
 	  egy ajtó, az lehetséges alvásprobléma.

@@ -122,7 +122,6 @@
     <Compile Include="Events\Event.cs" />
     <Compile Include="Events\IncorrectMovement.cs" />
     <Compile Include="Events\Leaving.cs" />
-    <Compile Include="Events\NoMovement.cs" />
     <Compile Include="Events\OscillationError.cs" />
     <Compile Include="Events\SleepDisorder.cs" />
     <Compile Include="HomeEditor.DoorEditor.cs">

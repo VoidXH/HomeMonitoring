@@ -242,7 +242,6 @@ HomeEditor.Events.DetectTV.samples = 10 # Samples to check
 HomeEditor.Events.IncorrectMovement.interval = 86400 # Interval to check for movement
 HomeEditor.Events.IncorrectMovement.maxSilence = 1800 # Maximum time for anything not to happen to disarm the alert
 HomeEditor.Events.Leaving.alertTimer = 300 # Alert after the entrance is open for longer than this time (in seconds) and the house is empty
-HomeEditor.Events.NoMovement.sleepTimer = 7200 # Time after no movement is interpreted as sleep
 HomeEditor.Events.OscillationError.errorRate = 10 # Amount of open/close events in the checking interval to trigger the alert
 HomeEditor.Events.OscillationError.errorInterval = 60 # Time span checked in seconds
 HomeEditor.Events.SleepDisorder.lightThreshold = 0,2 # Light value considered darkness";
