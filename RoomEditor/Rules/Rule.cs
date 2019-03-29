@@ -91,7 +91,7 @@ namespace HomeEditor.Rules {
         /// </summary>
         public void Tick() {
             List<SensorData> source = new List<SensorData>();
-            // TODO: collect from target room or all sensors
+            // TODO: collect from target room or all sensors in the past 24 hours
             source.Sort((a, b) => a.Timestamp.CompareTo(b.Timestamp));
         }
 
