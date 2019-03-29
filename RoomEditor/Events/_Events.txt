@@ -1,9 +1,6 @@
 ﻿- Lakó távozik, ajtót nyitva hagyta --------------------------------------------------------------- Leaving
 	= A bejárati ajtó nyitva, utoljára az amelletti szobában járt a lakó, de [alertTimer]
 	  másodperce nem mozgott.
-- Sötétben mászkál a lakó (pl. sötétben nyílnak ajtók, lehetséges alvásprobléma / néha lámpa) ----- SleepDisorder
-	= Ha a fény [lightThreshold] alatt van abban a szobában, ahol a lakó elaludt, de így is kinyílt
-	  egy ajtó, az lehetséges alvásprobléma.
 - TV-t néz-e (fényzaj) ---------------------------------------------------------------------------- DetectTV
 	= Az elmúlt [samples] mintában a fényerősség deriváltjának abszolút szummája [noiseThresh]
 	  felett van-e.

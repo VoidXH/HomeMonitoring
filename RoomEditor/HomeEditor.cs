@@ -237,6 +237,5 @@ Events
 HomeEditor.Events.DetectTV.noiseThresh = 1 # Minimum light noise required to trigger the alert
 HomeEditor.Events.DetectTV.samples = 10 # Samples to check
 HomeEditor.Events.Leaving.alertTimer = 300 # Alert after the entrance is open for longer than this time (in seconds) and the house is empty
-HomeEditor.Events.SleepDisorder.lightThreshold = 0,2 # Light value considered darkness";
     }
 }

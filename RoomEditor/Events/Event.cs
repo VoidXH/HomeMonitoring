@@ -20,7 +20,6 @@ namespace HomeEditor.Events {
 
         public static void RegisterEvents() {
             EventCalls += Leaving.Check;
-            EventCalls += SleepDisorder.Check;
             EventCalls += DetectTV.Check;
         }
 

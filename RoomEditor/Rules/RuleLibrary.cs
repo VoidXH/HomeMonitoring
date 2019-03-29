@@ -21,10 +21,11 @@ namespace HomeEditor.Rules {
             Rules.Clear();
             if (!File.Exists(RuleFileName)) {
                 rules.Add(new Rule("Unoptimal temperature", "Temperature") { minValue = 18, maxValue = 32 });
-                rules.Add(new Rule("Incorrect temperature (possible sensor failure)", "Temperature")
-                    { minValue = 10, maxValue = 50, span = TimeSpan.FromMinutes(0) });
                 rules.Add(new Rule("Sleep", "Movement") { invert = true, span = TimeSpan.FromHours(2), notify = false });
                 rules.Add(new Rule("Empty house for a day", "Movement") { invert = true, span = TimeSpan.FromHours(24) });
+                rules.Add(new Rule("Sleep disorder", "Movement") { span = TimeSpan.FromMinutes(15), occurence = 3, toTime = 300 });
+                rules.Add(new Rule("Incorrect temperature (possible sensor failure)", "Temperature")
+                    { minValue = 10, maxValue = 50, span = TimeSpan.FromMinutes(0) });
                 rules.Add(new Rule("Too much movement (possible sensor failure)", "Movement") { span = TimeSpan.FromHours(12) });
                 rules.Add(new Rule("Too many door openings (possible sensor failure)", "Open")
                     { span = TimeSpan.FromMinutes(1), occurence = 5 });
