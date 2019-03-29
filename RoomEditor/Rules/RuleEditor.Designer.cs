@@ -44,10 +44,22 @@
             this.deleteRule = new System.Windows.Forms.Button();
             this.invert = new System.Windows.Forms.CheckBox();
             this.notify = new System.Windows.Forms.CheckBox();
+            this.label9 = new System.Windows.Forms.Label();
+            this.fromHour = new System.Windows.Forms.NumericUpDown();
+            this.label10 = new System.Windows.Forms.Label();
+            this.fromMinute = new System.Windows.Forms.NumericUpDown();
+            this.label11 = new System.Windows.Forms.Label();
+            this.toMinute = new System.Windows.Forms.NumericUpDown();
+            this.label12 = new System.Windows.Forms.Label();
+            this.toHour = new System.Windows.Forms.NumericUpDown();
             ((System.ComponentModel.ISupportInitialize)(this.occurence)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.span)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.minValue)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.maxValue)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.fromHour)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.fromMinute)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.toMinute)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.toHour)).BeginInit();
             this.SuspendLayout();
             // 
             // ruleList
@@ -243,7 +255,7 @@
             this.close.Location = new System.Drawing.Point(584, 384);
             this.close.Name = "close";
             this.close.Size = new System.Drawing.Size(188, 23);
-            this.close.TabIndex = 18;
+            this.close.TabIndex = 100;
             this.close.Text = "Close";
             this.close.UseVisualStyleBackColor = true;
             this.close.Click += new System.EventHandler(this.Close_Click);
@@ -261,10 +273,10 @@
             // deleteRule
             // 
             this.deleteRule.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.deleteRule.Location = new System.Drawing.Point(670, 252);
+            this.deleteRule.Location = new System.Drawing.Point(670, 300);
             this.deleteRule.Name = "deleteRule";
             this.deleteRule.Size = new System.Drawing.Size(102, 23);
-            this.deleteRule.TabIndex = 17;
+            this.deleteRule.TabIndex = 99;
             this.deleteRule.Text = "Delete rule";
             this.deleteRule.UseVisualStyleBackColor = true;
             this.deleteRule.Click += new System.EventHandler(this.DeleteRule_Click);
@@ -273,7 +285,7 @@
             // 
             this.invert.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.invert.AutoSize = true;
-            this.invert.Location = new System.Drawing.Point(587, 229);
+            this.invert.Location = new System.Drawing.Point(587, 225);
             this.invert.Name = "invert";
             this.invert.Size = new System.Drawing.Size(53, 17);
             this.invert.TabIndex = 16;
@@ -283,10 +295,11 @@
             // 
             // notify
             // 
+            this.notify.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.notify.AutoSize = true;
             this.notify.Checked = true;
             this.notify.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.notify.Location = new System.Drawing.Point(719, 229);
+            this.notify.Location = new System.Drawing.Point(719, 225);
             this.notify.Name = "notify";
             this.notify.Size = new System.Drawing.Size(53, 17);
             this.notify.TabIndex = 19;
@@ -294,11 +307,125 @@
             this.notify.UseVisualStyleBackColor = true;
             this.notify.CheckedChanged += new System.EventHandler(this.Notify_CheckedChanged);
             // 
+            // label9
+            // 
+            this.label9.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(589, 250);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(30, 13);
+            this.label9.TabIndex = 20;
+            this.label9.Text = "From";
+            // 
+            // fromHour
+            // 
+            this.fromHour.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.fromHour.Location = new System.Drawing.Point(625, 248);
+            this.fromHour.Maximum = new decimal(new int[] {
+            23,
+            0,
+            0,
+            0});
+            this.fromHour.Name = "fromHour";
+            this.fromHour.Size = new System.Drawing.Size(32, 20);
+            this.fromHour.TabIndex = 21;
+            this.fromHour.ValueChanged += new System.EventHandler(this.FromHour_ValueChanged);
+            // 
+            // label10
+            // 
+            this.label10.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(658, 250);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(10, 13);
+            this.label10.TabIndex = 22;
+            this.label10.Text = ":";
+            // 
+            // fromMinute
+            // 
+            this.fromMinute.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.fromMinute.Location = new System.Drawing.Point(668, 248);
+            this.fromMinute.Maximum = new decimal(new int[] {
+            59,
+            0,
+            0,
+            0});
+            this.fromMinute.Name = "fromMinute";
+            this.fromMinute.Size = new System.Drawing.Size(32, 20);
+            this.fromMinute.TabIndex = 23;
+            this.fromMinute.ValueChanged += new System.EventHandler(this.FromMinute_ValueChanged);
+            // 
+            // label11
+            // 
+            this.label11.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(603, 276);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(16, 13);
+            this.label11.TabIndex = 24;
+            this.label11.Text = "to";
+            // 
+            // toMinute
+            // 
+            this.toMinute.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.toMinute.Location = new System.Drawing.Point(668, 274);
+            this.toMinute.Maximum = new decimal(new int[] {
+            59,
+            0,
+            0,
+            0});
+            this.toMinute.Name = "toMinute";
+            this.toMinute.Size = new System.Drawing.Size(32, 20);
+            this.toMinute.TabIndex = 27;
+            this.toMinute.Value = new decimal(new int[] {
+            59,
+            0,
+            0,
+            0});
+            this.toMinute.ValueChanged += new System.EventHandler(this.ToMinute_ValueChanged);
+            // 
+            // label12
+            // 
+            this.label12.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.label12.AutoSize = true;
+            this.label12.Location = new System.Drawing.Point(658, 276);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(10, 13);
+            this.label12.TabIndex = 26;
+            this.label12.Text = ":";
+            // 
+            // toHour
+            // 
+            this.toHour.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.toHour.Location = new System.Drawing.Point(625, 274);
+            this.toHour.Maximum = new decimal(new int[] {
+            23,
+            0,
+            0,
+            0});
+            this.toHour.Name = "toHour";
+            this.toHour.Size = new System.Drawing.Size(32, 20);
+            this.toHour.TabIndex = 25;
+            this.toHour.Value = new decimal(new int[] {
+            23,
+            0,
+            0,
+            0});
+            this.toHour.ValueChanged += new System.EventHandler(this.ToHour_ValueChanged);
+            // 
             // RuleEditor
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(784, 419);
+            this.Controls.Add(this.toMinute);
+            this.Controls.Add(this.label12);
+            this.Controls.Add(this.toHour);
+            this.Controls.Add(this.label11);
+            this.Controls.Add(this.fromMinute);
+            this.Controls.Add(this.label10);
+            this.Controls.Add(this.fromHour);
+            this.Controls.Add(this.label9);
             this.Controls.Add(this.notify);
             this.Controls.Add(this.invert);
             this.Controls.Add(this.deleteRule);
@@ -327,6 +454,10 @@
             ((System.ComponentModel.ISupportInitialize)(this.span)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.minValue)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.maxValue)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.fromHour)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.fromMinute)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.toMinute)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.toHour)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -355,5 +486,13 @@
         private System.Windows.Forms.Button deleteRule;
         private System.Windows.Forms.CheckBox invert;
         private System.Windows.Forms.CheckBox notify;
+        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.NumericUpDown fromHour;
+        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.NumericUpDown fromMinute;
+        private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.NumericUpDown toMinute;
+        private System.Windows.Forms.Label label12;
+        private System.Windows.Forms.NumericUpDown toHour;
     }
 }

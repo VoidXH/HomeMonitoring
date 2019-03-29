@@ -54,6 +54,16 @@ namespace HomeEditor.Rules {
         /// </summary>
         public bool notify = true;
 
+        /// <summary>
+        /// First time of the day (in total minutes) to handle this rule.
+        /// </summary>
+        public int fromTime = 0;
+
+        /// <summary>
+        /// Last time of the day (in total minutes) to handle this rule.
+        /// </summary>
+        public int toTime = 23 * 60 + 59;
+
         public Rule() { }
 
         public Rule(string name, PropertyInfo targetProperty) {
@@ -112,6 +122,8 @@ namespace HomeEditor.Rules {
                     case "maxValue": Utils.ParseProperty(reader.Value, out maxValue, errorLog, "maxValue"); break;
                     case "invert": Utils.ParseProperty(reader.Value, out invert, errorLog, "invert"); break;
                     case "notify": Utils.ParseProperty(reader.Value, out notify, errorLog, "notify"); break;
+                    case "fromTime": Utils.ParseProperty(reader.Value, out fromTime, errorLog, "fromTime"); break;
+                    case "toTime": Utils.ParseProperty(reader.Value, out toTime, errorLog, "toTime"); break;
                 }
             }
             if (errorLog.Length != 0)
@@ -130,6 +142,8 @@ namespace HomeEditor.Rules {
             writer.WriteAttributeString("maxValue", maxValue.ToString());
             writer.WriteAttributeString("invert", invert.ToString());
             writer.WriteAttributeString("notify", notify.ToString());
+            writer.WriteAttributeString("fromTime", fromTime.ToString());
+            writer.WriteAttributeString("toTime", toTime.ToString());
         }
         #endregion
     }

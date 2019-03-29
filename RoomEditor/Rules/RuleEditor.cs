@@ -50,6 +50,12 @@ namespace HomeEditor.Rules {
             maxValue.Value = (decimal)selectedRule.maxValue;
             invert.Checked = selectedRule.invert;
             notify.Checked = selectedRule.notify;
+            int newFromHour = selectedRule.fromTime / 60, newFromMinute = selectedRule.fromTime % 60,
+                newToHour = selectedRule.toTime / 60, newToMinute = selectedRule.toTime % 60;
+            fromHour.Value = newFromHour;
+            fromMinute.Value = newFromMinute;
+            toHour.Value = newToHour;
+            toMinute.Value = newToMinute;
         }
 
         void RuleName_TextChanged(object s, EventArgs e) {
@@ -102,6 +108,20 @@ namespace HomeEditor.Rules {
         void Notify_CheckedChanged(object s, EventArgs e) {
             if (selectedRule != null)
                 selectedRule.notify = notify.Checked;
+        }
+
+        void FromHour_ValueChanged(object s, EventArgs e) => FromMinute_ValueChanged(s, e);
+
+        void FromMinute_ValueChanged(object s, EventArgs e) {
+            if (selectedRule != null)
+                selectedRule.fromTime = (int)fromHour.Value * 60 + (int)fromMinute.Value;
+        }
+
+        void ToHour_ValueChanged(object s, EventArgs e) => ToMinute_ValueChanged(s, e);
+
+        void ToMinute_ValueChanged(object s, EventArgs e) {
+            if (selectedRule != null)
+                selectedRule.toTime = (int)toHour.Value * 60 + (int)toMinute.Value;
         }
 
         void DeleteRule_Click(object s, EventArgs e) {
