@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Drawing;
 using System.Reflection;
 using System.Windows.Forms;
@@ -19,6 +20,16 @@ namespace HomeEditor {
         /// How many pixels are representing a meter.
         /// </summary>
         public const int PixelsPerMeter = 25;
+
+        /// <summary>
+        /// <see cref="RoomStatus"/> history.
+        /// </summary>
+        readonly List<SensorData> history = new List<SensorData>();
+
+        /// <summary>
+        /// Read-only list of <see cref="RoomStatus"/> history.
+        /// </summary>
+        public IReadOnlyList<SensorData> DataHistory => history;
 
         /// <summary>
         /// Name of the room.
@@ -103,6 +114,15 @@ namespace HomeEditor {
                 }
             }
             return result;
+        }
+
+        public void DataReceived() {
+            DateTime yesterday = DateTime.Now - TimeSpan.FromDays(1);
+            int removeUntil = 0;
+            while (removeUntil != history.Count && history[removeUntil].Timestamp < yesterday)
+                ++removeUntil;
+            history.RemoveRange(0, removeUntil);
+            history.Add(RoomStatus());
         }
 
         public static void ForEach(Action<Room> action) {

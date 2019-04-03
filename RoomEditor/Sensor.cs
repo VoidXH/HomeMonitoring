@@ -55,7 +55,7 @@ namespace HomeEditor {
         /// <summary>
         /// Measured sensor data.
         /// </summary>
-        List<SensorData> history = new List<SensorData>();
+        readonly List<SensorData> history = new List<SensorData>();
 
         /// <summary>
         /// Read-only list of measured sensor data.
@@ -115,6 +115,8 @@ namespace HomeEditor {
                     ++removeUntil;
                 history.RemoveRange(0, removeUntil);
             }
+            if (parent is Room)
+                ((Room)parent).DataReceived();
             Program.window.Invoke(new Action(() => { Program.window.toolTip.SetToolTip(marker, data.ToString()); }));
             history.Add(data);
             bool activate = data.Open || data.Movement;
