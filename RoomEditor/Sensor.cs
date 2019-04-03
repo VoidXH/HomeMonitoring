@@ -107,8 +107,14 @@ namespace HomeEditor {
         /// New sensor data received.
         /// </summary>
         public void DataReceived(SensorData data) {
-            if (history.Count > 0)
+            if (history.Count > 0) {
                 data.FillFrom(history[history.Count - 1]);
+                DateTime yesterday = DateTime.Now - TimeSpan.FromDays(1);
+                int removeUntil = 0;
+                while (removeUntil != history.Count && history[removeUntil].Timestamp < yesterday)
+                    ++removeUntil;
+                history.RemoveRange(0, removeUntil);
+            }
             Program.window.Invoke(new Action(() => { Program.window.toolTip.SetToolTip(marker, data.ToString()); }));
             history.Add(data);
             bool activate = data.Open || data.Movement;
