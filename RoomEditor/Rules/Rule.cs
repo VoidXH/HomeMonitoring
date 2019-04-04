@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Reflection;
 using System.Text;
 using System.Windows.Forms;
@@ -50,7 +49,7 @@ namespace HomeEditor.Rules {
         public bool invert = false;
 
         /// <summary>
-        /// Notify the user if this rule triggers.
+        /// Notify the user if this rule triggers. The trigger will be logged anyway.
         /// </summary>
         public bool notify = true;
 
@@ -63,6 +62,16 @@ namespace HomeEditor.Rules {
         /// Last time of the day (in total minutes) to handle this rule.
         /// </summary>
         public int toTime = 23 * 60 + 59;
+
+        /// <summary>
+        /// Rule trigger function.
+        /// </summary>
+        public delegate void Notification(Rule rule);
+
+        /// <summary>
+        /// Called when a rule triggers.
+        /// </summary>
+        public static event Notification OnNotification;
 
         public Rule() { }
 
@@ -90,9 +99,27 @@ namespace HomeEditor.Rules {
         /// Check the history entries of the <see cref="targetRoom"/> for this rule.
         /// </summary>
         public void Tick() {
-            List<SensorData> source = new List<SensorData>();
-            // TODO: collect from target room or all sensors in the past 24 hours
-            source.Sort((a, b) => a.Timestamp.CompareTo(b.Timestamp));
+            DateTime now = DateTime.Now;
+            if (now.Hour < fromTime / 60 || (now.Hour == fromTime / 60 && now.Minute < fromTime % 60)) // Handle fromTime
+                return;
+            if (now.Hour > toTime / 60 || (now.Hour == toTime / 60 && now.Minute > toTime % 60)) // Handle toTime
+                return;
+            DateTime lastChecked = now - span;
+            Room.ForEach(room => {
+                if (targetRoom == null || targetRoom == room) { // Handle room
+                    int lastEntry = room.DataHistory.Count - 1;
+                    for (int i = lastEntry; i >= 0; --i) {
+                        SensorData entry = room.DataHistory[i];
+                        if (entry.Timestamp > lastChecked || (i == lastEntry)) { // Handle span
+                            if (targetProperty.PropertyType == typeof(bool)) {
+                                // TODO
+                            } else if (targetProperty.PropertyType == typeof(float)) {
+                                // TODO
+                            }
+                        }
+                    }
+                }
+            });
         }
 
         #region Serialization
