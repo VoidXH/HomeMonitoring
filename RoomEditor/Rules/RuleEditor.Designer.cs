@@ -52,6 +52,8 @@
             this.toMinute = new System.Windows.Forms.NumericUpDown();
             this.label12 = new System.Windows.Forms.Label();
             this.toHour = new System.Windows.Forms.NumericUpDown();
+            this.parentRule = new System.Windows.Forms.ComboBox();
+            this.label13 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.occurence)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.span)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.minValue)).BeginInit();
@@ -89,10 +91,10 @@
             // 
             this.targetRoom.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.targetRoom.FormattingEnabled = true;
-            this.targetRoom.Location = new System.Drawing.Point(628, 67);
+            this.targetRoom.Location = new System.Drawing.Point(628, 94);
             this.targetRoom.Name = "targetRoom";
             this.targetRoom.Size = new System.Drawing.Size(144, 21);
-            this.targetRoom.TabIndex = 3;
+            this.targetRoom.TabIndex = 6;
             this.targetRoom.Text = "None";
             this.targetRoom.SelectedIndexChanged += new System.EventHandler(this.TargetRoom_SelectedIndexChanged);
             // 
@@ -100,7 +102,7 @@
             // 
             this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(584, 70);
+            this.label1.Location = new System.Drawing.Point(584, 97);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(38, 13);
             this.label1.TabIndex = 3;
@@ -110,17 +112,17 @@
             // 
             this.targetProperty.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.targetProperty.FormattingEnabled = true;
-            this.targetProperty.Location = new System.Drawing.Point(639, 94);
+            this.targetProperty.Location = new System.Drawing.Point(639, 121);
             this.targetProperty.Name = "targetProperty";
             this.targetProperty.Size = new System.Drawing.Size(133, 21);
-            this.targetProperty.TabIndex = 4;
+            this.targetProperty.TabIndex = 7;
             this.targetProperty.SelectedIndexChanged += new System.EventHandler(this.TargetProperty_SelectedIndexChanged);
             // 
             // label2
             // 
             this.label2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(584, 97);
+            this.label2.Location = new System.Drawing.Point(584, 124);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(49, 13);
             this.label2.TabIndex = 5;
@@ -130,7 +132,7 @@
             // 
             this.label3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(584, 123);
+            this.label3.Location = new System.Drawing.Point(584, 150);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(35, 13);
             this.label3.TabIndex = 7;
@@ -140,7 +142,7 @@
             // 
             this.label4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(584, 149);
+            this.label4.Location = new System.Drawing.Point(584, 176);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(63, 13);
             this.label4.TabIndex = 10;
@@ -149,7 +151,7 @@
             // occurence
             // 
             this.occurence.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.occurence.Location = new System.Drawing.Point(653, 147);
+            this.occurence.Location = new System.Drawing.Point(653, 174);
             this.occurence.Minimum = new decimal(new int[] {
             1,
             0,
@@ -169,7 +171,7 @@
             // 
             this.label5.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(741, 149);
+            this.label5.Location = new System.Drawing.Point(741, 176);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(31, 13);
             this.label5.TabIndex = 11;
@@ -178,7 +180,7 @@
             // span
             // 
             this.span.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.span.Location = new System.Drawing.Point(625, 121);
+            this.span.Location = new System.Drawing.Point(625, 148);
             this.span.Maximum = new decimal(new int[] {
             1440,
             0,
@@ -186,7 +188,7 @@
             0});
             this.span.Name = "span";
             this.span.Size = new System.Drawing.Size(98, 20);
-            this.span.TabIndex = 6;
+            this.span.TabIndex = 8;
             this.span.Value = new decimal(new int[] {
             5,
             0,
@@ -198,7 +200,7 @@
             // 
             this.label6.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(729, 123);
+            this.label6.Location = new System.Drawing.Point(729, 150);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(43, 13);
             this.label6.TabIndex = 8;
@@ -208,7 +210,7 @@
             // 
             this.minValue.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.minValue.DecimalPlaces = 1;
-            this.minValue.Location = new System.Drawing.Point(670, 173);
+            this.minValue.Location = new System.Drawing.Point(670, 200);
             this.minValue.Name = "minValue";
             this.minValue.Size = new System.Drawing.Size(102, 20);
             this.minValue.TabIndex = 12;
@@ -218,7 +220,7 @@
             // 
             this.label7.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(584, 175);
+            this.label7.Location = new System.Drawing.Point(584, 202);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(80, 13);
             this.label7.TabIndex = 13;
@@ -228,7 +230,7 @@
             // 
             this.maxValue.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.maxValue.DecimalPlaces = 1;
-            this.maxValue.Location = new System.Drawing.Point(673, 199);
+            this.maxValue.Location = new System.Drawing.Point(673, 226);
             this.maxValue.Name = "maxValue";
             this.maxValue.Size = new System.Drawing.Size(99, 20);
             this.maxValue.TabIndex = 14;
@@ -243,7 +245,7 @@
             // 
             this.label8.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(584, 201);
+            this.label8.Location = new System.Drawing.Point(584, 228);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(83, 13);
             this.label8.TabIndex = 15;
@@ -273,7 +275,7 @@
             // deleteRule
             // 
             this.deleteRule.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.deleteRule.Location = new System.Drawing.Point(670, 300);
+            this.deleteRule.Location = new System.Drawing.Point(670, 327);
             this.deleteRule.Name = "deleteRule";
             this.deleteRule.Size = new System.Drawing.Size(102, 23);
             this.deleteRule.TabIndex = 99;
@@ -285,7 +287,7 @@
             // 
             this.invert.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.invert.AutoSize = true;
-            this.invert.Location = new System.Drawing.Point(587, 225);
+            this.invert.Location = new System.Drawing.Point(587, 252);
             this.invert.Name = "invert";
             this.invert.Size = new System.Drawing.Size(53, 17);
             this.invert.TabIndex = 16;
@@ -299,7 +301,7 @@
             this.notify.AutoSize = true;
             this.notify.Checked = true;
             this.notify.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.notify.Location = new System.Drawing.Point(719, 225);
+            this.notify.Location = new System.Drawing.Point(719, 252);
             this.notify.Name = "notify";
             this.notify.Size = new System.Drawing.Size(53, 17);
             this.notify.TabIndex = 19;
@@ -311,7 +313,7 @@
             // 
             this.label9.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(589, 250);
+            this.label9.Location = new System.Drawing.Point(589, 277);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(30, 13);
             this.label9.TabIndex = 20;
@@ -320,7 +322,7 @@
             // fromHour
             // 
             this.fromHour.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.fromHour.Location = new System.Drawing.Point(625, 248);
+            this.fromHour.Location = new System.Drawing.Point(625, 275);
             this.fromHour.Maximum = new decimal(new int[] {
             23,
             0,
@@ -335,7 +337,7 @@
             // 
             this.label10.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(658, 250);
+            this.label10.Location = new System.Drawing.Point(658, 277);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(10, 13);
             this.label10.TabIndex = 22;
@@ -344,7 +346,7 @@
             // fromMinute
             // 
             this.fromMinute.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.fromMinute.Location = new System.Drawing.Point(668, 248);
+            this.fromMinute.Location = new System.Drawing.Point(668, 275);
             this.fromMinute.Maximum = new decimal(new int[] {
             59,
             0,
@@ -359,7 +361,7 @@
             // 
             this.label11.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(603, 276);
+            this.label11.Location = new System.Drawing.Point(603, 303);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(16, 13);
             this.label11.TabIndex = 24;
@@ -368,7 +370,7 @@
             // toMinute
             // 
             this.toMinute.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.toMinute.Location = new System.Drawing.Point(668, 274);
+            this.toMinute.Location = new System.Drawing.Point(668, 301);
             this.toMinute.Maximum = new decimal(new int[] {
             59,
             0,
@@ -388,7 +390,7 @@
             // 
             this.label12.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(658, 276);
+            this.label12.Location = new System.Drawing.Point(658, 303);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(10, 13);
             this.label12.TabIndex = 26;
@@ -397,7 +399,7 @@
             // toHour
             // 
             this.toHour.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.toHour.Location = new System.Drawing.Point(625, 274);
+            this.toHour.Location = new System.Drawing.Point(625, 301);
             this.toHour.Maximum = new decimal(new int[] {
             23,
             0,
@@ -413,11 +415,34 @@
             0});
             this.toHour.ValueChanged += new System.EventHandler(this.ToHour_ValueChanged);
             // 
+            // parentRule
+            // 
+            this.parentRule.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.parentRule.FormattingEnabled = true;
+            this.parentRule.Location = new System.Drawing.Point(651, 67);
+            this.parentRule.Name = "parentRule";
+            this.parentRule.Size = new System.Drawing.Size(121, 21);
+            this.parentRule.TabIndex = 5;
+            this.parentRule.Text = "None";
+            this.parentRule.SelectedIndexChanged += new System.EventHandler(this.ParentRule_SelectedIndexChanged);
+            // 
+            // label13
+            // 
+            this.label13.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.label13.AutoSize = true;
+            this.label13.Location = new System.Drawing.Point(584, 70);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(61, 13);
+            this.label13.TabIndex = 101;
+            this.label13.Text = "Parent rule:";
+            // 
             // RuleEditor
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(784, 419);
+            this.Controls.Add(this.label13);
+            this.Controls.Add(this.parentRule);
             this.Controls.Add(this.toMinute);
             this.Controls.Add(this.label12);
             this.Controls.Add(this.toHour);
@@ -494,5 +519,7 @@
         private System.Windows.Forms.NumericUpDown toMinute;
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.NumericUpDown toHour;
+        private System.Windows.Forms.ComboBox parentRule;
+        private System.Windows.Forms.Label label13;
     }
 }

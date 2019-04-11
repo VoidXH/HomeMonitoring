@@ -14,6 +14,11 @@ namespace HomeEditor.Rules {
         public string name = string.Empty;
 
         /// <summary>
+        /// A rule that also has to trigger in order for this one to trigger.
+        /// </summary>
+        public string parentRule = null;
+
+        /// <summary>
         /// Room to check. If null, all sensors will be checked independently.
         /// </summary>
         public Room targetRoom;
@@ -130,6 +135,7 @@ namespace HomeEditor.Rules {
             while (reader.MoveToNextAttribute()) {
                 switch (reader.Name) {
                     case "name": name = reader.Value; break;
+                    case "parentRule": parentRule = reader.Value; break;
                     case "targetRoom":
                         targetRoom = Room.GetByName(reader.Value);
                         if (targetRoom == null)
@@ -159,6 +165,8 @@ namespace HomeEditor.Rules {
 
         public void WriteXml(XmlWriter writer) {
             writer.WriteAttributeString("name", name);
+            if (parentRule != null)
+                writer.WriteAttributeString("parentRule", parentRule);
             if (targetRoom != null)
                 writer.WriteAttributeString("targetRoom", targetRoom.Name);
             if (targetProperty != null)

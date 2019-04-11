@@ -9,13 +9,22 @@ namespace HomeEditor.Rules {
 
         public static List<Rule> Rules {
             get {
-                if (rules == null)
+                if (rules == null) {
                     rules = new List<Rule>();
+                    LoadRules();
+                }
                 return rules;
             }
         }
 
         public static string RuleFileName { get; set; } = "./_rules.xml";
+
+        public static Rule GetRuleByName(string name) {
+            foreach (Rule rule in Rules)
+                if (rule.name.Equals(name))
+                    return rule;
+            return null;
+        }
 
         public static void LoadRules() {
             Rules.Clear();

@@ -22,9 +22,13 @@ namespace HomeEditor.Rules {
 
         void UpdateRuleList() {
             ruleList.Items.Clear();
+            parentRule.Items.Clear();
+            parentRule.Items.Add("None");
             for (int i = 0, c = RuleLibrary.Rules.Count; i < c; ++i) {
                 ruleList.Items.Add(RuleLibrary.Rules[i].name);
-                if (RuleLibrary.Rules[i] == selectedRule)
+                if (RuleLibrary.Rules[i] != selectedRule)
+                    parentRule.Items.Add(RuleLibrary.Rules[i].name);
+                else
                     ruleList.SelectedIndex = i;
             }
         }
@@ -38,6 +42,10 @@ namespace HomeEditor.Rules {
         void RuleList_SelectedIndexChanged(object s, EventArgs e) {
             selectedRule = RuleLibrary.Rules[ruleList.SelectedIndex];
             ruleName.Text = selectedRule.name;
+            if (RuleLibrary.GetRuleByName(selectedRule.parentRule) == null)
+                parentRule.SelectedItem = "None";
+            else
+                parentRule.SelectedItem = selectedRule.parentRule;
             for (int i = 0, c = targetRoom.Items.Count; i < c; ++i)
                 if (((RoomListItem)targetRoom.Items[i]).item == selectedRule.targetRoom)
                     targetRoom.SelectedIndex = i;
@@ -63,6 +71,11 @@ namespace HomeEditor.Rules {
                 selectedRule.name = ruleName.Text;
                 UpdateRuleList();
             }
+        }
+
+        private void ParentRule_SelectedIndexChanged(object s, EventArgs e) {
+            if (selectedRule != null)
+                selectedRule.parentRule = (string)parentRule.SelectedItem;
         }
 
         void TargetRoom_SelectedIndexChanged(object s, EventArgs e) {
@@ -126,9 +139,24 @@ namespace HomeEditor.Rules {
 
         void DeleteRule_Click(object s, EventArgs e) {
             if (selectedRule != null) {
+                bool canRemove = false;
+                foreach (Rule rule in RuleLibrary.Rules) {
+                    if (rule.parentRule.Equals(selectedRule.name)) {
+                        if (!canRemove) {
+                            if (MessageBox.Show("This rule is the parent of other rules. Do you really want to delete it?", "Confirm deletion",
+                                MessageBoxButtons.YesNo) == DialogResult.Yes)
+                                canRemove = true;
+                            else
+                                return;
+                        }
+                        if (canRemove)
+                            rule.parentRule = null;
+                    }
+                }
                 RuleLibrary.Rules.Remove(selectedRule);
-                selectedRule = RuleLibrary.Rules.Count > 0 ? RuleLibrary.Rules[0] : null;
                 UpdateRuleList();
+                if (RuleLibrary.Rules.Count > 0)
+                    ruleList.SelectedIndex = 0;
             }
         }
 
