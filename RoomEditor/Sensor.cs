@@ -4,8 +4,6 @@ using System.Drawing;
 using System.Windows.Forms;
 using System.Xml;
 
-using HomeEditor.Events;
-
 namespace HomeEditor {
     /// <summary>
     /// A sensor in a room.
@@ -140,7 +138,7 @@ namespace HomeEditor {
         /// </summary>
         public static void ForwardButton(string address) => ForEach((sensor) => {
             if (sensor.Address.Equals(address))
-                Event.Alert(sensor, "Button pressed.");
+                Program.Alert(sensor, "Button pressed.");
         });
 
         /// <summary>

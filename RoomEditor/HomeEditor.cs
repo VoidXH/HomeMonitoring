@@ -5,8 +5,6 @@ using System.Linq;
 using System.Reflection;
 using System.Windows.Forms;
 
-using HomeEditor.Events;
-
 namespace HomeEditor {
     /// <summary>
     /// Main window of the application.
@@ -22,11 +20,6 @@ namespace HomeEditor {
         /// Selected control to configure.
         /// </summary>
         SerializablePanel selection;
-
-        /// <summary>
-        /// Event tick timer.
-        /// </summary>
-        Timer eventTimer;
 
         /// <summary>
         /// List of parent elements (rooms, doors, and obstacles) in the house.
@@ -51,12 +44,6 @@ namespace HomeEditor {
                 }
             }
             LoadConfiguration();
-            Event.RegisterEvents();
-            eventTimer = new Timer {
-                Enabled = true,
-                Interval = 1000
-            };
-            eventTimer.Tick += EventTick;
 #if DEBUG
             simulator.Visible = true;
             spoofSensor.Visible = true;
@@ -68,16 +55,9 @@ namespace HomeEditor {
         }
 
         /// <summary>
-        /// Event handler timer function.
-        /// </summary>
-        private void EventTick(object sender, EventArgs e) => Event.Tick();
-
-        /// <summary>
         /// Auto-save and export logs on close.
         /// </summary>
         private void HomeEditor_FormClosed(object sender, FormClosedEventArgs e) {
-            eventTimer.Stop();
-            eventTimer.Dispose();
             MQTT.Disconnect();
             SerializeHome(defaultFileName);
             if (!Directory.Exists("Logs"))
@@ -163,15 +143,6 @@ namespace HomeEditor {
                 return;
             if (Sensor.LastLocation is Room)
                 SelectObject(Sensor.LastLocation);
-            else {
-                SerializablePanel LastRoom = Event.GetLastRoom();
-                foreach (SerializablePanel target in drawingPanel.Controls) {
-                    if (target is Room && target != LastRoom && Utils.Intersect(Sensor.LastLocation, target)) {
-                        SelectObject(target);
-                        break;
-                    }
-                }
-            }
         }
 
         /// <summary>
@@ -231,11 +202,6 @@ namespace HomeEditor {
         static string defaultConfig = @"MQTT configuration
 HomeEditor.MQTTHandler.MQTTHost = hostname.com
 HomeEditor.MQTTHandler.MQTTUser = username
-HomeEditor.MQTTHandler.MQTTPass = password
-
-Events
-HomeEditor.Events.DetectTV.noiseThresh = 1 # Minimum light noise required to trigger the alert
-HomeEditor.Events.DetectTV.samples = 10 # Samples to check
-HomeEditor.Events.Leaving.alertTimer = 300 # Alert after the entrance is open for longer than this time (in seconds) and the house is empty";
+HomeEditor.MQTTHandler.MQTTPass = password";
     }
 }

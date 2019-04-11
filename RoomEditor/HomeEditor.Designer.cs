@@ -55,13 +55,13 @@
             this.loadRecentToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.saveToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.saveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.rulesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.helpMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.colorsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.backgroundSplit = new System.Windows.Forms.SplitContainer();
             this.drawingPanel = new System.Windows.Forms.Panel();
             this.openDebugger = new System.Windows.Forms.Button();
-            this.activityLabel = new System.Windows.Forms.Label();
             this.locate = new System.Windows.Forms.Button();
             this.simulator = new System.Windows.Forms.CheckBox();
             this.addDoor = new System.Windows.Forms.Button();
@@ -89,7 +89,6 @@
             this.StatusStrip = new System.Windows.Forms.StatusStrip();
             this.LastAlert = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolTip = new System.Windows.Forms.ToolTip(this.components);
-            this.rulesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.roomSettings.SuspendLayout();
             this.sensorSettings.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.roomHeight)).BeginInit();
@@ -444,6 +443,13 @@
             this.saveToolStripMenuItem.Text = "Save as...";
             this.saveToolStripMenuItem.Click += new System.EventHandler(this.SaveAsToolStripMenuItem_Click);
             // 
+            // rulesToolStripMenuItem
+            // 
+            this.rulesToolStripMenuItem.Name = "rulesToolStripMenuItem";
+            this.rulesToolStripMenuItem.Size = new System.Drawing.Size(47, 20);
+            this.rulesToolStripMenuItem.Text = "Rules";
+            this.rulesToolStripMenuItem.Click += new System.EventHandler(this.RulesToolStripMenuItem_Click);
+            // 
             // helpMenu
             // 
             this.helpMenu.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -487,7 +493,6 @@
             // 
             this.backgroundSplit.Panel2.AutoScroll = true;
             this.backgroundSplit.Panel2.Controls.Add(this.openDebugger);
-            this.backgroundSplit.Panel2.Controls.Add(this.activityLabel);
             this.backgroundSplit.Panel2.Controls.Add(this.locate);
             this.backgroundSplit.Panel2.Controls.Add(this.simulator);
             this.backgroundSplit.Panel2.Controls.Add(this.addDoor);
@@ -521,15 +526,6 @@
             this.openDebugger.UseVisualStyleBackColor = true;
             this.openDebugger.Visible = false;
             this.openDebugger.Click += new System.EventHandler(this.OpenDebugger_Click);
-            // 
-            // activityLabel
-            // 
-            this.activityLabel.AutoSize = true;
-            this.activityLabel.Location = new System.Drawing.Point(3, 188);
-            this.activityLabel.Name = "activityLabel";
-            this.activityLabel.Size = new System.Drawing.Size(118, 13);
-            this.activityLabel.TabIndex = 8;
-            this.activityLabel.Text = "Activity: None detected";
             // 
             // locate
             // 
@@ -818,13 +814,6 @@
             this.LastAlert.Name = "LastAlert";
             this.LastAlert.Size = new System.Drawing.Size(0, 17);
             // 
-            // rulesToolStripMenuItem
-            // 
-            this.rulesToolStripMenuItem.Name = "rulesToolStripMenuItem";
-            this.rulesToolStripMenuItem.Size = new System.Drawing.Size(47, 20);
-            this.rulesToolStripMenuItem.Text = "Rules";
-            this.rulesToolStripMenuItem.Click += new System.EventHandler(this.RulesToolStripMenuItem_Click);
-            // 
             // HomeEditor
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -933,7 +922,6 @@
         private System.Windows.Forms.Label doorNameLabel;
         private System.Windows.Forms.TextBox sensorName;
         private System.Windows.Forms.Label sensorNameLabel;
-        public System.Windows.Forms.Label activityLabel;
         private System.Windows.Forms.Button openDebugger;
         public System.Windows.Forms.ToolTip toolTip;
         public System.Windows.Forms.StatusStrip StatusStrip;

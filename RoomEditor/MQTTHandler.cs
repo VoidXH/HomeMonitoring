@@ -19,7 +19,7 @@ namespace HomeEditor {
         /// <summary>
         /// Last messages sent by each sensor.
         /// </summary>
-        Dictionary<string, string> lastMessages = new Dictionary<string, string>();
+        readonly Dictionary<string, string> lastMessages = new Dictionary<string, string>();
 
         /// <summary>
         /// Last message received at.
@@ -39,7 +39,7 @@ namespace HomeEditor {
             while (!client.IsConnected) {
                 System.Threading.Thread.Sleep(500);
                 if (i++ > 10) {
-                    Events.Event.Alert(null, "MQTT connection failed to " + MQTTHost + " as " + MQTTUser + '.');
+                    Program.Alert(null, "MQTT connection failed to " + MQTTHost + " as " + MQTTUser + '.');
                     break;
                 }
             }

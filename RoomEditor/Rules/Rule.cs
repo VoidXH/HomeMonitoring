@@ -18,6 +18,7 @@ namespace HomeEditor.Rules {
         /// </summary>
         public string parentRule = null;
 
+        // TODO: virtual "Lobby" room, which represents sensor data from the entrance door, use that as target for the leaving event
         /// <summary>
         /// Room to check. If null, all sensors will be checked independently.
         /// </summary>
