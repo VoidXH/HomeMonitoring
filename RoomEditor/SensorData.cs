@@ -7,6 +7,10 @@ namespace HomeEditor {
         /// Value of an unmeasured float field.
         /// </summary>
         public const float Unmeasured = -1;
+        /// <summary>
+        /// Ratio of light noise to retain between sensor updates.
+        /// </summary>
+        public const float LightNoiseFactor = .8f;
 
         public DateTime Timestamp { get; private set; }
 
@@ -24,6 +28,7 @@ namespace HomeEditor {
         public float Humidity { get; set; } = Unmeasured;
         public float Pressure { get; set; } = Unmeasured;
         public float Battery { get; set; } = Unmeasured;
+        public float LightNoise { get; set; } = Unmeasured;
 
         public SensorData() => Timestamp = DateTime.Now;
 
@@ -53,11 +58,17 @@ namespace HomeEditor {
 
         public void FillFrom(SensorData other) {
             if (!_movement.HasValue) _movement = other._movement;
-            if (Light <= 0) Light = other.Light;
+            float lightNoiseIncrease = other.Light;
+            if (Light <= 0) {
+                Light = other.Light;
+                lightNoiseIncrease = Math.Abs(Light - other.Light);
+            }
             if (Temperature <= 0) Temperature = other.Temperature;
             if (Humidity <= 0) Humidity = other.Humidity;
             if (Pressure <= 0) Pressure = other.Pressure;
             if (Battery <= 0) Battery = other.Battery;
+            if (lightNoiseIncrease >= 0)
+                LightNoise = (other.LightNoise >= 0 ? other.LightNoise : 0) * LightNoiseFactor + lightNoiseIncrease * (1 - LightNoiseFactor);
         }
 
         public override string ToString() {
