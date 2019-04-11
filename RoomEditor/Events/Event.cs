@@ -18,10 +18,7 @@ namespace HomeEditor.Events {
             }
         }
 
-        public static void RegisterEvents() {
-            EventCalls += Leaving.Check;
-            EventCalls += DetectTV.Check;
-        }
+        public static void RegisterEvents() => EventCalls += Leaving.Check;
 
         public static void Tick() => EventCalls?.Invoke();
 

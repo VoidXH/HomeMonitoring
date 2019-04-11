@@ -1,6 +1,3 @@
 ﻿- Lakó távozik, ajtót nyitva hagyta --------------------------------------------------------------- Leaving
 	= A bejárati ajtó nyitva, utoljára az amelletti szobában járt a lakó, de [alertTimer]
 	  másodperce nem mozgott.
-- TV-t néz-e (fényzaj) ---------------------------------------------------------------------------- DetectTV
-	= Az elmúlt [samples] mintában a fényerősség deriváltjának abszolút szummája [noiseThresh]
-	  felett van-e.

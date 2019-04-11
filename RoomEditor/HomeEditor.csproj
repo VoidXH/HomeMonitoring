@@ -117,7 +117,6 @@
       <DependentUpon>Colors.cs</DependentUpon>
     </Compile>
     <Compile Include="ColorStack.cs" />
-    <Compile Include="Events\DetectTV.cs" />
     <Compile Include="Events\Event.cs" />
     <Compile Include="Events\Leaving.cs" />
     <Compile Include="HomeEditor.DoorEditor.cs">
