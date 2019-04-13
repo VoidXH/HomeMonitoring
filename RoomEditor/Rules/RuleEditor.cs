@@ -1,13 +1,16 @@
 ﻿using System;
+using System.Drawing;
 using System.Reflection;
 using System.Windows.Forms;
 
 namespace HomeEditor.Rules {
     public partial class RuleEditor : Form {
+        Color textFieldColor;
         Rule selectedRule;
 
         public RuleEditor() {
             InitializeComponent();
+            textFieldColor = ruleName.BackColor;
             targetRoom.Items.Add(new RoomListItem(null));
             Room.ForEach(room => targetRoom.Items.Add(new RoomListItem(room)));
             targetRoom.SelectedIndex = 0;
@@ -68,6 +71,19 @@ namespace HomeEditor.Rules {
 
         void RuleName_TextChanged(object s, EventArgs e) {
             if (selectedRule != null) {
+                // Don't allow name collisions
+                foreach (Rule rule in RuleLibrary.Rules) {
+                    if (rule.name.Equals(ruleName.Text) && rule != selectedRule) {
+                        ruleName.BackColor = Color.Red;
+                        return;
+                    }
+                }
+                // Keep the parents
+                foreach (Rule rule in RuleLibrary.Rules)
+                    if (rule.parentRule != null && rule.parentRule.Equals(selectedRule.name))
+                        rule.parentRule = ruleName.Text;
+                // Finalize
+                ruleName.BackColor = textFieldColor;
                 selectedRule.name = ruleName.Text;
                 UpdateRuleList();
             }
