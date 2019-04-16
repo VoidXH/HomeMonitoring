@@ -21,6 +21,7 @@ namespace HomeEditor.Rules {
             targetProperty.SelectedIndex = 0;
             RuleLibrary.LoadRules();
             UpdateRuleList();
+            ruleList.SelectedIndex = 0;
         }
 
         void UpdateRuleList() {
@@ -157,7 +158,7 @@ namespace HomeEditor.Rules {
             if (selectedRule != null) {
                 bool canRemove = false;
                 foreach (Rule rule in RuleLibrary.Rules) {
-                    if (rule.parentRule.Equals(selectedRule.name)) {
+                    if (rule.parentRule != null && rule.parentRule.Equals(selectedRule.name)) {
                         if (!canRemove) {
                             if (MessageBox.Show("This rule is the parent of other rules. Do you really want to delete it?", "Confirm deletion",
                                 MessageBoxButtons.YesNo) == DialogResult.Yes)
