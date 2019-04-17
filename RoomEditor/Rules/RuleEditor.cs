@@ -45,13 +45,17 @@ namespace HomeEditor.Rules {
             ruleList.SelectedIndex = RuleLibrary.Rules.Count - 1;
         }
 
-        void RuleList_SelectedIndexChanged(object s, EventArgs e) {
-            selectedRule = RuleLibrary.Rules[ruleList.SelectedIndex];
-            ruleName.Text = selectedRule.name;
+        void ResetParent() {
             if (RuleLibrary.GetRuleByName(selectedRule.parentRule) == null)
                 parentRule.SelectedItem = noParent;
             else
                 parentRule.SelectedItem = selectedRule.parentRule;
+        }
+
+        void RuleList_SelectedIndexChanged(object s, EventArgs e) {
+            selectedRule = RuleLibrary.Rules[ruleList.SelectedIndex];
+            ruleName.Text = selectedRule.name;
+            ResetParent();
             for (int i = 0, c = targetRoom.Items.Count; i < c; ++i)
                 if (((RoomListItem)targetRoom.Items[i]).item == selectedRule.targetRoom)
                     targetRoom.SelectedIndex = i;
@@ -104,7 +108,7 @@ namespace HomeEditor.Rules {
                     checkedRule = RuleLibrary.GetRuleByName(checkedRule.parentRule);
                     if (checkedRule == selectedRule) {
                         MessageBox.Show("Loops are not allowed in the parent rule chain.");
-                        parentRule.SelectedIndex = 0;
+                        ResetParent();
                         return;
                     }
                 }
