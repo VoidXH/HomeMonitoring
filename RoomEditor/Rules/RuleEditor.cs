@@ -5,6 +5,8 @@ using System.Windows.Forms;
 
 namespace HomeEditor.Rules {
     public partial class RuleEditor : Form {
+        const string noParent = "None";
+
         Color textFieldColor;
         Rule selectedRule;
 
@@ -27,7 +29,7 @@ namespace HomeEditor.Rules {
         void UpdateRuleList() {
             ruleList.Items.Clear();
             parentRule.Items.Clear();
-            parentRule.Items.Add("None");
+            parentRule.Items.Add(noParent);
             for (int i = 0, c = RuleLibrary.Rules.Count; i < c; ++i) {
                 ruleList.Items.Add(RuleLibrary.Rules[i].name);
                 if (RuleLibrary.Rules[i] != selectedRule)
@@ -47,7 +49,7 @@ namespace HomeEditor.Rules {
             selectedRule = RuleLibrary.Rules[ruleList.SelectedIndex];
             ruleName.Text = selectedRule.name;
             if (RuleLibrary.GetRuleByName(selectedRule.parentRule) == null)
-                parentRule.SelectedItem = "None";
+                parentRule.SelectedItem = noParent;
             else
                 parentRule.SelectedItem = selectedRule.parentRule;
             for (int i = 0, c = targetRoom.Items.Count; i < c; ++i)
@@ -72,6 +74,11 @@ namespace HomeEditor.Rules {
 
         void RuleName_TextChanged(object s, EventArgs e) {
             if (selectedRule != null) {
+                // Don't allow naming a rule as the no parent option
+                if (ruleName.Text.Equals(noParent)) {
+                    ruleName.BackColor = Color.Red;
+                    return;
+                }
                 // Don't allow name collisions
                 foreach (Rule rule in RuleLibrary.Rules) {
                     if (rule.name.Equals(ruleName.Text) && rule != selectedRule) {
@@ -91,8 +98,18 @@ namespace HomeEditor.Rules {
         }
 
         private void ParentRule_SelectedIndexChanged(object s, EventArgs e) {
-            if (selectedRule != null)
-                selectedRule.parentRule = (string)parentRule.SelectedItem;
+            if (selectedRule != null) {
+                Rule checkedRule = RuleLibrary.GetRuleByName(parentRule.Text);
+                while (checkedRule != null) {
+                    checkedRule = RuleLibrary.GetRuleByName(checkedRule.parentRule);
+                    if (checkedRule == selectedRule) {
+                        MessageBox.Show("Loops are not allowed in the parent rule chain.");
+                        parentRule.SelectedIndex = 0;
+                        return;
+                    }
+                }
+                selectedRule.parentRule = parentRule.Text;
+            }
         }
 
         void TargetRoom_SelectedIndexChanged(object s, EventArgs e) {
