@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Drawing;
 using System.Windows.Forms;
 
 namespace HomeEditor {
@@ -19,7 +20,16 @@ namespace HomeEditor {
         /// <summary>
         /// Change the selected room's name.
         /// </summary>
-        void RoomName_TextChanged(object sender, EventArgs e) => GetSelectedRoom().SetName(((TextBox)sender).Text);
+        void RoomName_TextChanged(object sender, EventArgs e) {
+            TextBox target = (TextBox)sender;
+            string newName = target.Text;
+            if (newName.Equals(AllLobbies.Instance.Name)) {
+                target.BackColor = Color.Red;
+                return;
+            }
+            target.BackColor = roomNameBackground;
+            GetSelectedRoom().SetName(newName);
+        }
 
         /// <summary>
         /// Change the selected room's width.

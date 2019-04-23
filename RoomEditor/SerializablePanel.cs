@@ -31,8 +31,10 @@ namespace HomeEditor {
         /// </summary>
         /// <param name="parent">Containing Control</param>
         public SerializablePanel(Control parent) : base() {
-            parent.Controls.Add(this);
-            this.parent = parent;
+            if (parent != null) {
+                parent.Controls.Add(this);
+                this.parent = parent;
+            }
         }
 
         /// <summary>

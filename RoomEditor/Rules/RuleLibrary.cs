@@ -47,7 +47,8 @@ namespace HomeEditor.Rules {
                 rules.Add(new Rule("Watching TV", "LightNoise") { span = TimeSpan.FromMinutes(30), maxValue = 5, notify = false });
                 rules.Add(new Rule("Empty house for a day", "Movement") { invert = true, span = TimeSpan.FromHours(24) });
                 rules.Add(new Rule("Sleep disorder", "Movement") { span = TimeSpan.FromMinutes(15), occurence = 3, toTime = 300 });
-                rules.Add(new Rule("Entrance opened", "Open") { span = TimeSpan.FromMinutes(0), notify = false });
+                rules.Add(new Rule("Entrance opened", "Open")
+                    { targetRoom = AllLobbies.Instance, span = TimeSpan.FromMinutes(0), notify = false });
                 rules.Add(new Rule("Left home with entrance opened", "Movement")
                     { parentRule = "Entrance opened", span = TimeSpan.FromMinutes(5), invert = true });
                 rules.Add(new Rule("Unoptimal temperature", "Temperature") { minValue = 18, maxValue = 32 });

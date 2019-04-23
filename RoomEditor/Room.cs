@@ -29,7 +29,7 @@ namespace HomeEditor {
         /// <summary>
         /// Read-only list of <see cref="RoomStatus"/> history.
         /// </summary>
-        public IReadOnlyList<SensorData> DataHistory => history;
+        public virtual IReadOnlyList<SensorData> DataHistory => history;
 
         /// <summary>
         /// Name of the room.
@@ -60,7 +60,7 @@ namespace HomeEditor {
         /// <summary>
         /// This room is a lobby if an entrance intersects with it.
         /// </summary>
-        public bool IsLobby {
+        public virtual bool IsLobby {
             get {
                 foreach (SerializablePanel panel in Program.window.Elements)
                     if (panel.DoorType == (int)Door.Types.Entrance && Utils.Intersect(panel, this))

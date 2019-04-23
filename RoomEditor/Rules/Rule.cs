@@ -140,8 +140,12 @@ namespace HomeEditor.Rules {
                     case "parentRule": parentRule = reader.Value; break;
                     case "targetRoom":
                         targetRoom = Room.GetByName(reader.Value);
-                        if (targetRoom == null)
-                            errorLog.AppendLine("Room doesn't exist: " + reader.Value);
+                        if (targetRoom == null) {
+                            if (reader.Value.Equals(AllLobbies.Instance.Name))
+                                targetRoom = AllLobbies.Instance;
+                            else
+                                errorLog.AppendLine("Room doesn't exist: " + reader.Value);
+                        }
                         break;
                     case "targetProperty":
                         SetTargetProperty(reader.Value);

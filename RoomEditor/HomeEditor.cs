@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Reflection;
@@ -27,6 +28,11 @@ namespace HomeEditor {
         public IReadOnlyList<SerializablePanel> Elements => drawingPanel.Controls.OfType<SerializablePanel>().ToList();
 
         /// <summary>
+        /// Background color of the room name input field if the room name is valid.
+        /// </summary>
+        Color roomNameBackground;
+
+        /// <summary>
         /// Main window of the application.
         /// </summary>
         public HomeEditor() {
@@ -35,6 +41,7 @@ namespace HomeEditor {
             loading.Refresh();
             InitializeComponent();
             defaultTitle = Text;
+            roomNameBackground = roomName.BackColor;
             LoadRecents();
             if (File.Exists(defaultFileName)) {
                 try {

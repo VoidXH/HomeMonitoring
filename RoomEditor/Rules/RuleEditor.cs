@@ -14,6 +14,7 @@ namespace HomeEditor.Rules {
             InitializeComponent();
             textFieldColor = ruleName.BackColor;
             targetRoom.Items.Add(new RoomListItem(null));
+            targetRoom.Items.Add(new RoomListItem(AllLobbies.Instance));
             Room.ForEach(room => targetRoom.Items.Add(new RoomListItem(room)));
             targetRoom.SelectedIndex = 0;
             PropertyInfo[] properties = typeof(SensorData).GetProperties();

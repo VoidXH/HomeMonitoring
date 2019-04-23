@@ -194,6 +194,9 @@
     <Compile Include="Door.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Rules\AllLobbies.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <EmbeddedResource Include="Colors.resx">
       <DependentUpon>Colors.cs</DependentUpon>
     </EmbeddedResource>
