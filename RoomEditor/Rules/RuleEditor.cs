@@ -112,7 +112,7 @@ namespace HomeEditor.Rules {
                         return;
                     }
                 }
-                selectedRule.parentRule = parentRule.Text;
+                selectedRule.parentRule = !parentRule.Text.Equals(noParent) ? parentRule.Text : null;
             }
         }
 
