@@ -3,7 +3,7 @@ using System.Drawing;
 using System.Windows.Forms;
 using System.Xml;
 
-namespace HomeEditor {
+namespace HomeEditor.Elements {
     /// <summary>
     /// Renamable obstacle in the home.
     /// </summary>

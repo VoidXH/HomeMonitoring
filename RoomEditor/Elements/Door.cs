@@ -1,9 +1,8 @@
-﻿using System;
-using System.Drawing;
+﻿using System.Drawing;
 using System.Windows.Forms;
 using System.Xml;
 
-namespace HomeEditor {
+namespace HomeEditor.Elements {
     /// <summary>
     /// An openable entity in the home, like a door, entrance, or window.
     /// </summary>

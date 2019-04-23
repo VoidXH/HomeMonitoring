@@ -5,7 +5,7 @@ using System.Reflection;
 using System.Windows.Forms;
 using System.Xml;
 
-namespace HomeEditor {
+namespace HomeEditor.Elements {
     /// <summary>
     /// A room in the home.
     /// </summary>

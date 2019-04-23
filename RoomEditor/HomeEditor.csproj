@@ -154,7 +154,7 @@
       <DependentUpon>MQTTDebugger.cs</DependentUpon>
     </Compile>
     <Compile Include="MQTTHandler.cs" />
-    <Compile Include="Obstacle.cs">
+    <Compile Include="Elements\Obstacle.cs">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="HomeEditor.cs">
@@ -165,7 +165,7 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Room.cs">
+    <Compile Include="Elements\Room.cs">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Rules\ListItems.cs" />
@@ -177,21 +177,21 @@
       <DependentUpon>RuleEditor.cs</DependentUpon>
     </Compile>
     <Compile Include="Rules\RuleLibrary.cs" />
-    <Compile Include="Sensor.cs">
+    <Compile Include="Elements\Sensor.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="SensorData.cs" />
+    <Compile Include="Elements\SensorData.cs" />
     <Compile Include="SensorDataSpoof.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="SensorDataSpoof.Designer.cs">
       <DependentUpon>SensorDataSpoof.cs</DependentUpon>
     </Compile>
-    <Compile Include="SerializablePanel.cs">
+    <Compile Include="Elements\SerializablePanel.cs">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Utils.cs" />
-    <Compile Include="Door.cs">
+    <Compile Include="Elements\Door.cs">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Rules\AllLobbies.cs">

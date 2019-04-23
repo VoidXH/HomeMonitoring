@@ -1,4 +1,5 @@
-﻿using System.Windows.Forms;
+﻿using HomeEditor.Elements;
+using System.Windows.Forms;
 
 namespace HomeEditor {
     public partial class Colors : Form {

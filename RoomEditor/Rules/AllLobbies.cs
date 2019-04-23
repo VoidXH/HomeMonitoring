@@ -1,6 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using HomeEditor.Elements;
+using System.Collections.Generic;
 
-namespace HomeEditor {
+namespace HomeEditor.Rules {
     public class AllLobbies : Room {
         static AllLobbies instance;
 

@@ -5,7 +5,7 @@ using System.Xml;
 using System.Xml.Schema;
 using System.Xml.Serialization;
 
-namespace HomeEditor {
+namespace HomeEditor.Elements {
     /// <summary>
     /// An object in the home which could be imported and exported.
     /// </summary>

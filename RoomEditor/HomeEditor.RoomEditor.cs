@@ -1,4 +1,6 @@
-﻿using System;
+﻿using HomeEditor.Elements;
+using HomeEditor.Rules;
+using System;
 using System.Drawing;
 using System.Windows.Forms;
 

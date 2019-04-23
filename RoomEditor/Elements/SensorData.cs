@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Text;
 
-namespace HomeEditor {
+namespace HomeEditor.Elements {
     public class SensorData {
         /// <summary>
         /// Value of an unmeasured float field.
