@@ -102,14 +102,14 @@ namespace HomeEditor.Rules {
         }
 
         /// <summary>
-        /// Check the history entries of the <see cref="targetRoom"/> for this rule.
+        /// Check the history entries of the <see cref="targetRoom"/> for this rule. Returns true and notifies if the rule has triggered.
         /// </summary>
-        public void Tick() {
+        public bool Tick() {
             DateTime now = DateTime.Now;
             if (now.Hour < fromTime / 60 || (now.Hour == fromTime / 60 && now.Minute < fromTime % 60)) // Handle fromTime
-                return;
+                return false;
             if (now.Hour > toTime / 60 || (now.Hour == toTime / 60 && now.Minute > toTime % 60)) // Handle toTime
-                return;
+                return false;
             DateTime lastChecked = now - span;
             Room.ForEach(room => {
                 if (targetRoom == null || targetRoom == room) { // Handle room
@@ -126,6 +126,7 @@ namespace HomeEditor.Rules {
                     }
                 }
             });
+            return false;
         }
 
         #region Serialization

@@ -26,6 +26,20 @@ namespace HomeEditor.Rules {
             return null;
         }
 
+        /// <summary>
+        /// Check the sensor histories if they match rules with a given parent.
+        /// </summary>
+        static void Tick(string Parent = null) {
+            foreach (Rule rule in Rules)
+                if (rule.parentRule.Equals(Parent) && rule.Tick())
+                    Tick(rule.name);
+        }
+
+        /// <summary>
+        /// Check the sensor histories if they match rules.
+        /// </summary>
+        public static void Tick() => Tick(null);
+
         public static void LoadRules() {
             Rules.Clear();
             if (!File.Exists(RuleFileName)) {
