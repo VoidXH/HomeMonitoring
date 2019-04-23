@@ -58,11 +58,9 @@ namespace HomeEditor.Elements {
 
         public void FillFrom(SensorData other) {
             if (!_movement.HasValue) _movement = other._movement;
-            float lightNoiseIncrease = other.Light;
-            if (Light <= 0) {
+            if (Light <= 0)
                 Light = other.Light;
-                lightNoiseIncrease = Math.Abs(Light - other.Light);
-            }
+            float lightNoiseIncrease = Math.Abs(Light - other.Light);
             if (Temperature <= 0) Temperature = other.Temperature;
             if (Humidity <= 0) Humidity = other.Humidity;
             if (Pressure <= 0) Pressure = other.Pressure;
