@@ -1,4 +1,5 @@
 ﻿using HomeEditor.Elements;
+using HomeEditor.MQTT;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -208,8 +209,8 @@ namespace HomeEditor {
         /// Default configuration file contents.
         /// </summary>
         static string defaultConfig = @"MQTT configuration
-HomeEditor.MQTTHandler.MQTTHost = hostname.com
-HomeEditor.MQTTHandler.MQTTUser = username
-HomeEditor.MQTTHandler.MQTTPass = password";
+HomeEditor.MQTT.MQTTHandler.MQTTHost = hostname.com
+HomeEditor.MQTT.MQTTHandler.MQTTUser = username
+HomeEditor.MQTT.MQTTHandler.MQTTPass = password";
     }
 }

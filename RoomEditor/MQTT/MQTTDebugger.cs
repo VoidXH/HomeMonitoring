@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Windows.Forms;
 
-namespace HomeEditor {
+namespace HomeEditor.MQTT {
     public partial class MQTTDebugger : Form {
         DateTime lastUpdate;
         MQTTHandler handler;

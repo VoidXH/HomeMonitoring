@@ -147,13 +147,13 @@
     <Compile Include="LogViewer.Designer.cs">
       <DependentUpon>LogViewer.cs</DependentUpon>
     </Compile>
-    <Compile Include="MQTTDebugger.cs">
+    <Compile Include="MQTT\MQTTDebugger.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="MQTTDebugger.Designer.cs">
+    <Compile Include="MQTT\MQTTDebugger.Designer.cs">
       <DependentUpon>MQTTDebugger.cs</DependentUpon>
     </Compile>
-    <Compile Include="MQTTHandler.cs" />
+    <Compile Include="MQTT\MQTTHandler.cs" />
     <Compile Include="Elements\Obstacle.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -209,7 +209,7 @@
     <EmbeddedResource Include="LogViewer.resx">
       <DependentUpon>LogViewer.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="MQTTDebugger.resx">
+    <EmbeddedResource Include="MQTT\MQTTDebugger.resx">
       <DependentUpon>MQTTDebugger.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">

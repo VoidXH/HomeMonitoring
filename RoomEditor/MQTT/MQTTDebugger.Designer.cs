@@ -1,4 +1,4 @@
-﻿namespace HomeEditor {
+﻿namespace HomeEditor.MQTT {
     partial class MQTTDebugger {
         /// <summary>
         /// Required designer variable.

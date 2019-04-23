@@ -3,7 +3,7 @@ using OpenNETCF.MQTT;
 using System;
 using System.Collections.Generic;
 
-namespace HomeEditor {
+namespace HomeEditor.MQTT {
     /// <summary>
     /// MQTT message interpreter and setup object.
     /// </summary>
