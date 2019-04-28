@@ -8,12 +8,12 @@ namespace HomeEditor.Rules {
     public partial class RuleEditor : Form {
         const string noParent = "None";
 
-        Color textFieldColor;
+        Color defaultFieldColor;
         Rule selectedRule;
 
         public RuleEditor() {
             InitializeComponent();
-            textFieldColor = ruleName.BackColor;
+            defaultFieldColor = ruleName.BackColor;
             targetRoom.Items.Add(new RoomListItem(null));
             targetRoom.Items.Add(new RoomListItem(AllLobbies.Instance));
             Room.ForEach(room => targetRoom.Items.Add(new RoomListItem(room)));
@@ -97,7 +97,7 @@ namespace HomeEditor.Rules {
                     if (rule.parentRule != null && rule.parentRule.Equals(selectedRule.name))
                         rule.parentRule = ruleName.Text;
                 // Finalize
-                ruleName.BackColor = textFieldColor;
+                ruleName.BackColor = defaultFieldColor;
                 selectedRule.name = ruleName.Text;
                 UpdateRuleList();
             }
@@ -144,13 +144,29 @@ namespace HomeEditor.Rules {
         }
 
         void MinValue_ValueChanged(object s, EventArgs e) {
-            if (selectedRule != null)
+            if (selectedRule != null) {
+                if ((float)minValue.Value > selectedRule.maxValue) {
+                    minValue.BackColor = Color.Red;
+                    return;
+                }
+                minValue.BackColor = defaultFieldColor;
                 selectedRule.minValue = (float)minValue.Value;
+                if (maxValue.BackColor == Color.Red)
+                    MaxValue_ValueChanged(s, e);
+            }
         }
 
         void MaxValue_ValueChanged(object s, EventArgs e) {
-            if (selectedRule != null)
+            if (selectedRule != null) {
+                if ((float)maxValue.Value < selectedRule.minValue) {
+                    maxValue.BackColor = Color.Red;
+                    return;
+                }
+                maxValue.BackColor = defaultFieldColor;
                 selectedRule.maxValue = (float)maxValue.Value;
+                if (minValue.BackColor == Color.Red)
+                    MinValue_ValueChanged(s, e);
+            }
         }
 
         void Invert_CheckedChanged(object s, EventArgs e) {
