@@ -117,7 +117,7 @@ namespace HomeEditor.Rules {
                     int lastEntry = room.DataHistory.Count - 1;
                     for (int i = lastEntry; i >= 0; --i) {
                         SensorData entry = room.DataHistory[i];
-                        if (entry.Timestamp > lastChecked || (i == lastEntry)) { // Handle span
+                        if (entry.Timestamp >= lastChecked || (i == lastEntry)) { // Handle span
                             if (targetProperty.PropertyType == typeof(bool)) {
                                 // TODO
                             } else if (targetProperty.PropertyType == typeof(float)) {
