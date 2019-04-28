@@ -131,6 +131,13 @@ namespace HomeEditor.Elements {
                     action((Room)panel);
         }
 
+        public static void ForEachWithHistory(Action<Room> action) {
+            foreach (SerializablePanel panel in Program.window.Elements)
+                if (panel is Room)
+                    if (((Room)panel).history.Count != 0)
+                        action((Room)panel);
+        }
+
         public static Room GetByName(string name) {
             foreach (SerializablePanel panel in Program.window.Elements)
                 if (panel is Room && panel.Name.Equals(name))

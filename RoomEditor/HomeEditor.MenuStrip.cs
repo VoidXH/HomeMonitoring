@@ -113,8 +113,6 @@ namespace HomeEditor {
         /// <summary>
         /// Open a <see cref="RuleEditor"/>.
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
         void RulesToolStripMenuItem_Click(object sender, EventArgs e) => new RuleEditor().ShowDialog();
 
         /// <summary>
