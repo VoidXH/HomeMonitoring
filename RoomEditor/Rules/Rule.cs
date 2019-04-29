@@ -71,6 +71,19 @@ namespace HomeEditor.Rules {
         public int toTime = 23 * 60 + 59;
 
         /// <summary>
+        /// This rule was active in the last tick. <see cref="OnNotification"/> is called when this is set to true.
+        /// </summary>
+        public bool Triggered {
+            get => triggered;
+            private set {
+                if (value && !triggered)
+                    OnNotification(this);
+                triggered = value;
+            }
+        }
+        bool triggered;
+
+        /// <summary>
         /// Rule trigger function.
         /// </summary>
         public delegate void Notification(Rule rule);
