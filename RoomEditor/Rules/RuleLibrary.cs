@@ -30,9 +30,13 @@ namespace HomeEditor.Rules {
         /// Check the sensor histories if they match rules with a given parent.
         /// </summary>
         static void Tick(string Parent = null) {
-            foreach (Rule rule in Rules)
-                if (rule.parentRule.Equals(Parent) && rule.Tick())
-                    Tick(rule.name);
+            foreach (Rule rule in Rules) {
+                if (rule.parentRule.Equals(Parent)) {
+                    rule.Tick();
+                    if (rule.Triggered)
+                        Tick(rule.name);
+                }
+            }
         }
 
         /// <summary>

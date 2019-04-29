@@ -116,27 +116,42 @@ namespace HomeEditor.Rules {
         }
 
         /// <summary>
-        /// Check the history entries of the <see cref="targetRoom"/> for this rule. Returns true and notifies if the rule has triggered.
+        /// Check the history entries of the <see cref="targetRoom"/> for this rule.
         /// </summary>
-        public bool Tick() {
+        public void Tick() {
             DateTime now = DateTime.Now;
-            if (now.Hour < fromTime / 60 || (now.Hour == fromTime / 60 && now.Minute < fromTime % 60)) // Handle fromTime
-                return false;
-            if (now.Hour > toTime / 60 || (now.Hour == toTime / 60 && now.Minute > toTime % 60)) // Handle toTime
-                return false;
+            if (now.Hour < fromTime / 60 || (now.Hour == fromTime / 60 && now.Minute < fromTime % 60)) { // Handle fromTime
+                Triggered = false;
+                return;
+            }
+            if (now.Hour > toTime / 60 || (now.Hour == toTime / 60 && now.Minute > toTime % 60)) { // Handle toTime
+                Triggered = false;
+                return;
+            }
             bool state = false;
             Room.ForEachWithHistory(room => {
                 if (targetRoom == null || targetRoom == room) { // Handle room
                     int lastEntry = room.DataHistory.Count - 1;
-                    DateTime lastChecked = room.DataHistory[lastEntry].Timestamp;
+                    DateTime lastTime = room.DataHistory[lastEntry].Timestamp; // The timestamp to count the span from
                     for (int i = lastEntry; i >= 0; --i) {
                         SensorData entry = room.DataHistory[i];
                         if (targetProperty.PropertyType == typeof(bool)) {
+                            bool trigger = (bool)targetProperty.GetValue(entry);
+                            if (invert) // Handle invert
+                                trigger = !trigger;
                             if (span.TotalMinutes != 0) {
-                                // TODO
+                                if (occurence != 1) { // Handle occurence
+                                    // TODO
+                                } else {
+                                    if (!trigger)
+                                        break;
+                                    if (lastTime - entry.Timestamp >= span) { // Handle span
+                                        state = true;
+                                        break;
+                                    }
+                                }
                             } else { // Handle zero-span
-                                bool trigger = (bool)targetProperty.GetValue(entry);
-                                state |= !invert ? trigger : !trigger;
+                                state |= trigger;
                                 break;
                             }
                         } else if (targetProperty.PropertyType == typeof(float)) {
@@ -145,15 +160,14 @@ namespace HomeEditor.Rules {
                             } else { // Handle zero-span
                                 float sourceValue = (float)targetProperty.GetValue(entry);
                                 bool trigger = sourceValue < minValue || sourceValue > maxValue;
-                                state |= !invert ? trigger : !trigger;
+                                state |= !invert ? trigger : !trigger; // Handle invert
                                 break;
                             }
                         }
                     }
                 }
             });
-            triggered = state;
-            return false;
+            Triggered = state;
         }
 
         #region Serialization
