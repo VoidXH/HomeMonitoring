@@ -124,32 +124,22 @@ namespace HomeEditor.Rules {
                 return false;
             if (now.Hour > toTime / 60 || (now.Hour == toTime / 60 && now.Minute > toTime % 60)) // Handle toTime
                 return false;
-            DateTime lastChecked = now - span;
-            if (span.TotalMinutes == 0) { // Handle zero-span
-                lastChecked = now - TimeSpan.FromDays(2);
-                Room.ForEachWithHistory(room => {
-                    if (targetRoom == null || targetRoom == room) { // Limit to the target room
-                        DateTime timestamp = room.DataHistory[room.DataHistory.Count - 1].Timestamp;
-                        if (lastChecked < timestamp)
-                            lastChecked = timestamp;
-                    }
-                });
-            }
-            Room.ForEach(room => {
+            bool state = false;
+            Room.ForEachWithHistory(room => {
                 if (targetRoom == null || targetRoom == room) { // Handle room
                     int lastEntry = room.DataHistory.Count - 1;
+                    DateTime lastChecked = room.DataHistory[lastEntry].Timestamp;
                     for (int i = lastEntry; i >= 0; --i) {
                         SensorData entry = room.DataHistory[i];
-                        if (entry.Timestamp >= lastChecked || (i == lastEntry)) { // Handle span
-                            if (targetProperty.PropertyType == typeof(bool)) {
-                                // TODO
-                            } else if (targetProperty.PropertyType == typeof(float)) {
-                                // TODO
-                            }
+                        if (targetProperty.PropertyType == typeof(bool)) {
+                            // TODO
+                        } else if (targetProperty.PropertyType == typeof(float)) {
+                            // TODO
                         }
                     }
                 }
             });
+            triggered = state;
             return false;
         }
 
