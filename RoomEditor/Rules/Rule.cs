@@ -76,7 +76,7 @@ namespace HomeEditor.Rules {
         public bool Triggered {
             get => triggered;
             private set {
-                if (value && !triggered)
+                if (value && !triggered && notify)
                     OnNotification(this);
                 triggered = value;
             }
@@ -132,9 +132,22 @@ namespace HomeEditor.Rules {
                     for (int i = lastEntry; i >= 0; --i) {
                         SensorData entry = room.DataHistory[i];
                         if (targetProperty.PropertyType == typeof(bool)) {
-                            // TODO
+                            if (span.TotalMinutes != 0) {
+                                // TODO
+                            } else { // Handle zero-span
+                                bool trigger = (bool)targetProperty.GetValue(entry);
+                                state |= !invert ? trigger : !trigger;
+                                break;
+                            }
                         } else if (targetProperty.PropertyType == typeof(float)) {
-                            // TODO
+                            if (span.TotalMinutes != 0) {
+                                // TODO
+                            } else { // Handle zero-span
+                                float sourceValue = (float)targetProperty.GetValue(entry);
+                                bool trigger = sourceValue < minValue || sourceValue > maxValue;
+                                state |= !invert ? trigger : !trigger;
+                                break;
+                            }
                         }
                     }
                 }
