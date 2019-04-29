@@ -134,8 +134,11 @@ namespace HomeEditor.Rules {
         }
 
         void Span_ValueChanged(object s, EventArgs e) {
-            if (selectedRule != null)
-                selectedRule.span = TimeSpan.FromMinutes((int)span.Value);
+            if (selectedRule != null) {
+                int minutes = (int)span.Value;
+                selectedRule.span = TimeSpan.FromMinutes(minutes);
+                occurence.Enabled = minutes != 0 && ((PropertyInfoListItem)targetProperty.SelectedItem).item.PropertyType == typeof(bool);
+            }
         }
 
         void Occurence_ValueChanged(object s, EventArgs e) {
