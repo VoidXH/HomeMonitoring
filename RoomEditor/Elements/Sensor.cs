@@ -95,9 +95,9 @@ namespace HomeEditor.Elements {
             // Set mouse behaviour (on the filling label, because that's on top)
             SetDraggable(marker);
             // Design
-            ForeColor = BaseColor;
+            marker.ForeColor = BaseColor;
             Size = new Size(25, 25);
-            BringToFront(); // Obstacles are always above every other object
+            BringToFront(); // Sensors are always above every other object
             sensors.Add(this);
         }
 
