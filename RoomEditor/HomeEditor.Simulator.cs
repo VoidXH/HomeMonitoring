@@ -37,21 +37,34 @@ namespace HomeEditor {
             });
         }
 
-        /// <summary>
-        /// Handle enabling/disabling the simulator.
-        /// </summary>
-        void Simulator_CheckedChanged(object sender, EventArgs e) {
-            if (((CheckBox)sender).Checked) {
+        void EnableSimulator() {
+            if (simulatorTimer == null) {
                 simulatorTimer = new Timer(1000);
                 simulatorTimer.Elapsed += SimulatorTick;
                 simulatorTimer.AutoReset = true;
                 simulatorTimer.Enabled = true;
-            } else {
+                SimulatorTick(null, null);
+            }
+        }
+
+        void DisableSimulator() {
+            if (simulatorTimer != null) {
                 simulatorTimer.Stop();
                 simulatorTimer.Dispose();
+                simulatorTimer = null;
                 if (lastSimulated != null)
                     lastSimulated.OnDeactivate();
             }
+        }
+
+        /// <summary>
+        /// Switch between simulator enabled/disabled.
+        /// </summary>
+        void ToggleSimulator(object sender, EventArgs e) {
+            if (simulatorTimer == null)
+                EnableSimulator();
+            else
+                DisableSimulator();
         }
     }
 }

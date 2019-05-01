@@ -47,7 +47,7 @@ namespace HomeEditor {
         /// Empties the home.
         /// </summary>
         void HardReset() {
-            simulator.Checked = false;
+            DisableSimulator();
             DeselectEverything();
             selection = null;
             Sensor.ClearSensorList();

@@ -55,15 +55,16 @@
             this.loadRecentToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.saveToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.saveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.rulesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.homeMenu = new System.Windows.Forms.ToolStripMenuItem();
+            this.locateUser = new System.Windows.Forms.ToolStripMenuItem();
+            this.simulator = new System.Windows.Forms.ToolStripMenuItem();
+            this.rulesMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.helpMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.colorsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.openDebugger = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.backgroundSplit = new System.Windows.Forms.SplitContainer();
             this.drawingPanel = new System.Windows.Forms.Panel();
-            this.openDebugger = new System.Windows.Forms.Button();
-            this.locate = new System.Windows.Forms.Button();
-            this.simulator = new System.Windows.Forms.CheckBox();
             this.addDoor = new System.Windows.Forms.Button();
             this.openFileDialog = new System.Windows.Forms.OpenFileDialog();
             this.saveFileDialog = new System.Windows.Forms.SaveFileDialog();
@@ -382,7 +383,8 @@
             // 
             this.menuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.fileMenu,
-            this.rulesToolStripMenuItem,
+            this.homeMenu,
+            this.rulesMenu,
             this.helpMenu});
             this.menuStrip.Location = new System.Drawing.Point(0, 0);
             this.menuStrip.Name = "menuStrip";
@@ -443,37 +445,74 @@
             this.saveToolStripMenuItem.Text = "Save as...";
             this.saveToolStripMenuItem.Click += new System.EventHandler(this.SaveAsToolStripMenuItem_Click);
             // 
-            // rulesToolStripMenuItem
+            // homeMenu
             // 
-            this.rulesToolStripMenuItem.Name = "rulesToolStripMenuItem";
-            this.rulesToolStripMenuItem.Size = new System.Drawing.Size(47, 20);
-            this.rulesToolStripMenuItem.Text = "Rules";
-            this.rulesToolStripMenuItem.Click += new System.EventHandler(this.RulesToolStripMenuItem_Click);
+            this.homeMenu.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.locateUser,
+            this.simulator});
+            this.homeMenu.Name = "homeMenu";
+            this.homeMenu.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.H)));
+            this.homeMenu.Size = new System.Drawing.Size(52, 20);
+            this.homeMenu.Text = "&Home";
+            // 
+            // locateUser
+            // 
+            this.locateUser.Name = "locateUser";
+            this.locateUser.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.L)));
+            this.locateUser.Size = new System.Drawing.Size(198, 22);
+            this.locateUser.Text = "Locate user";
+            this.locateUser.Click += new System.EventHandler(this.Locate_Click);
+            // 
+            // simulator
+            // 
+            this.simulator.Name = "simulator";
+            this.simulator.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.S)));
+            this.simulator.Size = new System.Drawing.Size(198, 22);
+            this.simulator.Text = "Simulate sensors";
+            this.simulator.Visible = false;
+            this.simulator.Click += new System.EventHandler(this.ToggleSimulator);
+            // 
+            // rulesMenu
+            // 
+            this.rulesMenu.Name = "rulesMenu";
+            this.rulesMenu.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.R)));
+            this.rulesMenu.Size = new System.Drawing.Size(47, 20);
+            this.rulesMenu.Text = "&Rules";
+            this.rulesMenu.Click += new System.EventHandler(this.RulesToolStripMenuItem_Click);
             // 
             // helpMenu
             // 
             this.helpMenu.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.colorsToolStripMenuItem,
+            this.openDebugger,
             this.aboutToolStripMenuItem});
             this.helpMenu.Name = "helpMenu";
             this.helpMenu.ShortcutKeyDisplayString = "";
-            this.helpMenu.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.H)));
+            this.helpMenu.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.P)));
             this.helpMenu.Size = new System.Drawing.Size(44, 20);
-            this.helpMenu.Text = "&Help";
+            this.helpMenu.Text = "Hel&p";
             // 
             // colorsToolStripMenuItem
             // 
             this.colorsToolStripMenuItem.Name = "colorsToolStripMenuItem";
             this.colorsToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.C)));
-            this.colorsToolStripMenuItem.Size = new System.Drawing.Size(146, 22);
+            this.colorsToolStripMenuItem.Size = new System.Drawing.Size(203, 22);
             this.colorsToolStripMenuItem.Text = "Colors";
             this.colorsToolStripMenuItem.Click += new System.EventHandler(this.ColorsToolStripMenuItem_Click);
+            // 
+            // openDebugger
+            // 
+            this.openDebugger.Name = "openDebugger";
+            this.openDebugger.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.M)));
+            this.openDebugger.Size = new System.Drawing.Size(203, 22);
+            this.openDebugger.Text = "MQTT Debugger";
+            this.openDebugger.Click += new System.EventHandler(this.OpenDebugger_Click);
             // 
             // aboutToolStripMenuItem
             // 
             this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
             this.aboutToolStripMenuItem.ShortcutKeys = System.Windows.Forms.Keys.F1;
-            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(146, 22);
+            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(203, 22);
             this.aboutToolStripMenuItem.Text = "About";
             this.aboutToolStripMenuItem.Click += new System.EventHandler(this.AboutToolStripMenuItem_Click);
             // 
@@ -492,9 +531,6 @@
             // backgroundSplit.Panel2
             // 
             this.backgroundSplit.Panel2.AutoScroll = true;
-            this.backgroundSplit.Panel2.Controls.Add(this.openDebugger);
-            this.backgroundSplit.Panel2.Controls.Add(this.locate);
-            this.backgroundSplit.Panel2.Controls.Add(this.simulator);
             this.backgroundSplit.Panel2.Controls.Add(this.addDoor);
             this.backgroundSplit.Panel2.Controls.Add(this.addObstacle);
             this.backgroundSplit.Panel2.Controls.Add(this.addRoom);
@@ -513,43 +549,6 @@
             this.drawingPanel.Size = new System.Drawing.Size(89, 425);
             this.drawingPanel.TabIndex = 0;
             this.drawingPanel.Click += new System.EventHandler(this.DrawingPanel_Click);
-            // 
-            // openDebugger
-            // 
-            this.openDebugger.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.openDebugger.Location = new System.Drawing.Point(3, 377);
-            this.openDebugger.Name = "openDebugger";
-            this.openDebugger.Size = new System.Drawing.Size(125, 23);
-            this.openDebugger.TabIndex = 8;
-            this.openDebugger.Text = "MQTT debugger";
-            this.openDebugger.UseVisualStyleBackColor = true;
-            this.openDebugger.Visible = false;
-            this.openDebugger.Click += new System.EventHandler(this.OpenDebugger_Click);
-            // 
-            // locate
-            // 
-            this.locate.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.locate.Location = new System.Drawing.Point(3, 159);
-            this.locate.Name = "locate";
-            this.locate.Size = new System.Drawing.Size(125, 23);
-            this.locate.TabIndex = 7;
-            this.locate.Text = "Locate user";
-            this.locate.UseVisualStyleBackColor = true;
-            this.locate.Click += new System.EventHandler(this.Locate_Click);
-            // 
-            // simulator
-            // 
-            this.simulator.AutoSize = true;
-            this.simulator.Location = new System.Drawing.Point(3, 136);
-            this.simulator.Name = "simulator";
-            this.simulator.Size = new System.Drawing.Size(105, 17);
-            this.simulator.TabIndex = 6;
-            this.simulator.Text = "Simulate sensors";
-            this.simulator.UseVisualStyleBackColor = true;
-            this.simulator.Visible = false;
-            this.simulator.CheckedChanged += new System.EventHandler(this.Simulator_CheckedChanged);
             // 
             // addDoor
             // 
@@ -841,7 +840,6 @@
             this.menuStrip.PerformLayout();
             this.backgroundSplit.Panel1.ResumeLayout(false);
             this.backgroundSplit.Panel2.ResumeLayout(false);
-            this.backgroundSplit.Panel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.backgroundSplit)).EndInit();
             this.backgroundSplit.ResumeLayout(false);
             this.doorSettings.ResumeLayout(false);
@@ -911,8 +909,6 @@
         private System.Windows.Forms.TextBox doorSensorAddress;
         private System.Windows.Forms.Label doorAddressLabel;
         private System.Windows.Forms.CheckBox doorSensorAttached;
-        private System.Windows.Forms.CheckBox simulator;
-        private System.Windows.Forms.Button locate;
         private System.Windows.Forms.ToolStripMenuItem colorsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem newToolStripMenuItem;
         private System.Windows.Forms.Button spoofSensor;
@@ -922,10 +918,13 @@
         private System.Windows.Forms.Label doorNameLabel;
         private System.Windows.Forms.TextBox sensorName;
         private System.Windows.Forms.Label sensorNameLabel;
-        private System.Windows.Forms.Button openDebugger;
         public System.Windows.Forms.ToolTip toolTip;
         public System.Windows.Forms.StatusStrip StatusStrip;
-        private System.Windows.Forms.ToolStripMenuItem rulesToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem rulesMenu;
+        private System.Windows.Forms.ToolStripMenuItem openDebugger;
+        private System.Windows.Forms.ToolStripMenuItem homeMenu;
+        private System.Windows.Forms.ToolStripMenuItem locateUser;
+        private System.Windows.Forms.ToolStripMenuItem simulator;
     }
 }
 
