@@ -45,7 +45,7 @@ namespace HomeEditor {
         /// <summary>
         /// Root mean square of two bytes.
         /// </summary>
-        byte RMS(byte L, byte R) => (byte)Math.Sqrt(L * R);
+        byte RMS(byte L, byte R) => (byte)Math.Sqrt((L * L + R * R) / 2);
 
         /// <summary>
         /// Current color of the Control.
