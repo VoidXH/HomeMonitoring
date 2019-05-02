@@ -1,4 +1,5 @@
-﻿using System.Drawing;
+﻿using System;
+using System.Drawing;
 
 namespace HomeEditor {
     /// <summary>
@@ -42,12 +43,17 @@ namespace HomeEditor {
         }
 
         /// <summary>
+        /// Root mean square of two bytes.
+        /// </summary>
+        byte RMS(byte L, byte R) => (byte)Math.Sqrt(L * R);
+
+        /// <summary>
         /// Current color of the Control.
         /// </summary>
         public Color GetColor() {
 #if DEBUG
             if (Selection && Activation)
-                return Color.FromArgb((Selected.R + Activated.R) / 2, (Selected.G + Activated.G) / 2, (Selected.B + Activated.B) / 2);
+                return Color.FromArgb(RMS(Selected.R, Activated.R), RMS(Selected.G, Activated.G), RMS(Selected.B, Activated.B));
 #endif
             return Selection ? Selected : Activation ? Activated : Base;
         }
