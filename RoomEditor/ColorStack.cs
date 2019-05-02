@@ -44,6 +44,12 @@ namespace HomeEditor {
         /// <summary>
         /// Current color of the Control.
         /// </summary>
-        public Color GetColor() => Selection ? Selected : Activation ? Activated : Base;
+        public Color GetColor() {
+#if DEBUG
+            if (Selection && Activation)
+                return Color.FromArgb((Selected.R + Activated.R) / 2, (Selected.G + Activated.G) / 2, (Selected.B + Activated.B) / 2);
+#endif
+            return Selection ? Selected : Activation ? Activated : Base;
+        }
     }
 }
