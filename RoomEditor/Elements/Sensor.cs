@@ -76,6 +76,11 @@ namespace HomeEditor.Elements {
         public static void ClearSensorList() => sensors.Clear();
 
         /// <summary>
+        /// Apply a new color or a new state's color.
+        /// </summary>
+        protected override void Repaint() => marker.ForeColor = color.GetColor();
+
+        /// <summary>
         /// A sensor in a room.
         /// </summary>
         /// <param name="parent">Containing Control</param>
@@ -95,7 +100,7 @@ namespace HomeEditor.Elements {
             // Set mouse behaviour (on the filling label, because that's on top)
             SetDraggable(marker);
             // Design
-            marker.ForeColor = BaseColor;
+            Repaint();
             Size = new Size(25, 25);
             BringToFront(); // Sensors are always above every other object
             sensors.Add(this);
@@ -122,7 +127,7 @@ namespace HomeEditor.Elements {
                 OnActivate();
             else if (!activate && color.Activation)
                 OnDeactivate();
-            marker.ForeColor = color.GetColor();
+            Repaint();
         }
 
         /// <summary>
@@ -147,6 +152,7 @@ namespace HomeEditor.Elements {
         public override void OnActivate() {
             lastActivation = DateTime.Now;
             color.Activation = true;
+            Repaint();
             LastLocation = (SerializablePanel)parent;
             LastLocation.OnActivate();
             if (activations.Count == 0 || activations[activations.Count - 1] != this) {
@@ -161,6 +167,7 @@ namespace HomeEditor.Elements {
         /// </summary>
         public override void OnDeactivate() {
             color.Activation = false;
+            Repaint();
             ((SerializablePanel)parent).OnDeactivate();
         }
 
@@ -178,7 +185,7 @@ namespace HomeEditor.Elements {
         public override void OnSelect() {
             ((SerializablePanel)parent).OnSelect();
             color.Selection = true;
-            marker.ForeColor = color.GetColor();
+            Repaint();
         }
 
         /// <summary>
@@ -187,7 +194,7 @@ namespace HomeEditor.Elements {
         public override void OnDeselect() {
             ((SerializablePanel)parent).OnDeselect();
             color.Selection = false;
-            marker.ForeColor = color.GetColor();
+            Repaint();
         }
 
         /// <summary>
