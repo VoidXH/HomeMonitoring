@@ -195,10 +195,17 @@ namespace HomeEditor {
                             FieldInfo field = t.GetField(path.Substring(splitter + 1).Trim());
                             if (field.FieldType == typeof(string))
                                 field.SetValue(null, value);
-                            else if (field.FieldType == typeof(int))
-                                field.SetValue(null, int.Parse(value));
-                            else if (field.FieldType == typeof(float))
-                                field.SetValue(null, float.Parse(value));
+                            else if (field.FieldType == typeof(int)) {
+                                if (int.TryParse(value, out int intValue))
+                                    field.SetValue(null, intValue);
+                                else
+                                    MessageBox.Show("Failed to parse value:" + Environment.NewLine + config[line]);
+                            } else if (field.FieldType == typeof(float)) {
+                                if (float.TryParse(value, out float floatValue))
+                                    field.SetValue(null, floatValue);
+                                else
+                                    MessageBox.Show("Failed to parse value:" + Environment.NewLine + config[line]);
+                            }
                         }
                     }
                 }
