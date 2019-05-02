@@ -9,6 +9,7 @@ namespace HomeEditor.MQTT {
     /// </summary>
     public class MQTTHandler {
         public static string MQTTHost;
+        public static int MQTTPort = 1883;
         public static string MQTTUser;
         public static string MQTTPass;
 
@@ -33,7 +34,7 @@ namespace HomeEditor.MQTT {
         public IReadOnlyDictionary<string, string> LastMessages => lastMessages;
 
         public MQTTHandler() {
-            client = new MQTTClient(MQTTHost, 1883);
+            client = new MQTTClient(MQTTHost, MQTTPort);
             client.MessageReceived += MessageReceived;
             client.Connect(MQTTHost, MQTTUser, MQTTPass);
             int i = 0;

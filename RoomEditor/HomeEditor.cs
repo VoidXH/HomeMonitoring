@@ -210,6 +210,7 @@ namespace HomeEditor {
         /// </summary>
         static string defaultConfig = @"MQTT configuration
 HomeEditor.MQTT.MQTTHandler.MQTTHost = hostname.com
+HomeEditor.MQTT.MQTTHandler.MQTTPort = 1883
 HomeEditor.MQTT.MQTTHandler.MQTTUser = username
 HomeEditor.MQTT.MQTTHandler.MQTTPass = password";
     }
