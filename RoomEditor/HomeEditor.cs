@@ -59,7 +59,7 @@ namespace HomeEditor {
             spoofDoor.Visible = true;
             openDebugger.Visible = true;
 #endif
-            MQTT = new MQTTHandler();
+            MQTT = new MQTTHandler(Config.MQTTHost, Config.MQTTPort, Config.MQTTUser, Config.MQTTPass);
             loading.Close();
         }
 
@@ -191,7 +191,12 @@ namespace HomeEditor {
                         string path = config[line].Substring(0, splitter);
                         string value = config[line].Substring(splitter + 1).Trim();
                         if ((splitter = path.LastIndexOf('.')) != -1) {
-                            Type t = Type.GetType(path.Substring(0, splitter).Trim());
+                            string type = path.Substring(0, splitter).Trim();
+                            Type t = Type.GetType(type);
+                            if (t == null) {
+                                MessageBox.Show("Type " + t + " does not exist.");
+                                continue;
+                            }
                             FieldInfo field = t.GetField(path.Substring(splitter + 1).Trim());
                             if (field.FieldType == typeof(string))
                                 field.SetValue(null, value);
@@ -216,9 +221,9 @@ namespace HomeEditor {
         /// Default configuration file contents.
         /// </summary>
         static string defaultConfig = @"MQTT configuration
-HomeEditor.MQTT.MQTTHandler.MQTTHost = hostname.com
-HomeEditor.MQTT.MQTTHandler.MQTTPort = 1883
-HomeEditor.MQTT.MQTTHandler.MQTTUser = username
-HomeEditor.MQTT.MQTTHandler.MQTTPass = password";
+HomeEditor.Config.MQTTHost = hostname.com
+HomeEditor.Config.MQTTPort = 1883
+HomeEditor.Config.MQTTUser = username
+HomeEditor.Config.MQTTPass = password";
     }
 }

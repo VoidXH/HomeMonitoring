@@ -8,11 +8,6 @@ namespace HomeEditor.MQTT {
     /// MQTT message interpreter and setup object.
     /// </summary>
     public class MQTTHandler {
-        public static string MQTTHost;
-        public static int MQTTPort = 1883;
-        public static string MQTTUser;
-        public static string MQTTPass;
-
         /// <summary>
         /// MQTT connection handler object.
         /// </summary>
@@ -33,15 +28,18 @@ namespace HomeEditor.MQTT {
         /// </summary>
         public IReadOnlyDictionary<string, string> LastMessages => lastMessages;
 
-        public MQTTHandler() {
-            client = new MQTTClient(MQTTHost, MQTTPort);
+        /// <summary>
+        /// MQTT message interpreter.
+        /// </summary>
+        public MQTTHandler(string host, int port, string user, string password) {
+            client = new MQTTClient(host, port);
             client.MessageReceived += MessageReceived;
-            client.Connect(MQTTHost, MQTTUser, MQTTPass);
+            client.Connect(host, user, password);
             int i = 0;
             while (!client.IsConnected) {
                 System.Threading.Thread.Sleep(500);
                 if (i++ > 10) {
-                    Program.Alert(null, "MQTT connection failed to " + MQTTHost + " as " + MQTTUser + '.');
+                    Program.Alert(null, "MQTT connection failed to " + host + " as " + user + '.');
                     break;
                 }
             }
