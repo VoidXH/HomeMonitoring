@@ -63,7 +63,7 @@ namespace HomeEditor.Elements {
         public virtual bool IsLobby {
             get {
                 foreach (SerializablePanel panel in Program.window.Elements)
-                    if (panel.DoorType == (int)Door.Types.Entrance && Utils.Intersect(panel, this))
+                    if (panel.DoorType == Door.Types.Entrance && Utils.Intersect(panel, this))
                         return true;
                 return false;
             }

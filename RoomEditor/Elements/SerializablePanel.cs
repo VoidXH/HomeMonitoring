@@ -126,7 +126,13 @@ namespace HomeEditor.Elements {
         #endregion
 
         #region Checks
-        public virtual int DoorType => -1;
+        /// <summary>
+        /// This entity's door type.
+        /// </summary>
+        public virtual Door.Types DoorType {
+            get => Door.Types.NotDoor;
+            set { }
+        }
         #endregion
     }
 }

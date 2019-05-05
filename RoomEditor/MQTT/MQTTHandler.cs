@@ -66,7 +66,7 @@ namespace HomeEditor.MQTT {
                     string[] dataParts = message.Split(';');
                     float temp = Convert.ToSingle(dataParts[0].Replace('.', ',').Trim());
                     float light = Convert.ToSingle(dataParts[1].Replace('.', ',').Trim());
-                    float battery = -1;
+                    float battery = SensorData.Unmeasured;
                     bool led = false, buzzer = false;
                     if (dataParts.Length == 3)
                         battery = Convert.ToSingle(dataParts[2].Replace('.', ',').Trim());

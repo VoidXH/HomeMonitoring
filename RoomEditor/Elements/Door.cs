@@ -20,18 +20,13 @@ namespace HomeEditor.Elements {
         /// Possible types of openable entities.
         /// </summary>
         public enum Types {
-            Door, Entrance, Window
+            NotDoor, Door, Entrance, Window
         }
 
         /// <summary>
         /// This entity's type.
         /// </summary>
-        public Types doorType;
-
-        /// <summary>
-        /// Door type as int.
-        /// </summary>
-        public override int DoorType => (int)doorType;
+        public override Types DoorType { get; set; }
 
         /// <summary>
         /// Possible orientations.
@@ -87,10 +82,11 @@ namespace HomeEditor.Elements {
         /// Set color by type when deselected.
         /// </summary>
         public override void OnDeselect() {
-            switch (doorType) {
+            switch (DoorType) {
                 case Types.Door: color.Base = BaseDoorColor; break;
                 case Types.Entrance: color.Base = BaseEntranceColor; break;
                 case Types.Window: color.Base = BaseWindowColor; break;
+                default: break;
             }
             base.OnDeselect();
         }
@@ -119,7 +115,7 @@ namespace HomeEditor.Elements {
                 switch (reader.Name) {
                     case "type":
                         if (Utils.ParseProperty(reader.Value, out int type)) {
-                            doorType = (Types)type;
+                            DoorType = (Types)type;
                             OnDeselect();
                         }
                         break;
@@ -153,7 +149,7 @@ namespace HomeEditor.Elements {
         }
 
         public override void WriteXml(XmlWriter writer) {
-            writer.WriteAttributeString("type", ((int)doorType).ToString());
+            writer.WriteAttributeString("type", ((int)DoorType).ToString());
             writer.WriteAttributeString("orientation", ((int)Orientation).ToString());
             writer.WriteAttributeString("size", Size.ToString());
             writer.WriteAttributeString("left", Left.ToString());

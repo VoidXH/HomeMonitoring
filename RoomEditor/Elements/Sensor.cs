@@ -223,7 +223,7 @@ namespace HomeEditor.Elements {
 
         public static void ForEachDoor(Room room, Action<Door, Sensor> action) {
             foreach (SerializablePanel panel in Program.window.Elements) {
-                if (Utils.Intersect(room, panel) && panel.DoorType != -1) {
+                if (Utils.Intersect(room, panel) && panel.DoorType != Door.Types.NotDoor) {
                     Sensor sensor = ((Door)panel).AttachedSensor;
                     if (sensor != null)
                         action.Invoke((Door)panel, sensor);
@@ -245,7 +245,7 @@ namespace HomeEditor.Elements {
 
         public static void ForEachDoorWithHistory(Room room, Action<Door, Sensor> action) {
             foreach (SerializablePanel panel in Program.window.Elements) {
-                if (panel.DoorType != -1 && Utils.Intersect(room, panel)) {
+                if (panel.DoorType != Door.Types.NotDoor && Utils.Intersect(room, panel)) {
                     Sensor sensor = ((Door)panel).AttachedSensor;
                     if (sensor != null && sensor.DataHistory.Count != 0)
                         action.Invoke((Door)panel, sensor);

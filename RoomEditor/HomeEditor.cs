@@ -108,10 +108,11 @@ namespace HomeEditor {
                     sensorSettings.Visible = true;
                     break;
                 case Door door:
-                    switch (door.doorType) {
+                    switch (door.DoorType) {
                         case Door.Types.Door: doorDoor.Checked = true; break;
                         case Door.Types.Entrance: doorEntrance.Checked = true; break;
                         case Door.Types.Window: doorWindow.Checked = true; break;
+                        default: break;
                     }
                     doorHorizontal.Checked = door.Orientation == Door.Orientations.Horizontal;
                     doorVertical.Checked = door.Orientation == Door.Orientations.Vertical;
@@ -185,12 +186,12 @@ namespace HomeEditor {
                 string[] config = File.ReadAllLines("config.cfg");
                 int splitter;
                 for (int line = 0, count = config.Length; line < count; ++line) {
-                    if ((splitter = config[line].IndexOf('#')) != -1)
+                    if ((splitter = config[line].IndexOf('#')) >= 0)
                         config[line] = config[line].Substring(0, splitter);
-                    if ((splitter = config[line].IndexOf('=')) != -1) {
+                    if ((splitter = config[line].IndexOf('=')) >= 0) {
                         string path = config[line].Substring(0, splitter);
                         string value = config[line].Substring(splitter + 1).Trim();
-                        if ((splitter = path.LastIndexOf('.')) != -1) {
+                        if ((splitter = path.LastIndexOf('.')) >= 0) {
                             string type = path.Substring(0, splitter).Trim();
                             Type t = Type.GetType(type);
                             if (t == null) {
