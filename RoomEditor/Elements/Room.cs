@@ -91,7 +91,7 @@ namespace HomeEditor.Elements {
         /// Merges data from all sensors in the room, averaging available float values and or-ing bool values.
         /// Data older than 5 minutes won't count, as the sensor's battery has probably died.
         /// </summary>
-        public SensorData RoomStatus() {
+        SensorData RoomStatus() { // TODO: door/window open states
             TimeSpan maxDiff = TimeSpan.FromMinutes(5);
             DateTime lastResult = DateTime.Now - maxDiff;
             SensorData result = new SensorData(lastResult);
