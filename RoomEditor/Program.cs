@@ -1,6 +1,4 @@
-﻿using HomeEditor.Elements;
-using System;
-using System.Drawing;
+﻿using System;
 using System.Windows.Forms;
 
 namespace HomeEditor {
@@ -15,17 +13,6 @@ namespace HomeEditor {
             Application.SetCompatibleTextRenderingDefault(false);
             window = new HomeEditor();
             Application.Run(window);
-        }
-
-        public static void Alert(Sensor sensor, string message) {
-            if (sensor != null)
-                sensor.Parent.BackColor = Color.Red;
-            if (window != null) {
-                LogViewer.Log(message);
-                window.StatusStrip.BackColor = Color.Red;
-                window.LastAlert.Text = LogViewer.GetLog(1);
-            } else
-                MessageBox.Show(message);
         }
     }
 }

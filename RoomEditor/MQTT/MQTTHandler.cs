@@ -39,7 +39,7 @@ namespace HomeEditor.MQTT {
             while (!client.IsConnected) {
                 System.Threading.Thread.Sleep(500);
                 if (i++ > 10) {
-                    Program.Alert(null, "MQTT connection failed to " + host + " as " + user + '.');
+                    Alert.SendAlert(null, "MQTT connection failed to " + host + " as " + user + '.');
                     break;
                 }
             }

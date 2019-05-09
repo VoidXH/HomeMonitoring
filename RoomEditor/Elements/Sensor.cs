@@ -143,7 +143,7 @@ namespace HomeEditor.Elements {
         /// </summary>
         public static void ForwardButton(string address) => ForEach((sensor) => {
             if (sensor.Address.Equals(address))
-                Program.Alert(sensor, "Button pressed.");
+                Alert.SendAlert(sensor, "Button pressed.");
         });
 
         /// <summary>
