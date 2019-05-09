@@ -33,7 +33,10 @@ namespace HomeEditor.Elements {
         /// <summary>
         /// Remove this object from the home.
         /// </summary>
-        public virtual void DisconnectFromParent() => Parent.Controls.Remove(this);
+        public virtual void DisconnectFromParent() {
+            if (Parent != null)
+                Parent.Controls.Remove(this);
+        }
 
         #region Selection
         /// <summary>
