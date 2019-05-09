@@ -83,8 +83,8 @@ namespace HomeEditor.Elements {
         /// <summary>
         /// A sensor in a room.
         /// </summary>
-        /// <param name="parent">Containing panel</param>
-        public Sensor(Panel parent) : base(parent) {
+        /// <param name="parent">Containing element</param>
+        public Sensor(SerializablePanel parent) : base(parent) {
             color = new ColorStack(BaseColor, SelectionColor, ActivationColor);
             // Marker label
             marker = new Label {
