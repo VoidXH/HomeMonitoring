@@ -44,6 +44,7 @@ namespace HomeEditor {
                 simulatorTimer.AutoReset = true;
                 simulatorTimer.Enabled = true;
                 SimulatorTick(null, null);
+                simulator.Checked = true;
             }
         }
 
@@ -54,6 +55,7 @@ namespace HomeEditor {
                 simulatorTimer = null;
                 if (lastSimulated != null)
                     lastSimulated.OnDeactivate();
+                simulator.Checked = false;
             }
         }
 
