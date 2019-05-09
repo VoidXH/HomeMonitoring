@@ -68,8 +68,8 @@ namespace HomeEditor.Elements {
         /// <summary>
         /// An openable entity, like a door, entrance, or window.
         /// </summary>
-        /// <param name="parent">Containing Control</param>
-        public Door(Control parent) : base(parent) {
+        /// <param name="parent">Containing panel</param>
+        public Door(Panel parent) : base(parent) {
             color = new ColorStack(BaseDoorColor, SelectionColor, ActivationColor);
             SetDraggable(this);
             BorderStyle = BorderStyle.FixedSingle;

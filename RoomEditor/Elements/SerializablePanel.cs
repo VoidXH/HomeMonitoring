@@ -24,8 +24,8 @@ namespace HomeEditor.Elements {
         /// <summary>
         /// An object in the home which could be imported and exported.
         /// </summary>
-        /// <param name="parent">Containing Control</param>
-        public SerializablePanel(Control parent) : base() {
+        /// <param name="parent">Containing panel</param>
+        public SerializablePanel(Panel parent) : base() {
             if (parent != null)
                 parent.Controls.Add(this);
         }

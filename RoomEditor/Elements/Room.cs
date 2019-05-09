@@ -39,8 +39,8 @@ namespace HomeEditor.Elements {
         /// <summary>
         /// A room in the home.
         /// </summary>
-        /// <param name="parent">Containing Control</param>
-        public Room(Control parent) : base(parent) {
+        /// <param name="parent">Containing panel</param>
+        public Room(Panel parent) : base(parent) {
             color = new ColorStack(BaseColor, SelectionColor, ActivationColor);
             // Add name label
             name = new Label {

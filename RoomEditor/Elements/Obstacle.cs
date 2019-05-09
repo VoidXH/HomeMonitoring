@@ -26,8 +26,8 @@ namespace HomeEditor.Elements {
         /// <summary>
         /// Renamable obstacle in the home.
         /// </summary>
-        /// <param name="parent">Containing Control</param>
-        public Obstacle(Control parent) : base(parent) {
+        /// <param name="parent">Containing panel</param>
+        public Obstacle(Panel parent) : base(parent) {
             color = new ColorStack(BaseColor, SelectionColor, Color.Red);
             // Add name label
             name = new Label {
