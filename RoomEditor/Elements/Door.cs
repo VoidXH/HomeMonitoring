@@ -99,10 +99,10 @@ namespace HomeEditor.Elements {
                 if (_Orientation == Orientations.Horizontal) {
                     Left += e.X - dragOrigin.X;
                     Top = ((Top + e.Y - dragOrigin.Y) / Room.PixelsPerMeter + 1) * Room.PixelsPerMeter - Thickness / 2
-                        - ((Panel)parent).VerticalScroll.Value % Room.PixelsPerMeter;
+                        - ((Panel)Parent).VerticalScroll.Value % Room.PixelsPerMeter;
                 } else {
                     Left = ((Left + e.X - dragOrigin.X) / Room.PixelsPerMeter + 1) * Room.PixelsPerMeter - Thickness / 2
-                        - ((Panel)parent).HorizontalScroll.Value % Room.PixelsPerMeter;
+                        - ((Panel)Parent).HorizontalScroll.Value % Room.PixelsPerMeter;
                     Top += e.Y - dragOrigin.Y;
                 }
             }

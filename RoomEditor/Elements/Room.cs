@@ -82,8 +82,8 @@ namespace HomeEditor.Elements {
         /// </summary>
         protected override void Draggable_MouseMove(object sender, MouseEventArgs e) {
             if (e.Button == MouseButtons.Left) { // TODO: don't jump on click
-                Left = (Left + e.X - dragOrigin.X) / PixelsPerMeter * PixelsPerMeter - ((Panel)parent).HorizontalScroll.Value % PixelsPerMeter;
-                Top = (Top + e.Y - dragOrigin.Y) / PixelsPerMeter * PixelsPerMeter - ((Panel)parent).VerticalScroll.Value % PixelsPerMeter;
+                Left = (Left + e.X - dragOrigin.X) / PixelsPerMeter * PixelsPerMeter - ((Panel)Parent).HorizontalScroll.Value % PixelsPerMeter;
+                Top = (Top + e.Y - dragOrigin.Y) / PixelsPerMeter * PixelsPerMeter - ((Panel)Parent).VerticalScroll.Value % PixelsPerMeter;
             }
         }
 

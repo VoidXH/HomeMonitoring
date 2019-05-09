@@ -102,7 +102,7 @@ namespace HomeEditor {
                     break;
                 case Sensor sensor:
                     selection = target;
-                    ShowRoomPanel((Room)target.parent);
+                    ShowRoomPanel((Room)target.Parent);
                     sensorName.Text = sensor.Name;
                     sensorAddress.Text = sensor.Address;
                     sensorSettings.Visible = true;

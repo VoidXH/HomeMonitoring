@@ -12,11 +12,6 @@ namespace HomeEditor.Elements {
     [Serializable]
     public abstract class SerializablePanel : Panel, IXmlSerializable {
         /// <summary>
-        /// The Control containing this Panel.
-        /// </summary>
-        public Control parent { get; private set; }
-
-        /// <summary>
         /// Colors of this Panel by state.
         /// </summary>
         protected ColorStack color;
@@ -31,16 +26,14 @@ namespace HomeEditor.Elements {
         /// </summary>
         /// <param name="parent">Containing Control</param>
         public SerializablePanel(Control parent) : base() {
-            if (parent != null) {
+            if (parent != null)
                 parent.Controls.Add(this);
-                this.parent = parent;
-            }
         }
 
         /// <summary>
         /// Remove this object from the home.
         /// </summary>
-        public virtual void DisconnectFromParent() => parent.Controls.Remove(this);
+        public virtual void DisconnectFromParent() => Parent.Controls.Remove(this);
 
         #region Selection
         /// <summary>

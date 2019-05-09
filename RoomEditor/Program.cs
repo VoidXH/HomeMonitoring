@@ -19,7 +19,7 @@ namespace HomeEditor {
 
         public static void Alert(Sensor sensor, string message) {
             if (sensor != null)
-                sensor.parent.BackColor = Color.Red;
+                sensor.Parent.BackColor = Color.Red;
             if (window != null) {
                 LogViewer.Log(message);
                 window.StatusStrip.BackColor = Color.Red;

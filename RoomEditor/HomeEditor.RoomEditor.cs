@@ -80,7 +80,7 @@ namespace HomeEditor {
         void DeleteSensor_Click(object sender, EventArgs e) {
             sensorSettings.Visible = false;
             selection.DisconnectFromParent();
-            selection = (SerializablePanel)selection.parent;
+            selection = (SerializablePanel)selection.Parent;
         }
         #endregion
     }

@@ -118,8 +118,8 @@ namespace HomeEditor.Elements {
                     ++removeUntil;
                 history.RemoveRange(0, removeUntil);
             }
-            if (parent is Room)
-                ((Room)parent).DataReceived();
+            if (Parent is Room)
+                ((Room)Parent).DataReceived();
             Program.window.Invoke(new Action(() => { Program.window.toolTip.SetToolTip(marker, data.ToString()); }));
             history.Add(data);
             bool activate = data.Open || data.Movement;
@@ -152,7 +152,7 @@ namespace HomeEditor.Elements {
         public override void OnActivate() {
             base.OnActivate();
             lastActivation = DateTime.Now;
-            LastLocation = (SerializablePanel)parent;
+            LastLocation = (SerializablePanel)Parent;
             LastLocation.OnActivate();
             if (activations.Count == 0 || activations[activations.Count - 1] != this) {
                 activations.Add(this);
@@ -166,7 +166,7 @@ namespace HomeEditor.Elements {
         /// </summary>
         public override void OnDeactivate() {
             base.OnDeactivate();
-            ((SerializablePanel)parent).OnDeactivate();
+            ((SerializablePanel)Parent).OnDeactivate();
         }
 
         /// <summary>
@@ -181,7 +181,7 @@ namespace HomeEditor.Elements {
         /// Select both the sensor and the containing room when selected.
         /// </summary>
         public override void OnSelect() {
-            ((SerializablePanel)parent).OnSelect();
+            ((SerializablePanel)Parent).OnSelect();
             base.OnSelect();
         }
 
@@ -189,7 +189,7 @@ namespace HomeEditor.Elements {
         /// Deselect both the sensor and the containing room when deselected.
         /// </summary>
         public override void OnDeselect() {
-            ((SerializablePanel)parent).OnDeselect();
+            ((SerializablePanel)Parent).OnDeselect();
             base.OnDeselect();
         }
 
@@ -198,8 +198,8 @@ namespace HomeEditor.Elements {
         /// </summary>
         protected override void Draggable_MouseMove(object sender, MouseEventArgs e) {
             if (e.Button == MouseButtons.Left) {
-                Left = Utils.Clamp(Left + e.X - dragOrigin.X, 0, parent.Width - SensorSize);
-                Top = Utils.Clamp(Top + e.Y - dragOrigin.Y, 0, parent.Height - SensorSize);
+                Left = Utils.Clamp(Left + e.X - dragOrigin.X, 0, Parent.Width - SensorSize);
+                Top = Utils.Clamp(Top + e.Y - dragOrigin.Y, 0, Parent.Height - SensorSize);
             }
         }
 
