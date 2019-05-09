@@ -50,7 +50,7 @@ namespace HomeEditor.Elements {
             SetDraggable(name);
             SetDraggable(marker);
             // Design
-            ForeColor = BaseColor;
+            Repaint();
             Size = new Size(125, 25);
             BringToFront(); // Obstacles are always above rooms
         }
