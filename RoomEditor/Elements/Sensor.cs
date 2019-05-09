@@ -150,9 +150,8 @@ namespace HomeEditor.Elements {
         /// Set color when activated.
         /// </summary>
         public override void OnActivate() {
+            base.OnActivate();
             lastActivation = DateTime.Now;
-            color.Activation = true;
-            Repaint();
             LastLocation = (SerializablePanel)parent;
             LastLocation.OnActivate();
             if (activations.Count == 0 || activations[activations.Count - 1] != this) {
@@ -166,8 +165,7 @@ namespace HomeEditor.Elements {
         /// Set color when deactivated.
         /// </summary>
         public override void OnDeactivate() {
-            color.Activation = false;
-            Repaint();
+            base.OnDeactivate();
             ((SerializablePanel)parent).OnDeactivate();
         }
 
@@ -184,8 +182,7 @@ namespace HomeEditor.Elements {
         /// </summary>
         public override void OnSelect() {
             ((SerializablePanel)parent).OnSelect();
-            color.Selection = true;
-            Repaint();
+            base.OnSelect();
         }
 
         /// <summary>
@@ -193,8 +190,7 @@ namespace HomeEditor.Elements {
         /// </summary>
         public override void OnDeselect() {
             ((SerializablePanel)parent).OnDeselect();
-            color.Selection = false;
-            Repaint();
+            base.OnDeselect();
         }
 
         /// <summary>
