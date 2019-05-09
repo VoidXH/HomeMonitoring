@@ -151,8 +151,7 @@ namespace HomeEditor {
         void Locate_Click(object sender, EventArgs e) {
             if (Sensor.LastLocation == null)
                 return;
-            if (Sensor.LastLocation is Room)
-                SelectObject(Sensor.LastLocation);
+            SelectObject(Sensor.LastLocation);
         }
 
         /// <summary>
