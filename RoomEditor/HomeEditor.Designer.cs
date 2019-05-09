@@ -460,7 +460,7 @@
             this.locateUser.Name = "locateUser";
             this.locateUser.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.L)));
             this.locateUser.Size = new System.Drawing.Size(198, 22);
-            this.locateUser.Text = "Locate user";
+            this.locateUser.Text = "Locate resident";
             this.locateUser.Click += new System.EventHandler(this.Locate_Click);
             // 
             // simulator
