@@ -149,9 +149,8 @@ namespace HomeEditor {
         /// Locate the user in the home by selecting the last activated sensor's parent.
         /// </summary>
         void Locate_Click(object sender, EventArgs e) {
-            if (Sensor.LastLocation == null)
-                return;
-            SelectObject(Sensor.LastLocation);
+            if (Sensor.LastLocation != null)
+                SelectObject(Sensor.LastLocation);
         }
 
         /// <summary>
