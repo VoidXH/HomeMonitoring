@@ -109,9 +109,9 @@ namespace HomeEditor {
                     break;
                 case Door door:
                     switch (door.DoorType) {
-                        case Door.Types.Door: doorDoor.Checked = true; break;
-                        case Door.Types.Entrance: doorEntrance.Checked = true; break;
-                        case Door.Types.Window: doorWindow.Checked = true; break;
+                        case DoorTypes.Door: doorDoor.Checked = true; break;
+                        case DoorTypes.Entrance: doorEntrance.Checked = true; break;
+                        case DoorTypes.Window: doorWindow.Checked = true; break;
                         default: break;
                     }
                     doorHorizontal.Checked = door.Orientation == Door.Orientations.Horizontal;

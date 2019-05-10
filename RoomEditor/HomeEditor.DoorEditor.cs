@@ -17,7 +17,7 @@ namespace HomeEditor {
         /// </summary>
         void DoorDoor_CheckedChanged(object sender, EventArgs e) {
             if (((RadioButton)sender).Checked)
-                ((Door)selection).DoorType = Door.Types.Door;
+                ((Door)selection).DoorType = DoorTypes.Door;
         }
 
         /// <summary>
@@ -25,7 +25,7 @@ namespace HomeEditor {
         /// </summary>
         void DoorEntrance_CheckedChanged(object sender, EventArgs e) {
             if (((RadioButton)sender).Checked)
-                ((Door)selection).DoorType = Door.Types.Entrance;
+                ((Door)selection).DoorType = DoorTypes.Entrance;
         }
 
         /// <summary>
@@ -33,7 +33,7 @@ namespace HomeEditor {
         /// </summary>
         void DoorWindow_CheckedChanged(object sender, EventArgs e) {
             if (((RadioButton)sender).Checked)
-                ((Door)selection).DoorType = Door.Types.Window;
+                ((Door)selection).DoorType = DoorTypes.Window;
         }
 
         /// <summary>

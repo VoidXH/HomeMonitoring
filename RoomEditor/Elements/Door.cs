@@ -4,6 +4,13 @@ using System.Xml;
 
 namespace HomeEditor.Elements {
     /// <summary>
+    /// Possible types of openable entities.
+    /// </summary>
+    public enum DoorTypes {
+        NotDoor, Door, Entrance, Window
+    }
+
+    /// <summary>
     /// An openable entity in the home, like a door, entrance, or window.
     /// </summary>
     public class Door : SerializablePanel {
@@ -17,16 +24,9 @@ namespace HomeEditor.Elements {
             ActivationColor = Color.Khaki;
 
         /// <summary>
-        /// Possible types of openable entities.
-        /// </summary>
-        public enum Types {
-            NotDoor, Door, Entrance, Window
-        }
-
-        /// <summary>
         /// This entity's type.
         /// </summary>
-        public override Types DoorType { get; set; }
+        public override DoorTypes DoorType { get; set; }
 
         /// <summary>
         /// Possible orientations.
@@ -83,9 +83,9 @@ namespace HomeEditor.Elements {
         /// </summary>
         public override void OnDeselect() {
             switch (DoorType) {
-                case Types.Door: color.Base = BaseDoorColor; break;
-                case Types.Entrance: color.Base = BaseEntranceColor; break;
-                case Types.Window: color.Base = BaseWindowColor; break;
+                case DoorTypes.Door: color.Base = BaseDoorColor; break;
+                case DoorTypes.Entrance: color.Base = BaseEntranceColor; break;
+                case DoorTypes.Window: color.Base = BaseWindowColor; break;
                 default: break;
             }
             base.OnDeselect();
@@ -115,7 +115,7 @@ namespace HomeEditor.Elements {
                 switch (reader.Name) {
                     case "type":
                         if (Utils.ParseProperty(reader.Value, out int type)) {
-                            DoorType = (Types)type;
+                            DoorType = (DoorTypes)type;
                             OnDeselect();
                         }
                         break;

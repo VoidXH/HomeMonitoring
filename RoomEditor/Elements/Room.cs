@@ -64,7 +64,7 @@ namespace HomeEditor.Elements {
             get {
                 if (Parent != null) // Virtual rooms don't intersect with anything, but their virtual boundaries could
                     foreach (SerializablePanel panel in Program.window.Elements)
-                        if (panel.DoorType == Door.Types.Entrance && Utils.Intersect(panel, this))
+                        if (panel.DoorType == DoorTypes.Entrance && Utils.Intersect(panel, this))
                             return true;
                 return false;
             }
