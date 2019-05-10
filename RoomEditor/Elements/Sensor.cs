@@ -239,12 +239,12 @@ namespace HomeEditor.Elements {
                     action.Invoke((Sensor)child);
         }
 
-        public static void ForEachDoorWithHistory(Room room, Action<Door, Sensor> action) {
+        public static void ForEachDoorWithHistory(Room room, DateTime after, Action<Sensor> action) {
             foreach (SerializablePanel panel in Program.window.Elements) {
                 if (panel.DoorType != DoorTypes.NotDoor && Utils.Intersect(room, panel)) {
                     Sensor sensor = ((Door)panel).AttachedSensor;
-                    if (sensor != null && sensor.DataHistory.Count != 0)
-                        action.Invoke((Door)panel, sensor);
+                    if (sensor != null && sensor.DataHistory.Count != 0 && after < sensor.lastActivation)
+                        action.Invoke(sensor);
                 }
             }
         }

@@ -92,7 +92,7 @@ namespace HomeEditor.Elements {
         /// Merges data from all sensors in the room, averaging available float values and or-ing bool values.
         /// Data older than 5 minutes won't count, as the sensor's battery has probably died.
         /// </summary>
-        SensorData RoomStatus() { // TODO: door/window open states
+        SensorData RoomStatus() {
             TimeSpan maxDiff = TimeSpan.FromMinutes(5);
             DateTime lastResult = DateTime.Now - maxDiff;
             SensorData result = new SensorData(lastResult);
@@ -100,6 +100,7 @@ namespace HomeEditor.Elements {
                 if (property.PropertyType == typeof(bool)) {
                     bool value = false;
                     Sensor.ForEachWithHistory(this, lastResult, sensor => value |= (bool)property.GetValue(sensor.DataHistory[sensor.DataHistory.Count - 1]));
+                    Sensor.ForEachDoorWithHistory(this, lastResult, sensor => value |= (bool)property.GetValue(sensor.DataHistory[sensor.DataHistory.Count - 1]));
                     property.SetValue(result, value);
                 } else if (property.PropertyType == typeof(float)) {
                     float sum = 0;
