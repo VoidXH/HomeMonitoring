@@ -7,7 +7,7 @@ namespace HomeEditor.Elements {
     /// Possible types of openable entities.
     /// </summary>
     public enum DoorTypes {
-        NotDoor, Door, Entrance, Window
+        Door, Entrance, Window
     }
 
     /// <summary>
@@ -26,7 +26,7 @@ namespace HomeEditor.Elements {
         /// <summary>
         /// This entity's type.
         /// </summary>
-        public override DoorTypes DoorType { get; set; }
+        public DoorTypes DoorType { get; set; }
 
         /// <summary>
         /// Possible orientations.

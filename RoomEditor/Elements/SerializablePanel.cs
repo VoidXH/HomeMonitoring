@@ -120,15 +120,5 @@ namespace HomeEditor.Elements {
             target.MouseMove += Draggable_MouseMove;
         }
         #endregion
-
-        #region Checks
-        /// <summary>
-        /// This entity's door type.
-        /// </summary>
-        public virtual DoorTypes DoorType {
-            get => DoorTypes.NotDoor;
-            set { }
-        }
-        #endregion
     }
 }
