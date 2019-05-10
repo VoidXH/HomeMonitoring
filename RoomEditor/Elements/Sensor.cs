@@ -61,6 +61,11 @@ namespace HomeEditor.Elements {
         public IReadOnlyList<SensorData> DataHistory => history;
 
         /// <summary>
+        /// The last measured sensor data in <see cref="DataHistory"/>.
+        /// </summary>
+        public SensorData LastEntry => history.Count != 0 ? history[history.Count - 1] : null;
+
+        /// <summary>
         /// An "O" marking the sensor.
         /// </summary>
         Label marker;

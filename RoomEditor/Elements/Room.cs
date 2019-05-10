@@ -89,6 +89,16 @@ namespace HomeEditor.Elements {
         }
 
         /// <summary>
+        /// Calculates the sum of float type sensor data.
+        /// </summary>
+        void SumFloat(ref int count, ref float sum, float value) {
+            if (value != SensorData.Unmeasured) {
+                ++count;
+                sum += value;
+            }
+        }
+
+        /// <summary>
         /// Merges data from all sensors in the room, averaging available float values and or-ing bool values.
         /// Data older than 5 minutes won't count, as the sensor's battery has probably died.
         /// </summary>
@@ -99,19 +109,16 @@ namespace HomeEditor.Elements {
             foreach (PropertyInfo property in typeof(SensorData).GetProperties()) {
                 if (property.PropertyType == typeof(bool)) {
                     bool value = false;
-                    Sensor.ForEachWithHistory(this, lastResult, sensor => value |= (bool)property.GetValue(sensor.DataHistory[sensor.DataHistory.Count - 1]));
-                    Sensor.ForEachDoorWithHistory(this, lastResult, sensor => value |= (bool)property.GetValue(sensor.DataHistory[sensor.DataHistory.Count - 1]));
+                    Sensor.ForEachWithHistory(this, lastResult, sensor => value |= (bool)property.GetValue(sensor.LastEntry));
+                    Sensor.ForEachDoorWithHistory(this, lastResult, sensor => value |= (bool)property.GetValue(sensor.LastEntry));
                     property.SetValue(result, value);
                 } else if (property.PropertyType == typeof(float)) {
                     float sum = 0;
                     int measurements = 0;
-                    Sensor.ForEachWithHistory(this, lastResult, sensor => {
-                        float value = (float)property.GetValue(sensor.DataHistory[sensor.DataHistory.Count - 1]);
-                        if (value != SensorData.Unmeasured) {
-                            ++measurements;
-                            sum += value;
-                        }
-                    });
+                    Sensor.ForEachWithHistory(this, lastResult, sensor => SumFloat(ref measurements, ref sum,
+                        (float)property.GetValue(sensor.LastEntry)));
+                    Sensor.ForEachDoorWithHistory(this, lastResult, sensor => SumFloat(ref measurements, ref sum,
+                        (float)property.GetValue(sensor.LastEntry)));
                     property.SetValue(result, measurements != 0 ? sum / measurements : SensorData.Unmeasured);
                 }
             }
