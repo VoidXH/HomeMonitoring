@@ -473,7 +473,7 @@
             this.Controls.Add(this.newRule);
             this.Controls.Add(this.ruleList);
             this.Name = "RuleEditor";
-            this.Text = "RuleEditor";
+            this.Text = "Rule Editor";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.RuleEditor_FormClosing);
             ((System.ComponentModel.ISupportInitialize)(this.occurence)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.span)).EndInit();
