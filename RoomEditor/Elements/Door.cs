@@ -24,9 +24,24 @@ namespace HomeEditor.Elements {
             ActivationColor = Color.Khaki;
 
         /// <summary>
-        /// This entity's type.
+        /// Actual value of <see cref="DoorType"/>.
         /// </summary>
-        public DoorTypes DoorType { get; set; }
+        DoorTypes doorType = DoorTypes.Door;
+
+        /// <summary>
+        /// This door's type.
+        /// </summary>
+        public DoorTypes DoorType {
+            get => doorType;
+            set {
+                switch (doorType = value) {
+                    case DoorTypes.Door: color.Base = BaseDoorColor; break;
+                    case DoorTypes.Entrance: color.Base = BaseEntranceColor; break;
+                    case DoorTypes.Window: color.Base = BaseWindowColor; break;
+                    default: break;
+                }
+            }
+        }
 
         /// <summary>
         /// Possible orientations.
@@ -36,18 +51,18 @@ namespace HomeEditor.Elements {
         }
 
         /// <summary>
-        /// Cached orientation.
+        /// Actual value of <see cref="Orientation"/>.
         /// </summary>
-        Orientations _Orientation;
+        Orientations orientation;
 
         /// <summary>
         /// Orientation, resizes the panel on change.
         /// </summary>
         public Orientations Orientation {
-            get => _Orientation;
+            get => orientation;
             set {
                 int currentSize = Size;
-                _Orientation = value;
+                orientation = value;
                 Size = currentSize;
             }
         }
@@ -56,8 +71,8 @@ namespace HomeEditor.Elements {
         /// Width in pixels, relative to the <see cref="Orientation"/>.
         /// </summary>
         public new int Size {
-            get => _Orientation == Orientations.Horizontal ? base.Size.Width : base.Size.Height;
-            set => base.Size = _Orientation == Orientations.Horizontal ? new Size(value, Thickness) : new Size(Thickness, value);
+            get => orientation == Orientations.Horizontal ? base.Size.Width : base.Size.Height;
+            set => base.Size = orientation == Orientations.Horizontal ? new Size(value, Thickness) : new Size(Thickness, value);
         }
 
         /// <summary>
@@ -79,24 +94,11 @@ namespace HomeEditor.Elements {
         }
 
         /// <summary>
-        /// Set color by type when deselected.
-        /// </summary>
-        public override void OnDeselect() {
-            switch (DoorType) {
-                case DoorTypes.Door: color.Base = BaseDoorColor; break;
-                case DoorTypes.Entrance: color.Base = BaseEntranceColor; break;
-                case DoorTypes.Window: color.Base = BaseWindowColor; break;
-                default: break;
-            }
-            base.OnDeselect();
-        }
-
-        /// <summary>
         /// Snap to the orientation's lines when moved.
         /// </summary>
         protected override void Draggable_MouseMove(object sender, MouseEventArgs e) {
             if (e.Button == MouseButtons.Left) {
-                if (_Orientation == Orientations.Horizontal) {
+                if (orientation == Orientations.Horizontal) {
                     Left += e.X - dragOrigin.X;
                     Top = ((Top + e.Y - dragOrigin.Y) / Room.PixelsPerMeter + 1) * Room.PixelsPerMeter - Thickness / 2
                         - ((Panel)Parent).VerticalScroll.Value % Room.PixelsPerMeter;
@@ -114,10 +116,8 @@ namespace HomeEditor.Elements {
             while (reader.MoveToNextAttribute()) {
                 switch (reader.Name) {
                     case "type":
-                        if (Utils.ParseProperty(reader.Value, out int type)) {
+                        if (Utils.ParseProperty(reader.Value, out int type))
                             DoorType = (DoorTypes)type;
-                            OnDeselect();
-                        }
                         break;
                     case "orientation":
                         if (Utils.ParseProperty(reader.Value, out int orientation))
@@ -149,7 +149,7 @@ namespace HomeEditor.Elements {
         }
 
         public override void WriteXml(XmlWriter writer) {
-            writer.WriteAttributeString("type", ((int)DoorType).ToString());
+            writer.WriteAttributeString("type", ((int)doorType).ToString());
             writer.WriteAttributeString("orientation", ((int)Orientation).ToString());
             writer.WriteAttributeString("size", Size.ToString());
             writer.WriteAttributeString("left", Left.ToString());
