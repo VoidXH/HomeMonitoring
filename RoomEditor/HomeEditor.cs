@@ -223,6 +223,11 @@ namespace HomeEditor {
 HomeEditor.Config.MQTTHost = hostname.com
 HomeEditor.Config.MQTTPort = 1883
 HomeEditor.Config.MQTTUser = username
-HomeEditor.Config.MQTTPass = password";
+HomeEditor.Config.MQTTPass = password
+Mail configuration
+HomeEditor.Alert.SMTPHost = smtp.gmail.com
+HomeEditor.Alert.SMTPPort = 587
+HomeEditor.Alert.Address = user@gmail.com
+HomeEditor.Alert.Password = password ; For Gmail with 2FA, ask for one at https://myaccount.google.com/apppasswords";
     }
 }
