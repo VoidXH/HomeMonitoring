@@ -91,7 +91,7 @@ namespace HomeEditor.Rules {
         /// <summary>
         /// Called when a rule triggers.
         /// </summary>
-        public static event Notification OnNotification;
+        public static event Notification OnNotification; // TODO: set mail sending
 
         public Rule() { }
 
@@ -131,17 +131,20 @@ namespace HomeEditor.Rules {
             bool state = false;
             Room.ForEachWithHistory(room => {
                 if (targetRoom == null || targetRoom == room) { // Handle room
-                    int lastEntry = room.DataHistory.Count - 1;
-                    DateTime lastTime = room.DataHistory[lastEntry].Timestamp; // The timestamp to count the span from
-                    for (int i = lastEntry; i >= 0; --i) {
+                    bool lastTrigger = false; // The last frame triggered the rule with one occurence
+                    int triggerCount = 0; // Occurences
+                    int i = room.DataHistory.Count - 1;
+                    DateTime lastTime = room.DataHistory[i].Timestamp; // The timestamp to count the span from
+                    for (; i >= 0; --i) { // For each entry in this room
                         SensorData entry = room.DataHistory[i];
                         if (targetProperty.PropertyType == typeof(bool)) {
-                            bool trigger = (bool)targetProperty.GetValue(entry);
-                            if (invert) // Handle invert
-                                trigger = !trigger;
+                            bool trigger = (bool)targetProperty.GetValue(entry) ^ invert; // Handle invert
                             if (span.TotalMinutes != 0) {
                                 if (occurence != 1) { // Handle occurence
-                                    // TODO
+                                    if (trigger) // On rising edges, increase the trigger count, and set the state if the occurence requirement is met
+                                        state |= lastTrigger != (lastTrigger = true) && ++triggerCount == occurence; // Yolo
+                                    else
+                                        lastTrigger = false;
                                 } else {
                                     if (!trigger)
                                         break;
@@ -155,12 +158,15 @@ namespace HomeEditor.Rules {
                                 break;
                             }
                         } else if (targetProperty.PropertyType == typeof(float)) {
-                            if (span.TotalMinutes != 0) {
-                                // TODO
-                            } else { // Handle zero-span
-                                float sourceValue = (float)targetProperty.GetValue(entry);
-                                bool trigger = sourceValue < minValue || sourceValue > maxValue;
-                                state |= !invert ? trigger : !trigger; // Handle invert
+                            float sourceValue = (float)targetProperty.GetValue(entry);
+                            bool trigger = (sourceValue < minValue || sourceValue > maxValue) ^ invert; // Handle invert
+                            if (span.TotalMinutes != 0 && trigger) {
+                                if (lastTime - entry.Timestamp >= span) { // Handle span
+                                    state = true;
+                                    break;
+                                }
+                            } else { // Handle zero-span and span not reached
+                                state |= trigger;
                                 break;
                             }
                         }
