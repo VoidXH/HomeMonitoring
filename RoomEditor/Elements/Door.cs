@@ -40,6 +40,7 @@ namespace HomeEditor.Elements {
                     case DoorTypes.Window: color.Base = BaseWindowColor; break;
                     default: break;
                 }
+                Repaint();
             }
         }
 
@@ -88,7 +89,6 @@ namespace HomeEditor.Elements {
             color = new ColorStack(BaseDoorColor, SelectionColor, ActivationColor);
             SetDraggable(this);
             BorderStyle = BorderStyle.FixedSingle;
-            OnDeselect();
             Size = Room.PixelsPerMeter;
             BringToFront(); // Windows are always above rooms
         }
