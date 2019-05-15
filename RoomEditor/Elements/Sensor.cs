@@ -148,7 +148,7 @@ namespace HomeEditor.Elements {
         /// </summary>
         public static void ForwardButton(string address) => ForEach((sensor) => {
             if (sensor.Address.Equals(address))
-                Alert.SendAlert(sensor, "Button pressed.");
+                Alert.SendAlert(sensor.Parent is Room ? (Room)sensor.Parent : null, "Button pressed.");
         });
 
         /// <summary>

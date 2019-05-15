@@ -29,13 +29,12 @@ namespace HomeEditor {
                 client.Send(mail);
         }
 
-        public static void SendAlert(Sensor sensor, string message) {
-            if (sensor != null)
-                sensor.Parent.BackColor = Color.Red;
+        public static void SendAlert(Room room, string message) {
+            if (room != null)
+                room.BackColor = Color.Red;
             if (Program.window != null) {
                 SendEmail("Remote Monitoring Alert", message);
                 LogViewer.Log(message);
-                Program.window.StatusStrip.BackColor = Color.Red;
                 Program.window.LastAlert.Text = LogViewer.GetLog(1);
             } else
                 MessageBox.Show(message);

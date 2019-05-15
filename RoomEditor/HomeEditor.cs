@@ -1,5 +1,6 @@
 ﻿using HomeEditor.Elements;
 using HomeEditor.MQTT;
+using HomeEditor.Rules;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -35,6 +36,22 @@ namespace HomeEditor {
         Color roomNameBackground;
 
         /// <summary>
+        /// Check if each rule's criteria has been met every seond.
+        /// </summary>
+        Timer ruleEngineTicker = new Timer() { Interval = 1000 };
+
+        /// <summary>
+        /// Send an alert when a rule has triggered.
+        /// </summary>
+        void SendAlert(Rule rule) =>
+            Alert.SendAlert(rule.targetRoom, "The following rule has triggered a notification: " + rule.name);
+
+        /// <summary>
+        /// Call the rule engine's update function.
+        /// </summary>
+        void RuleTick(object sender, EventArgs e) => RuleLibrary.Tick();
+
+        /// <summary>
         /// Main window of the application.
         /// </summary>
         public HomeEditor() {
@@ -53,6 +70,9 @@ namespace HomeEditor {
                 }
             }
             LoadConfiguration();
+            Rule.OnNotification += SendAlert;
+            ruleEngineTicker.Tick += RuleTick;
+            ruleEngineTicker.Start();
 #if DEBUG
             simulator.Visible = true;
             spoofSensor.Visible = true;
@@ -67,11 +87,16 @@ namespace HomeEditor {
         /// Auto-save and export logs on close.
         /// </summary>
         private void HomeEditor_FormClosed(object sender, FormClosedEventArgs e) {
+            ruleEngineTicker.Stop();
+            ruleEngineTicker.Dispose();
             MQTT.Disconnect();
             SerializeHome(defaultFileName);
-            if (!Directory.Exists("Logs"))
-                Directory.CreateDirectory("Logs");
-            File.WriteAllText("Logs/" + DateTime.Now.ToString().Replace(':', '-') + ".txt", LogViewer.GetLog());
+            try {
+                if (!Directory.Exists("Logs"))
+                    Directory.CreateDirectory("Logs");
+                if (!LogViewer.IsEmpty)
+                    File.WriteAllText("Logs/" + DateTime.Now.ToString().Replace(':', '-') + ".txt", LogViewer.GetLog());
+            } catch { }
         }
 
         /// <summary>

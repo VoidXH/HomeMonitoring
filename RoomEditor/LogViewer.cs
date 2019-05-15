@@ -6,6 +6,8 @@ namespace HomeEditor {
     public partial class LogViewer : Form {
         static List<LogEntry> logs = new List<LogEntry>();
 
+        public static bool IsEmpty => logs.Count == 0;
+
         public static void Log(string message) {
             bool add = logs.Count == 0 || !logs[logs.Count - 1].Message.Equals(message);
             if (add)

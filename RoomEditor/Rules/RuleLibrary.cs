@@ -31,7 +31,7 @@ namespace HomeEditor.Rules {
         /// </summary>
         static void Tick(string Parent = null) {
             foreach (Rule rule in Rules) {
-                if (rule.parentRule.Equals(Parent)) {
+                if (rule.parentRule == Parent) {
                     rule.Tick();
                     if (rule.Triggered)
                         Tick(rule.name);
