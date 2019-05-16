@@ -126,9 +126,9 @@ namespace HomeEditor.Elements {
         }
 
         public void DataReceived() {
-            DateTime yesterday = DateTime.Now - TimeSpan.FromDays(1);
+            DateTime lastKeptEntry = DateTime.Now - TimeSpan.FromDays(2);
             int removeUntil = 0;
-            while (removeUntil != history.Count && history[removeUntil].Timestamp < yesterday)
+            while (removeUntil != history.Count && history[removeUntil].Timestamp < lastKeptEntry)
                 ++removeUntil;
             history.RemoveRange(0, removeUntil);
             history.Add(RoomStatus());
