@@ -158,6 +158,8 @@ namespace HomeEditor.Rules {
                             }
                         } else if (targetProperty.PropertyType == typeof(float)) {
                             float sourceValue = (float)targetProperty.GetValue(entry);
+                            if (sourceValue == SensorData.Unmeasured)
+                                continue;
                             bool trigger = (sourceValue < minValue || sourceValue > maxValue) ^ invert; // Handle invert
                             if (span.TotalMinutes != 0 && trigger) {
                                 if (lastTime - entry.Timestamp >= span) { // Handle span

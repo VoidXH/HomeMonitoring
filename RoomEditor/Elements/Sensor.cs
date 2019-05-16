@@ -240,7 +240,7 @@ namespace HomeEditor.Elements {
 
         public static void ForEachWithHistory(Room room, DateTime after, Action<Sensor> action) {
             foreach (Control child in room.Controls)
-                if (child is Sensor && ((Sensor)child).DataHistory.Count != 0 && after < ((Sensor)child).lastActivation)
+                if (child is Sensor && ((Sensor)child).DataHistory.Count != 0 && after < ((Sensor)child).LastEntry.Timestamp)
                     action.Invoke((Sensor)child);
         }
 
@@ -248,7 +248,7 @@ namespace HomeEditor.Elements {
             foreach (SerializablePanel panel in Program.window.Elements) {
                 if (panel is Door && Utils.Intersect(room, panel)) {
                     Sensor sensor = ((Door)panel).AttachedSensor;
-                    if (sensor != null && sensor.DataHistory.Count != 0 && after < sensor.lastActivation)
+                    if (sensor != null && sensor.DataHistory.Count != 0 && after < sensor.LastEntry.Timestamp)
                         action.Invoke(sensor);
                 }
             }
