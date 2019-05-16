@@ -107,6 +107,14 @@ namespace HomeEditor.Elements {
         }
 
         /// <summary>
+        /// Keep the lowest of the two values in <paramref name="min"/>.
+        /// </summary>
+        void MinFloat(ref float min, float value) {
+            if (min > value)
+                min = value;
+        }
+
+        /// <summary>
         /// Merges data from all sensors in the room, averaging available float values and or-ing bool values.
         /// Data older than 5 minutes won't count, as the sensor's battery has probably died.
         /// </summary>
@@ -118,7 +126,12 @@ namespace HomeEditor.Elements {
             lastResult -= maxDiff;
             SensorData result = new SensorData(lastResult);
             foreach (PropertyInfo property in typeof(SensorData).GetProperties()) {
-                if (property.PropertyType == typeof(bool)) {
+                if (property.Name.Equals("Battery")) {
+                    float min = 100;
+                    Sensor.ForEachWithHistory(this, lastResult, sensor => MinFloat(ref min, (float)property.GetValue(sensor.LastEntry)));
+                    Sensor.ForEachDoorWithHistory(this, lastResult, sensor => MinFloat(ref min, (float)property.GetValue(sensor.LastEntry)));
+                    property.SetValue(result, min);
+                } else if (property.PropertyType == typeof(bool)) {
                     bool value = false;
                     Sensor.ForEachWithHistory(this, lastResult, sensor => value |= (bool)property.GetValue(sensor.LastEntry));
                     Sensor.ForEachDoorWithHistory(this, lastResult, sensor => value |= (bool)property.GetValue(sensor.LastEntry));
