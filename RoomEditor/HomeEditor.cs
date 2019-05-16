@@ -253,6 +253,6 @@ Mail configuration
 HomeEditor.Alert.SMTPHost = smtp.gmail.com
 HomeEditor.Alert.SMTPPort = 587
 HomeEditor.Alert.Address = user@gmail.com
-HomeEditor.Alert.Password = password ; For Gmail with 2FA, ask for one at https://myaccount.google.com/apppasswords";
+HomeEditor.Alert.Password = password # For Gmail with 2FA, ask for one at https://myaccount.google.com/apppasswords";
     }
 }
