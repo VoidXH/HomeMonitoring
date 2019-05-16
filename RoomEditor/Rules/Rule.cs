@@ -140,9 +140,11 @@ namespace HomeEditor.Rules {
                             bool trigger = (bool)targetProperty.GetValue(entry) ^ invert; // Handle invert
                             if (span.TotalMinutes != 0) {
                                 if (occurence != 1) { // Handle occurence
-                                    if (trigger) // On rising edges, increase the trigger count, and set the state if the occurence requirement is met
+                                    if (trigger) { // On rising edges, increase the trigger count, and set the state if the occurence requirement is met
+                                        if (lastTime - entry.Timestamp >= span) // Handle span
+                                            break;
                                         state |= lastTrigger != (lastTrigger = true) && ++triggerCount == occurence; // Yolo
-                                    else
+                                    } else
                                         lastTrigger = false;
                                 } else {
                                     if (!trigger)
