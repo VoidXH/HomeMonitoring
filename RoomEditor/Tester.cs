@@ -10,5 +10,13 @@ namespace HomeEditor {
                 target.DataReceived(new SensorData(targetTime));
             }
         }
+
+        public static void DoorSensorFailure() {
+            Sensor target = Sensor.Random;
+            for (int secondsBack = 50; secondsBack >= 0; --secondsBack) { // Oscillate contact info for 50 seconds
+                DateTime targetTime = DateTime.Now - TimeSpan.FromSeconds(secondsBack);
+                target.DataReceived(new SensorData(targetTime) { Open = secondsBack % 2 == 0 });
+            }
+        }
     }
 }
