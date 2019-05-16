@@ -25,8 +25,14 @@ namespace HomeEditor {
             using (MailMessage mail = new MailMessage(Address, Address, subject, body) {
                 BodyEncoding = Encoding.UTF8,
                 DeliveryNotificationOptions = DeliveryNotificationOptions.OnFailure
-            })
-                client.Send(mail);
+            }) {
+                try {
+                    client.Send(mail);
+                } catch {
+                    LogViewer.Log("Failed to send e-mail alert.");
+                    Program.window.LastAlert.Text = LogViewer.GetLog(1);
+                }
+            }
         }
 
         public static void SendAlert(Room room, string message) {
