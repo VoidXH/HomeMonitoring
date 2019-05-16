@@ -192,6 +192,7 @@
     <Compile Include="Elements\SerializablePanel.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Tester.cs" />
     <Compile Include="Utils.cs" />
     <Compile Include="Elements\Door.cs">
       <SubType>Component</SubType>
