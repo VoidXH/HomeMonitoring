@@ -9,7 +9,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("VoidX")]
 [assembly: AssemblyProduct("Home Editor")]
-[assembly: AssemblyCopyright("Copyright ©2017 Bence Sgánetz")]
+[assembly: AssemblyCopyright("Copyright ©2019 Bence Sgánetz")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
