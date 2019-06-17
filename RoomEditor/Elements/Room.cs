@@ -159,18 +159,24 @@ namespace HomeEditor.Elements {
         }
 
         public static void ForEach(Action<Room> action) {
+            if (Program.window == null)
+                return;
             foreach (SerializablePanel panel in Program.window.Elements)
                 if (panel is Room)
                     action((Room)panel);
         }
 
         public static void ForEachWithHistory(Action<Room> action) {
+            if (Program.window == null)
+                return;
             foreach (SerializablePanel panel in Program.window.Elements)
                 if (panel is Room && ((Room)panel).history.Count != 0)
                     action((Room)panel);
         }
 
         public static Room GetByName(string name) {
+            if (Program.window == null)
+                return null;
             foreach (SerializablePanel panel in Program.window.Elements)
                 if (panel is Room && panel.Name.Equals(name))
                     return (Room)panel;
